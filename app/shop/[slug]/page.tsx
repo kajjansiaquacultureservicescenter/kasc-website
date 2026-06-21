@@ -1,0 +1,210 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import Image from "next/image";
+import { notFound } from "next/navigation";
+import { ArrowLeft, CheckCircle2, Phone, ArrowRight, Package, Star, Shield, Truck, RefreshCcw } from "lucide-react";
+import { PRODUCTS } from "@/lib/data";
+import { formatPrice, cn } from "@/lib/utils";
+import ProductActions from "@/components/shop/ProductActions";
+import AddToCartButton from "@/components/shop/AddToCartButton";
+
+type Props = { params: Promise<{ slug: string }> };
+
+export async function generateStaticParams() {
+  return PRODUCTS.map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const product = PRODUCTS.find((p) => p.slug === slug);
+  if (!product) return {};
+  return { title: product.name, description: product.description };
+}
+
+const CATEGORY_IMAGES: Record<string, string> = {
+  fingerlings: "1560275619-4662e36fa65c",
+  feed: "1586201375761-83865001e31c",
+  liners: "1504711434969-e33886168f5c",
+  equipment: "1574943320219-553eb213f72d",
+};
+
+const BADGE_STYLE: Record<string, string> = {
+  "Best Seller": "bg-[#f4a020] text-white",
+  "Premium": "bg-[#0f5070] text-white",
+  "New": "bg-[#226640] text-white",
+  "Most Popular": "bg-[#2d8ab8] text-white",
+  "Heavy Duty": "bg-gray-800 text-white",
+};
+
+export default async function ProductPage({ params }: Props) {
+  const { slug } = await params;
+  const product = PRODUCTS.find((p) => p.slug === slug);
+  if (!product) notFound();
+
+  const related = PRODUCTS.filter((p) => p.category === product.category && p.slug !== slug).slice(0, 4);
+
+  return (
+    <div className="min-h-screen bg-[#f8fafc]">
+      {/* Breadcrumb */}
+      <div className="bg-white border-b border-gray-100 py-3">
+        <div className="container-wide flex items-center gap-2 text-sm text-gray-500">
+          <Link href="/" className="hover:text-[#0f5070] transition-colors">Home</Link>
+          <span className="text-gray-300">/</span>
+          <Link href="/shop" className="hover:text-[#0f5070] transition-colors">Shop</Link>
+          <span className="text-gray-300">/</span>
+          <span className="text-[#0f5070] font-medium capitalize">{product.category}</span>
+          <span className="text-gray-300">/</span>
+          <span className="text-gray-700 truncate max-w-[200px]">{product.name}</span>
+        </div>
+      </div>
+
+      <div className="container-wide py-8">
+        <Link href="/shop" className="inline-flex items-center gap-2 text-gray-500 hover:text-[#0f5070] text-sm mb-6 transition-colors group">
+          <ArrowLeft size={14} className="group-hover:-translate-x-0.5 transition-transform" /> Back to Shop
+        </Link>
+
+        {/* Main product section */}
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-[var(--shadow-card)] overflow-hidden mb-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+            {/* Image panel */}
+            <div className="relative min-h-[340px] lg:min-h-[520px] bg-gradient-to-br from-[#eef8fd] to-[#f0fcf4]">
+              <Image
+                src={`https://images.unsplash.com/photo-${CATEGORY_IMAGES[product.category]}?w=800&q=85`}
+                alt={product.name} fill className="object-cover"
+                priority
+              />
+              {product.badge && (
+                <span className={cn("absolute top-5 left-5 px-3 py-1.5 rounded-full text-sm font-bold shadow-md", BADGE_STYLE[product.badge] ?? "bg-gray-800 text-white")}>
+                  {product.badge}
+                </span>
+              )}
+              {!product.inStock && (
+                <div className="absolute inset-0 bg-white/75 flex items-center justify-center">
+                  <span className="px-5 py-2 bg-gray-800 text-white font-semibold rounded-full">Out of Stock</span>
+                </div>
+              )}
+            </div>
+
+            {/* Details panel */}
+            <div className="p-7 lg:p-10 flex flex-col">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-xs font-bold text-[#2d8ab8] uppercase tracking-widest capitalize">{product.category}</span>
+                {product.inStock && (
+                  <span className="flex items-center gap-1 text-xs text-[#226640] font-medium">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#3aaf6c]" /> In Stock
+                  </span>
+                )}
+              </div>
+
+              <h1 className="text-2xl lg:text-3xl font-bold text-[#071e2e] mb-3 font-display leading-tight">{product.name}</h1>
+
+              {/* Stars */}
+              <div className="flex items-center gap-2 mb-4">
+                <div className="flex items-center gap-0.5">
+                  {[1,2,3,4,5].map(s => <Star key={s} size={15} className="text-[#f4a020]" fill="currentColor" />)}
+                </div>
+                <span className="text-sm text-gray-500">5.0 · Verified quality</span>
+              </div>
+
+              {/* Price */}
+              <div className="flex items-baseline gap-3 mb-5 pb-5 border-b border-gray-100">
+                <span className="text-3xl lg:text-4xl font-bold text-[#0f5070]">{formatPrice(product.price)}</span>
+                <span className="text-gray-400 text-sm">{product.unit}</span>
+              </div>
+
+              <p className="text-gray-600 leading-relaxed mb-5">{product.description}</p>
+
+              {/* Specs */}
+              <div className="mb-6">
+                <h3 className="font-semibold text-[#071e2e] text-sm mb-3">Product Specifications</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {product.specs.map((spec) => (
+                    <div key={spec} className="flex items-center gap-2.5 p-3 rounded-xl bg-[#f8fafc] border border-gray-100 text-sm text-gray-700">
+                      <CheckCircle2 size={14} className="text-[#2d8ab8] shrink-0" />
+                      {spec}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Interactive: quantity + cart (client component) */}
+              <ProductActions product={{ id: product.id, name: product.name, slug: product.slug, price: product.price, unit: product.unit, inStock: product.inStock }} />
+
+              {/* Trust signals */}
+              <div className="mt-5 pt-5 border-t border-gray-100 grid grid-cols-2 gap-3">
+                {[
+                  { icon: Shield, label: "Quality Certified", desc: "All products tested" },
+                  { icon: Truck, label: "Nationwide Delivery", desc: "Uganda & East Africa" },
+                  { icon: Phone, label: "Expert Support", desc: "+256 700 000000" },
+                  { icon: RefreshCcw, label: "After-Sales Service", desc: "We follow up" },
+                ].map(({ icon: Icon, label, desc }) => (
+                  <div key={label} className="flex items-start gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-[#eef8fd] flex items-center justify-center shrink-0">
+                      <Icon size={14} className="text-[#0f5070]" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-semibold text-[#071e2e]">{label}</div>
+                      <div className="text-xs text-gray-400">{desc}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* How to order info */}
+        <div className="bg-white rounded-2xl border border-[#a0d4ea] p-6 mb-8 flex items-start gap-4">
+          <div className="w-10 h-10 rounded-xl bg-[#eef8fd] flex items-center justify-center shrink-0">
+            <Package size={18} className="text-[#0f5070]" />
+          </div>
+          <div>
+            <h3 className="font-semibold text-[#071e2e] mb-1">How Ordering Works</h3>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              Add products to your cart, then proceed to the order form where you fill in your delivery location and contact details. Our team will confirm availability, delivery cost, and timeline within 24 hours before any payment is processed.
+            </p>
+          </div>
+        </div>
+
+        {/* Related products */}
+        {related.length > 0 && (
+          <div>
+            <div className="flex items-center justify-between mb-5">
+              <h2 className="text-xl font-bold text-[#071e2e] font-display">More {product.category.charAt(0).toUpperCase() + product.category.slice(1)}</h2>
+              <Link href="/shop" className="text-sm text-[#0f5070] hover:underline flex items-center gap-1">
+                View All <ArrowRight size={13} />
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {related.map((p) => (
+                <div key={p.id} className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-1 transition-all duration-300 group flex flex-col">
+                  <div className="relative h-40 bg-gradient-to-br from-[#eef8fd] to-[#f0fcf4] overflow-hidden">
+                    <Link href={`/shop/${p.slug}`}>
+                      <Image src={`https://images.unsplash.com/photo-${CATEGORY_IMAGES[p.category]}?w=400&q=80`} alt={p.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                    </Link>
+                    {p.badge && (
+                      <span className={cn("absolute top-2 left-2 px-2 py-0.5 rounded-full text-xs font-bold", BADGE_STYLE[p.badge] ?? "bg-gray-800 text-white")}>{p.badge}</span>
+                    )}
+                  </div>
+                  <div className="p-4 flex flex-col flex-1">
+                    <Link href={`/shop/${p.slug}`}>
+                      <h3 className="font-semibold text-[#071e2e] text-sm mb-1 hover:text-[#0f5070] transition-colors line-clamp-2 font-display">{p.name}</h3>
+                    </Link>
+                    <div className="mt-auto pt-3 flex items-center justify-between gap-2">
+                      <div>
+                        <div className="text-[#0f5070] font-bold">{formatPrice(p.price)}</div>
+                        <div className="text-gray-400 text-xs">{p.unit}</div>
+                      </div>
+                      <AddToCartButton productId={p.id} variant="icon" />
+                    </div>
+                    <AddToCartButton productId={p.id} className="mt-2" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
