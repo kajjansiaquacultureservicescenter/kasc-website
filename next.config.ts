@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "img.youtube.com" },
       { protocol: "https", hostname: "i.ytimg.com" },
       // Supabase Storage CDN
-      { protocol: "https", hostname: "upfimcexlzpycxsapqfy.supabase.co" },
+      { protocol: "https", hostname: "wpqdvhmlfwtukzqetyax.supabase.co" },
     ],
   },
 };
