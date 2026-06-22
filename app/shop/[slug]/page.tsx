@@ -3,45 +3,60 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ArrowLeft, CheckCircle2, Phone, ArrowRight, Package, Star, Shield, Truck, RefreshCcw } from "lucide-react";
-import { PRODUCTS } from "@/lib/data";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { formatPrice, cn } from "@/lib/utils";
 import ProductActions from "@/components/shop/ProductActions";
 import AddToCartButton from "@/components/shop/AddToCartButton";
 
 type Props = { params: Promise<{ slug: string }> };
 
+export const revalidate = 60;
+
 export async function generateStaticParams() {
-  return PRODUCTS.map((p) => ({ slug: p.slug }));
+  const admin = createAdminClient();
+  const { data } = await admin.from("products").select("slug");
+  return (data ?? []).map((p) => ({ slug: p.slug as string }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const product = PRODUCTS.find((p) => p.slug === slug);
-  if (!product) return {};
-  return { title: product.name, description: product.description };
+  const admin = createAdminClient();
+  const { data } = await admin.from("products").select("name, description").eq("slug", slug).single();
+  if (!data) return {};
+  return { title: data.name, description: data.description };
 }
 
-const CATEGORY_IMAGES: Record<string, string> = {
-  fingerlings: "1560275619-4662e36fa65c",
-  feed: "1586201375761-83865001e31c",
-  liners: "1504711434969-e33886168f5c",
-  equipment: "1574943320219-553eb213f72d",
+const FALLBACK_IMAGES: Record<string, string> = {
+  fingerlings: "https://images.unsplash.com/photo-1560275619-4662e36fa65c?w=800&q=85",
+  feed:        "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=85",
+  liners:      "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=85",
+  nets:        "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=85",
+  equipment:   "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800&q=85",
 };
 
 const BADGE_STYLE: Record<string, string> = {
-  "Best Seller": "bg-[#f4a020] text-white",
-  "Premium": "bg-[#0f5070] text-white",
-  "New": "bg-[#226640] text-white",
+  "Best Seller":  "bg-[#f4a020] text-white",
+  "Premium":      "bg-[#0f5070] text-white",
+  "New":          "bg-[#226640] text-white",
   "Most Popular": "bg-[#2d8ab8] text-white",
-  "Heavy Duty": "bg-gray-800 text-white",
+  "Heavy Duty":   "bg-gray-800 text-white",
+  "Essential":    "bg-purple-700 text-white",
 };
 
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
-  const product = PRODUCTS.find((p) => p.slug === slug);
+  const admin = createAdminClient();
+
+  const [{ data: product }, { data: related }] = await Promise.all([
+    admin.from("products").select("*").eq("slug", slug).single(),
+    admin.from("products").select("id, name, slug, category, price, unit, badge, image_url, in_stock").neq("slug", slug).order("sort_order").limit(20),
+  ]);
+
   if (!product) notFound();
 
-  const related = PRODUCTS.filter((p) => p.category === product.category && p.slug !== slug).slice(0, 4);
+  const relatedProducts = (related ?? []).filter(p => p.category === product.category).slice(0, 4);
+  const heroImg = product.image_url || FALLBACK_IMAGES[product.category] || FALLBACK_IMAGES.equipment;
+  const specs: string[] = Array.isArray(product.specs) ? product.specs : [];
 
   return (
     <div className="min-h-screen bg-[#f8fafc]">
@@ -69,7 +84,7 @@ export default async function ProductPage({ params }: Props) {
             {/* Image panel */}
             <div className="relative min-h-[340px] lg:min-h-[520px] bg-gradient-to-br from-[#eef8fd] to-[#f0fcf4]">
               <Image
-                src={`https://images.unsplash.com/photo-${CATEGORY_IMAGES[product.category]}?w=800&q=85`}
+                src={heroImg}
                 alt={product.name} fill className="object-cover"
                 priority
               />
@@ -78,7 +93,7 @@ export default async function ProductPage({ params }: Props) {
                   {product.badge}
                 </span>
               )}
-              {!product.inStock && (
+              {!product.in_stock && (
                 <div className="absolute inset-0 bg-white/75 flex items-center justify-center">
                   <span className="px-5 py-2 bg-gray-800 text-white font-semibold rounded-full">Out of Stock</span>
                 </div>
@@ -89,7 +104,7 @@ export default async function ProductPage({ params }: Props) {
             <div className="p-7 lg:p-10 flex flex-col">
               <div className="flex items-center gap-2 mb-3">
                 <span className="text-xs font-bold text-[#2d8ab8] uppercase tracking-widest capitalize">{product.category}</span>
-                {product.inStock && (
+                {product.in_stock && (
                   <span className="flex items-center gap-1 text-xs text-[#226640] font-medium">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#3aaf6c]" /> In Stock
                   </span>
@@ -115,27 +130,37 @@ export default async function ProductPage({ params }: Props) {
               <p className="text-gray-600 leading-relaxed mb-5">{product.description}</p>
 
               {/* Specs */}
-              <div className="mb-6">
-                <h3 className="font-semibold text-[#071e2e] text-sm mb-3">Product Specifications</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {product.specs.map((spec) => (
-                    <div key={spec} className="flex items-center gap-2.5 p-3 rounded-xl bg-[#f8fafc] border border-gray-100 text-sm text-gray-700">
-                      <CheckCircle2 size={14} className="text-[#2d8ab8] shrink-0" />
-                      {spec}
-                    </div>
-                  ))}
+              {specs.length > 0 && (
+                <div className="mb-6">
+                  <h3 className="font-semibold text-[#071e2e] text-sm mb-3">Product Specifications</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {specs.map((spec) => (
+                      <div key={spec} className="flex items-center gap-2.5 p-3 rounded-xl bg-[#f8fafc] border border-gray-100 text-sm text-gray-700">
+                        <CheckCircle2 size={14} className="text-[#2d8ab8] shrink-0" />
+                        {spec}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
-              {/* Interactive: quantity + cart (client component) */}
-              <ProductActions product={{ id: product.id, name: product.name, slug: product.slug, price: product.price, unit: product.unit, inStock: product.inStock }} />
+              {/* Interactive: quantity + cart */}
+              <ProductActions product={{
+                id: product.id,
+                slug: product.slug,
+                name: product.name,
+                category: product.category,
+                price: product.price,
+                unit: product.unit,
+                in_stock: product.in_stock,
+              }} />
 
               {/* Trust signals */}
               <div className="mt-5 pt-5 border-t border-gray-100 grid grid-cols-2 gap-3">
                 {[
                   { icon: Shield, label: "Quality Certified", desc: "All products tested" },
                   { icon: Truck, label: "Nationwide Delivery", desc: "Uganda & East Africa" },
-                  { icon: Phone, label: "Expert Support", desc: "+256 700 000000" },
+                  { icon: Phone, label: "Expert Support", desc: "+256 705 641626" },
                   { icon: RefreshCcw, label: "After-Sales Service", desc: "We follow up" },
                 ].map(({ icon: Icon, label, desc }) => (
                   <div key={label} className="flex items-start gap-2.5">
@@ -167,7 +192,7 @@ export default async function ProductPage({ params }: Props) {
         </div>
 
         {/* Related products */}
-        {related.length > 0 && (
+        {relatedProducts.length > 0 && (
           <div>
             <div className="flex items-center justify-between mb-5">
               <h2 className="text-xl font-bold text-[#071e2e] font-display">More {product.category.charAt(0).toUpperCase() + product.category.slice(1)}</h2>
@@ -176,31 +201,34 @@ export default async function ProductPage({ params }: Props) {
               </Link>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {related.map((p) => (
-                <div key={p.id} className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-1 transition-all duration-300 group flex flex-col">
-                  <div className="relative h-40 bg-gradient-to-br from-[#eef8fd] to-[#f0fcf4] overflow-hidden">
-                    <Link href={`/shop/${p.slug}`}>
-                      <Image src={`https://images.unsplash.com/photo-${CATEGORY_IMAGES[p.category]}?w=400&q=80`} alt={p.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                    </Link>
-                    {p.badge && (
-                      <span className={cn("absolute top-2 left-2 px-2 py-0.5 rounded-full text-xs font-bold", BADGE_STYLE[p.badge] ?? "bg-gray-800 text-white")}>{p.badge}</span>
-                    )}
-                  </div>
-                  <div className="p-4 flex flex-col flex-1">
-                    <Link href={`/shop/${p.slug}`}>
-                      <h3 className="font-semibold text-[#071e2e] text-sm mb-1 hover:text-[#0f5070] transition-colors line-clamp-2 font-display">{p.name}</h3>
-                    </Link>
-                    <div className="mt-auto pt-3 flex items-center justify-between gap-2">
-                      <div>
-                        <div className="text-[#0f5070] font-bold">{formatPrice(p.price)}</div>
-                        <div className="text-gray-400 text-xs">{p.unit}</div>
-                      </div>
-                      <AddToCartButton productId={p.id} variant="icon" />
+              {relatedProducts.map((p) => {
+                const img = p.image_url || FALLBACK_IMAGES[p.category] || FALLBACK_IMAGES.equipment;
+                return (
+                  <div key={p.id} className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-1 transition-all duration-300 group flex flex-col">
+                    <div className="relative h-40 bg-gradient-to-br from-[#eef8fd] to-[#f0fcf4] overflow-hidden">
+                      <Link href={`/shop/${p.slug}`}>
+                        <Image src={img} alt={p.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                      </Link>
+                      {p.badge && (
+                        <span className={cn("absolute top-2 left-2 px-2 py-0.5 rounded-full text-xs font-bold", BADGE_STYLE[p.badge] ?? "bg-gray-800 text-white")}>{p.badge}</span>
+                      )}
                     </div>
-                    <AddToCartButton productId={p.id} className="mt-2" />
+                    <div className="p-4 flex flex-col flex-1">
+                      <Link href={`/shop/${p.slug}`}>
+                        <h3 className="font-semibold text-[#071e2e] text-sm mb-1 hover:text-[#0f5070] transition-colors line-clamp-2 font-display">{p.name}</h3>
+                      </Link>
+                      <div className="mt-auto pt-3 flex items-center justify-between gap-2">
+                        <div>
+                          <div className="text-[#0f5070] font-bold">{formatPrice(p.price)}</div>
+                          <div className="text-gray-400 text-xs">{p.unit}</div>
+                        </div>
+                        <AddToCartButton product={p} variant="icon" />
+                      </div>
+                      <AddToCartButton product={p} className="mt-2" />
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}

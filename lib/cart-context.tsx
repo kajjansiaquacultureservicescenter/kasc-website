@@ -1,7 +1,6 @@
 "use client";
 
 import { createContext, useContext, useEffect, useReducer, useCallback } from "react";
-import { PRODUCTS } from "@/lib/data";
 
 export type CartItem = {
   id: string;
@@ -13,13 +12,15 @@ export type CartItem = {
   quantity: number;
 };
 
+export type CartProduct = Omit<CartItem, "quantity">;
+
 type CartState = {
   items: CartItem[];
   isOpen: boolean;
 };
 
 type CartAction =
-  | { type: "ADD"; item: Omit<CartItem, "quantity">; qty?: number }
+  | { type: "ADD"; item: CartProduct; qty?: number }
   | { type: "REMOVE"; id: string }
   | { type: "UPDATE_QTY"; id: string; qty: number }
   | { type: "CLEAR" }
@@ -76,7 +77,7 @@ type CartContextType = {
   isOpen: boolean;
   itemCount: number;
   subtotal: number;
-  addItem: (productId: string, qty?: number) => void;
+  addItem: (product: CartProduct, qty?: number) => void;
   removeItem: (id: string) => void;
   updateQty: (id: string, qty: number) => void;
   clearCart: () => void;
@@ -102,21 +103,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     } catch {}
   }, [state.items]);
 
-  const addItem = useCallback((productId: string, qty = 1) => {
-    const product = PRODUCTS.find((p) => p.id === productId || p.slug === productId);
-    if (!product) return;
-    dispatch({
-      type: "ADD",
-      qty,
-      item: {
-        id: product.id,
-        slug: product.slug,
-        name: product.name,
-        category: product.category,
-        price: product.price,
-        unit: product.unit,
-      },
-    });
+  const addItem = useCallback((product: CartProduct, qty = 1) => {
+    dispatch({ type: "ADD", qty, item: product });
   }, []);
 
   const removeItem = useCallback((id: string) => dispatch({ type: "REMOVE", id }), []);

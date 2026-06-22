@@ -3,10 +3,10 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Minus, Plus, ShoppingCart, Check, Phone } from "lucide-react";
-import { useCart } from "@/lib/cart-context";
+import { useCart, type CartProduct } from "@/lib/cart-context";
 
 type Props = {
-  product: { id: string; name: string; slug: string; price: number; unit: string; inStock: boolean };
+  product: CartProduct & { in_stock: boolean };
 };
 
 export default function ProductActions({ product }: Props) {
@@ -15,17 +15,17 @@ export default function ProductActions({ product }: Props) {
   const { addItem, openCart } = useCart();
 
   function handleAdd() {
-    addItem(product.id, qty);
+    addItem(product, qty);
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   }
 
-  if (!product.inStock) {
+  if (!product.in_stock) {
     return (
       <div className="space-y-3">
         <div className="p-4 rounded-xl bg-gray-50 border border-gray-200 text-center">
           <p className="text-gray-500 text-sm font-medium mb-3">This product is currently out of stock.</p>
-          <a href="tel:+256700000000" className="btn-outline text-sm inline-flex">
+          <a href="tel:+256705641626" className="btn-outline text-sm inline-flex">
             <Phone size={14} /> Call to Check Availability
           </a>
         </div>

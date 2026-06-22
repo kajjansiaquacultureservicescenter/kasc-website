@@ -2,24 +2,24 @@
 
 import { useState } from "react";
 import { ShoppingCart, Check } from "lucide-react";
-import { useCart } from "@/lib/cart-context";
+import { useCart, type CartProduct } from "@/lib/cart-context";
 import { cn } from "@/lib/utils";
 
 type Props = {
-  productId: string;
+  product: CartProduct;
   qty?: number;
   variant?: "full" | "icon";
   className?: string;
 };
 
-export default function AddToCartButton({ productId, qty = 1, variant = "full", className }: Props) {
+export default function AddToCartButton({ product, qty = 1, variant = "full", className }: Props) {
   const { addItem } = useCart();
   const [added, setAdded] = useState(false);
 
   function handleAdd(e: React.MouseEvent) {
     e.preventDefault();
     e.stopPropagation();
-    addItem(productId, qty);
+    addItem(product, qty);
     setAdded(true);
     setTimeout(() => setAdded(false), 1800);
   }
