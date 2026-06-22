@@ -5,15 +5,27 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NAV_ITEMS, COMPANY } from "@/lib/data";
 import { cn } from "@/lib/utils";
-import { Menu, X, ChevronDown, Phone, Mail, MapPin, ShoppingCart } from "lucide-react";
+import { Menu, X, ChevronDown, Phone, Mail, MapPin, ShoppingCart, User, LogIn } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
+import { createClient } from "@/lib/supabase/client";
+import type { User as SupabaseUser } from "@supabase/supabase-js";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const { itemCount, openCart } = useCart();
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [user, setUser] = useState<SupabaseUser | null>(null);
   const pathname = usePathname();
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data }) => setUser(data.user));
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -151,6 +163,23 @@ export default function Header() {
             <Link href="/shop" className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[#2d8ab8]/40 text-[#5aafd4] hover:bg-white/10 text-sm font-medium transition-colors">
               Shop
             </Link>
+            {user ? (
+              <Link
+                href="/account"
+                className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[#2d8ab8]/40 text-[#5aafd4] hover:bg-white/10 text-sm font-medium transition-colors"
+              >
+                <User size={15} />
+                My Account
+              </Link>
+            ) : (
+              <Link
+                href="/auth/login"
+                className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[#2d8ab8]/40 text-[#5aafd4] hover:bg-white/10 text-sm font-medium transition-colors"
+              >
+                <LogIn size={15} />
+                Sign In
+              </Link>
+            )}
             <button
               onClick={openCart}
               className="relative flex items-center gap-2 btn-primary text-sm py-2.5 px-4"
@@ -249,6 +278,15 @@ export default function Header() {
               <Link href="/shop" className="btn-primary text-sm justify-center">
                 <ShoppingCart size={15} /> Shop Now
               </Link>
+              {user ? (
+                <Link href="/account" className="flex items-center justify-center gap-2 py-2.5 rounded-lg border border-[#2d8ab8]/40 text-[#5aafd4] text-sm font-medium">
+                  <User size={15} /> My Account
+                </Link>
+              ) : (
+                <Link href="/auth/login" className="flex items-center justify-center gap-2 py-2.5 rounded-lg border border-[#2d8ab8]/40 text-[#5aafd4] text-sm font-medium">
+                  <LogIn size={15} /> Sign In
+                </Link>
+              )}
               <a
                 href={`https://wa.me/${COMPANY.social.whatsapp}`}
                 target="_blank"

@@ -17,7 +17,7 @@ const LoginSchema = z.object({
 const RegisterSchema = z.object({
   fullName: z.string().min(2, { message: "Name must be at least 2 characters" }).trim(),
   email: z.string().email({ message: "Enter a valid email address" }),
-  phone: z.string().optional(),
+  phone: z.string().min(7, { message: "Phone number is required" }).trim(),
   password: z.string().min(8, { message: "Password must be at least 8 characters" }),
 });
 
@@ -65,7 +65,7 @@ export async function register(
   const raw = {
     fullName: formData.get("fullName") as string,
     email: formData.get("email") as string,
-    phone: (formData.get("phone") as string) || undefined,
+    phone: (formData.get("phone") as string) || "",
     password: formData.get("password") as string,
   };
 
@@ -75,7 +75,7 @@ export async function register(
   }
 
   const supabase = await createClient();
-  const { error } = await supabase.auth.signUp({
+  const { data: signUpData, error } = await supabase.auth.signUp({
     email: parsed.data.email,
     password: parsed.data.password,
     options: {
@@ -88,6 +88,13 @@ export async function register(
       return { error: "An account with this email already exists. Try logging in." };
     }
     return { error: error.message };
+  }
+
+  // Save phone to the profile row created by the DB trigger
+  if (signUpData.user && parsed.data.phone) {
+    const { createAdminClient } = await import("@/lib/supabase/admin");
+    const admin = createAdminClient();
+    await admin.from("profiles").update({ phone: parsed.data.phone }).eq("id", signUpData.user.id);
   }
 
   return { success: "Account created! You can now log in." };

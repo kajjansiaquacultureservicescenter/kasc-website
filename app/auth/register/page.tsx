@@ -71,13 +71,12 @@ function RegisterForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1.5">
-            Phone number <span className="text-gray-400 font-normal">(optional)</span>
-          </label>
+          <label className="block text-sm font-medium text-gray-700 mb-1.5">Phone number</label>
           <input
             name="phone"
             type="tel"
             autoComplete="tel"
+            required
             placeholder="+256 700 000000"
             className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8] focus:border-transparent transition-all"
           />
