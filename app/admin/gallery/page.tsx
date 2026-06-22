@@ -18,7 +18,7 @@ type Photo = {
   created_at: string;
 };
 
-const CATEGORIES = ["general", "ponds", "hatchery", "training", "products", "events", "farm"];
+const CATEGORIES = ["general", "ponds", "hatchery", "liners", "feed", "training", "products", "events", "farm"];
 
 export default function AdminGalleryPage() {
   const [photos, setPhotos] = useState<Photo[]>([]);
@@ -78,7 +78,9 @@ export default function AdminGalleryPage() {
 
   async function deletePhoto(photo: Photo) {
     if (!confirm(`Delete "${photo.title}"? This cannot be undone.`)) return;
-    await supabase.storage.from("gallery").remove([photo.storage_path]);
+    if (photo.storage_path) {
+      await supabase.storage.from("gallery").remove([photo.storage_path]);
+    }
     await supabase.from("gallery_photos").delete().eq("id", photo.id);
     toast.success("Photo deleted");
     setPhotos((prev) => prev.filter((p) => p.id !== photo.id));

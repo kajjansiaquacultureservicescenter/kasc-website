@@ -7,6 +7,16 @@ import { Play, PlayCircle, Image as ImageIcon, Film, Plus, X, Music2 } from "luc
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
 
+type Photo = {
+  id: string;
+  title: string;
+  description: string | null;
+  public_url: string;
+  category: string;
+  is_featured: boolean;
+  sort_order: number;
+};
+
 type MediaEmbed = {
   id: string;
   title: string;
@@ -17,53 +27,41 @@ type MediaEmbed = {
   created_at: string;
 };
 
-const GALLERY_IMAGES = [
-  { src: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=700&q=85", alt: "Fish pond preparation at Kajjansi farm", category: "ponds" },
-  { src: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=700&q=85", alt: "Mature fish pond at sunset", category: "ponds" },
-  { src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=85", alt: "Clear water aquaculture pond", category: "ponds" },
-  { src: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=700&q=85", alt: "Sustainable pond environment", category: "ponds" },
-  { src: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=700&q=85", alt: "HDPE geomembrane dam liner rolls", category: "liners" },
-  { src: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=700&q=85&crop=entropy", alt: "Dam liner installation in progress", category: "liners" },
-  { src: "https://images.unsplash.com/photo-1560275619-4662e36fa65c?w=700&q=85", alt: "Tilapia fingerlings in hatchery tank", category: "hatchery" },
-  { src: "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?w=700&q=85", alt: "Nile tilapia fingerlings close-up", category: "hatchery" },
-  { src: "https://images.unsplash.com/photo-1534043464124-3be32fe000c9?w=700&q=85", alt: "Colourful fish in hatchery display tank", category: "hatchery" },
-  { src: "https://images.unsplash.com/photo-1518467166778-b88f373ffec7?w=700&q=85", alt: "Water quality monitoring and testing", category: "hatchery" },
-  { src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=700&q=85", alt: "Farmer training session at Kajjansi", category: "training" },
-  { src: "https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=700&q=85", alt: "On-farm aquaculture demonstration", category: "training" },
-  { src: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=700&q=85", alt: "Quality fish feed pellets", category: "feed" },
-  { src: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=700&q=85&crop=faces", alt: "Fish feed powder and pellets", category: "feed" },
-  { src: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=700&q=85&crop=top", alt: "Commercial fish farm operations", category: "ponds" },
-  { src: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=700&q=85&crop=bottom", alt: "Net installation at fish cage site", category: "hatchery" },
-];
-
 export default function GalleryPage() {
   const [tab, setTab] = useState<"photos" | "videos">("photos");
+  const [photos, setPhotos] = useState<Photo[]>([]);
   const [videos, setVideos] = useState<MediaEmbed[]>([]);
+  const [loadingPhotos, setLoadingPhotos] = useState(true);
   const [loadingVideos, setLoadingVideos] = useState(true);
   const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
   const [filter, setFilter] = useState("all");
 
   useEffect(() => {
-    async function fetchVideos() {
-      try {
-        const supabase = createClient();
-        const { data } = await supabase
-          .from("media_embeds")
-          .select("id, title, description, platform, embed_url, thumbnail_url, created_at")
-          .order("sort_order")
-          .order("created_at", { ascending: false });
+    const supabase = createClient();
+
+    supabase
+      .from("gallery_photos")
+      .select("id, title, description, public_url, category, is_featured, sort_order")
+      .order("sort_order")
+      .order("created_at", { ascending: false })
+      .then(({ data }) => {
+        setPhotos((data as Photo[]) ?? []);
+        setLoadingPhotos(false);
+      });
+
+    supabase
+      .from("media_embeds")
+      .select("id, title, description, platform, embed_url, thumbnail_url, created_at")
+      .order("sort_order")
+      .order("created_at", { ascending: false })
+      .then(({ data }) => {
         setVideos((data as MediaEmbed[]) ?? []);
-      } catch {
-        setVideos([]);
-      } finally {
         setLoadingVideos(false);
-      }
-    }
-    fetchVideos();
+      });
   }, []);
 
-  const categories = ["all", ...Array.from(new Set(GALLERY_IMAGES.map((i) => i.category)))];
-  const filtered = filter === "all" ? GALLERY_IMAGES : GALLERY_IMAGES.filter((i) => i.category === filter);
+  const categories = ["all", ...Array.from(new Set(photos.map((p) => p.category))).sort()];
+  const filtered = filter === "all" ? photos : photos.filter((p) => p.category === filter);
 
   return (
     <div className="overflow-x-hidden">
@@ -99,7 +97,7 @@ export default function GalleryPage() {
             className={cn("flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm transition-all",
               tab === "photos" ? "bg-[#0f5070] text-white" : "text-gray-600 hover:bg-gray-50")}
           >
-            <ImageIcon size={16} /> Photos ({GALLERY_IMAGES.length})
+            <ImageIcon size={16} /> Photos{!loadingPhotos && ` (${photos.length})`}
           </button>
           <button
             onClick={() => setTab("videos")}
@@ -115,48 +113,63 @@ export default function GalleryPage() {
       {tab === "photos" && (
         <section className="section-padding bg-[#f8fafc]">
           <div className="container-wide">
-            <div className="flex flex-wrap gap-2 mb-8">
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setFilter(cat)}
-                  className={cn(
-                    "px-4 py-2 rounded-full text-sm font-medium border transition-all capitalize",
-                    filter === cat
-                      ? "bg-[#0f5070] text-white border-[#0f5070]"
-                      : "bg-white text-gray-600 border-gray-200 hover:border-[#2d8ab8] hover:text-[#0f5070]"
-                  )}
-                >
-                  {cat === "all" ? "All Photos" : cat}
-                </button>
-              ))}
-            </div>
+            {loadingPhotos ? (
+              <div className="flex justify-center py-24">
+                <div className="w-8 h-8 border-2 border-[#0f5070] border-t-transparent rounded-full animate-spin" />
+              </div>
+            ) : (
+              <>
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {categories.map((cat) => (
+                    <button
+                      key={cat}
+                      onClick={() => setFilter(cat)}
+                      className={cn(
+                        "px-4 py-2 rounded-full text-sm font-medium border transition-all capitalize",
+                        filter === cat
+                          ? "bg-[#0f5070] text-white border-[#0f5070]"
+                          : "bg-white text-gray-600 border-gray-200 hover:border-[#2d8ab8] hover:text-[#0f5070]"
+                      )}
+                    >
+                      {cat === "all" ? "All Photos" : cat}
+                    </button>
+                  ))}
+                </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-              {filtered.map((img, i) => (
-                <button
-                  key={i}
-                  onClick={() => setLightbox(img)}
-                  className="relative rounded-2xl overflow-hidden aspect-square group shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-                >
-                  <Image
-                    src={img.src}
-                    alt={img.alt}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  />
-                  <div className="absolute inset-0 bg-[#071e2e]/0 group-hover:bg-[#071e2e]/40 transition-colors flex items-center justify-center">
-                    <div className="w-10 h-10 rounded-full bg-white/0 group-hover:bg-white/90 flex items-center justify-center transition-all scale-0 group-hover:scale-100">
-                      <Plus size={18} className="text-[#0f5070]" />
-                    </div>
+                {filtered.length === 0 ? (
+                  <div className="text-center py-24">
+                    <ImageIcon size={48} className="mx-auto text-gray-200 mb-4" />
+                    <p className="text-gray-400 font-medium">No photos in this category yet.</p>
                   </div>
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3 translate-y-full group-hover:translate-y-0 transition-transform">
-                    <p className="text-white text-xs font-medium">{img.alt}</p>
+                ) : (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                    {filtered.map((photo) => (
+                      <button
+                        key={photo.id}
+                        onClick={() => setLightbox({ src: photo.public_url, alt: photo.title })}
+                        className="relative rounded-2xl overflow-hidden aspect-square group shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                      >
+                        <Image
+                          src={photo.public_url}
+                          alt={photo.title}
+                          fill
+                          className="object-cover group-hover:scale-110 transition-transform duration-500"
+                          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                        />
+                        <div className="absolute inset-0 bg-[#071e2e]/0 group-hover:bg-[#071e2e]/40 transition-colors flex items-center justify-center">
+                          <div className="w-10 h-10 rounded-full bg-white/0 group-hover:bg-white/90 flex items-center justify-center transition-all scale-0 group-hover:scale-100">
+                            <Plus size={18} className="text-[#0f5070]" />
+                          </div>
+                        </div>
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3 translate-y-full group-hover:translate-y-0 transition-transform">
+                          <p className="text-white text-xs font-medium">{photo.title}</p>
+                        </div>
+                      </button>
+                    ))}
                   </div>
-                </button>
-              ))}
-            </div>
+                )}
+              </>
+            )}
           </div>
         </section>
       )}
