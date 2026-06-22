@@ -79,11 +79,11 @@ export default function Header() {
             <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full overflow-hidden bg-white shadow-lg group-hover:shadow-xl transition-shadow shrink-0">
               <img src="/logo.png" alt="KASC Logo" className="w-full h-full object-contain" />
             </div>
-            <div className="hidden sm:block">
-              <div className="text-white font-bold text-base lg:text-lg leading-tight font-display">
+            <div>
+              <div className="text-white font-bold text-sm lg:text-lg leading-tight font-display">
                 Kajjansi
               </div>
-              <div className="text-[#5aafd4] text-xs font-medium leading-tight tracking-wide">
+              <div className="text-[#5aafd4] text-[10px] lg:text-xs font-medium leading-tight tracking-wide">
                 Aquaculture Service Center
               </div>
             </div>
