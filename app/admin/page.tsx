@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import {
   ShoppingBag, MessageSquare, Image, Zap, Newspaper,
-  TrendingUp, ArrowRight, Clock,
+  TrendingUp, ArrowRight,
 } from "lucide-react";
 
 export const metadata: Metadata = { title: "Dashboard" };
@@ -11,23 +11,52 @@ export const metadata: Metadata = { title: "Dashboard" };
 export const revalidate = 30;
 
 export default async function AdminDashboard() {
-  const supabase = await createClient();
+  const admin = createAdminClient();
+  const today = new Date().toISOString().split("T")[0];
 
-  const { data: stats } = await supabase.rpc("get_dashboard_stats");
+  const [
+    { count: orders_today },
+    { count: orders_pending },
+    { count: orders_total },
+    { data: revenueToday },
+    { data: revenueAll },
+    { count: inquiries_new },
+    { count: inquiries_total },
+    { count: gallery_photos },
+    { count: active_flash_deals },
+    { count: published_news },
+    { data: recentOrders },
+    { data: recentInquiries },
+  ] = await Promise.all([
+    admin.from("orders").select("*", { count: "exact", head: true }).gte("created_at", today),
+    admin.from("orders").select("*", { count: "exact", head: true }).eq("status", "pending"),
+    admin.from("orders").select("*", { count: "exact", head: true }),
+    admin.from("orders").select("total_amount").gte("created_at", today).eq("payment_status", "paid"),
+    admin.from("orders").select("total_amount").eq("payment_status", "paid"),
+    admin.from("inquiries").select("*", { count: "exact", head: true }).eq("status", "new"),
+    admin.from("inquiries").select("*", { count: "exact", head: true }),
+    admin.from("gallery_photos").select("*", { count: "exact", head: true }),
+    admin.from("flash_deals").select("*", { count: "exact", head: true }).eq("is_active", true).gt("ends_at", new Date().toISOString()),
+    admin.from("news").select("*", { count: "exact", head: true }).eq("is_published", true),
+    admin.from("orders").select("id, order_number, guest_name, total_amount, status, payment_method, created_at").order("created_at", { ascending: false }).limit(5),
+    admin.from("inquiries").select("id, name, subject, service, status, created_at").order("created_at", { ascending: false }).limit(4),
+  ]);
 
-  const { data: recentOrders } = await supabase
-    .from("orders")
-    .select("id, order_number, guest_name, total_amount, status, payment_method, created_at")
-    .order("created_at", { ascending: false })
-    .limit(5);
+  const revenue_today = (revenueToday ?? []).reduce((s: number, r: any) => s + Number(r.total_amount), 0);
+  const revenue_total = (revenueAll ?? []).reduce((s: number, r: any) => s + Number(r.total_amount), 0);
 
-  const { data: recentInquiries } = await supabase
-    .from("inquiries")
-    .select("id, name, subject, service, status, created_at")
-    .order("created_at", { ascending: false })
-    .limit(4);
-
-  const s = stats as Record<string, number> | null;
+  const s = {
+    orders_today:       orders_today ?? 0,
+    orders_pending:     orders_pending ?? 0,
+    orders_total:       orders_total ?? 0,
+    revenue_today,
+    revenue_total,
+    inquiries_new:      inquiries_new ?? 0,
+    inquiries_total:    inquiries_total ?? 0,
+    gallery_photos:     gallery_photos ?? 0,
+    active_flash_deals: active_flash_deals ?? 0,
+    published_news:     published_news ?? 0,
+  } as Record<string, number>;
 
   const STAT_CARDS = [
     { label: "Orders Today",     value: s?.orders_today ?? 0,     icon: ShoppingBag, sub: `${s?.orders_pending ?? 0} pending`,   color: "brand" },
