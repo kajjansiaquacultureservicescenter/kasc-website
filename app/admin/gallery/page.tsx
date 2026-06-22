@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { createClient } from "@/lib/supabase/client";
 import Image from "next/image";
 import { toast } from "sonner";
@@ -27,18 +27,18 @@ export default function AdminGalleryPage() {
   const [filterCat, setFilterCat] = useState("all");
   const [form, setForm] = useState({ title: "", category: "general", description: "" });
   const fileRef = useRef<HTMLInputElement>(null);
-  const supabase = createClient();
+  const supabase = useMemo(() => createClient(), []);
 
-  async function fetchPhotos() {
+  const fetchPhotos = useCallback(async () => {
     setLoading(true);
     let q = supabase.from("gallery_photos").select("*").order("sort_order", { ascending: true });
     if (filterCat !== "all") q = q.eq("category", filterCat);
     const { data } = await q;
     setPhotos(data as Photo[] || []);
     setLoading(false);
-  }
+  }, [filterCat, supabase]);
 
-  useEffect(() => { fetchPhotos(); }, [filterCat]);
+  useEffect(() => { fetchPhotos(); }, [fetchPhotos]);
 
   async function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { MessageSquare, Clock, Mail, Phone, Tag, Loader2, CheckCircle2, Eye, RefreshCw, Send } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
@@ -27,9 +27,9 @@ export default function AdminInquiries() {
   const [replyText, setReplyText] = useState("");
   const [savingReply, setSavingReply] = useState(false);
 
-  const supabase = createClient();
+  const supabase = useMemo(() => createClient(), []);
 
-  async function load() {
+  const load = useCallback(async () => {
     setLoading(true);
     const { data, error } = await supabase
       .from("inquiries")
@@ -38,9 +38,9 @@ export default function AdminInquiries() {
     if (error) toast.error("Failed to load inquiries");
     else setInquiries(data as Inquiry[]);
     setLoading(false);
-  }
+  }, [supabase]);
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => { load(); }, [load]);
 
   async function markStatus(id: string, status: Inquiry["status"]) {
     await supabase.from("inquiries").update({ status }).eq("id", id);

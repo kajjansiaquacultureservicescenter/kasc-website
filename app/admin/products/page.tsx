@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
 import {
@@ -45,16 +45,16 @@ export default function AdminProductsPage() {
   const [editId, setEditId] = useState<string | "new" | null>(null);
   const [form, setForm] = useState<Omit<Product, "id">>(EMPTY);
   const [specsInput, setSpecsInput] = useState("");
-  const supabase = createClient();
+  const supabase = useMemo(() => createClient(), []);
 
-  async function load() {
+  const load = useCallback(async () => {
     setLoading(true);
     const { data } = await supabase.from("products").select("*").order("sort_order").order("name");
     setProducts((data as Product[]) ?? []);
     setLoading(false);
-  }
+  }, [supabase]);
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => { load(); }, [load]);
 
   function openNew() {
     setForm(EMPTY);

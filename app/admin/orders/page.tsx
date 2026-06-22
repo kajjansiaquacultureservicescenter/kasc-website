@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
 import { ShoppingBag, ChevronDown, X, Loader2, RefreshCw } from "lucide-react";
@@ -67,9 +67,9 @@ export default function AdminOrdersPage() {
   const [selected, setSelected] = useState<Order | null>(null);
   const [updating, setUpdating] = useState(false);
 
-  const supabase = createClient();
+  const supabase = useMemo(() => createClient(), []);
 
-  async function fetchOrders() {
+  const fetchOrders = useCallback(async () => {
     setLoading(true);
     let query = supabase
       .from("orders")
@@ -82,9 +82,9 @@ export default function AdminOrdersPage() {
     if (error) toast.error("Failed to load orders");
     else setOrders(data as Order[]);
     setLoading(false);
-  }
+  }, [filterStatus, supabase]);
 
-  useEffect(() => { fetchOrders(); }, [filterStatus]);
+  useEffect(() => { fetchOrders(); }, [fetchOrders]);
 
   async function updateOrderStatus(orderId: string, field: "status" | "payment_status", value: string) {
     setUpdating(true);

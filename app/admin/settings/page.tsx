@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
 import { Settings, Loader2, Save } from "lucide-react";
@@ -19,7 +19,7 @@ export default function AdminSettingsPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState<string | null>(null);
   const [values, setValues] = useState<Record<string, string>>({});
-  const supabase = createClient();
+  const supabase = useMemo(() => createClient(), []);
 
   useEffect(() => {
     (async () => {
@@ -31,7 +31,7 @@ export default function AdminSettingsPage() {
       setValues(v);
       setLoading(false);
     })();
-  }, []);
+  }, [supabase]);
 
   async function saveCategory(category: string) {
     setSaving(category);

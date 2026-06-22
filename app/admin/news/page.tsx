@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
 import { Newspaper, Plus, Trash2, Loader2, Eye, EyeOff, Edit3, X, Upload } from "lucide-react";
@@ -30,16 +30,16 @@ export default function AdminNewsPage() {
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [form, setForm] = useState({ title: "", slug: "", excerpt: "", content: "", cover_image_url: "", cover_storage_path: "", is_published: false });
-  const supabase = createClient();
+  const supabase = useMemo(() => createClient(), []);
 
-  async function fetch() {
+  const loadNews = useCallback(async () => {
     setLoading(true);
     const { data } = await supabase.from("news").select("*").order("created_at", { ascending: false });
     setArticles(data as Article[] || []);
     setLoading(false);
-  }
+  }, [supabase]);
 
-  useEffect(() => { fetch(); }, []);
+  useEffect(() => { loadNews(); }, [loadNews]);
 
   function openNew() {
     setForm({ title: "", slug: "", excerpt: "", content: "", cover_image_url: "", cover_storage_path: "", is_published: false });
@@ -93,7 +93,7 @@ export default function AdminNewsPage() {
     } else {
       toast.success(isNew ? "Article created!" : "Article updated!");
       closeEditor();
-      fetch();
+      loadNews();
     }
     setSaving(false);
   }

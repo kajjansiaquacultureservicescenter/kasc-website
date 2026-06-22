@@ -53,19 +53,28 @@ export default function CartPage() {
     }
     setSubmitting(true);
     try {
-      const orderItems = items.map(i => `${i.quantity}× ${i.name} @ ${formatPrice(i.price)}/${i.unit}`).join("\n");
-      const message = `ORDER REQUEST\n\nItems:\n${orderItems}\n\nSubtotal: ${formatPrice(subtotal)}\nDelivery Region: ${form.region}\nDelivery Address: ${form.address || "—"}\nNotes: ${form.notes || "—"}`;
+      const orderItems = items.map(i => ({
+        product_slug: i.slug,
+        product_name: i.name,
+        product_price: i.price,
+        quantity: i.quantity,
+        subtotal: i.price * i.quantity,
+      }));
 
-      const res = await fetch("/api/contact", {
+      const res = await fetch("/api/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          phone: form.phone,
-          subject: `Order Request — ${itemCount} item${itemCount > 1 ? "s" : ""}`,
-          service: "Product Order",
-          message,
+          items: orderItems,
+          customer: {
+            name: form.name,
+            email: form.email,
+            phone: form.phone,
+            address: form.address || form.region,
+            district: form.region,
+            notes: form.notes || undefined,
+          },
+          payment_method: "cash_on_delivery",
         }),
       });
 

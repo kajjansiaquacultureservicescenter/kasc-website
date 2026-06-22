@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
 import { Tag, Plus, Trash2, Loader2, ToggleLeft, ToggleRight, Edit3, X, Upload } from "lucide-react";
@@ -37,16 +37,16 @@ export default function AdminOffersPage() {
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [form, setForm] = useState({ ...blankForm });
-  const supabase = createClient();
+  const supabase = useMemo(() => createClient(), []);
 
-  async function fetch() {
+  const loadOffers = useCallback(async () => {
     setLoading(true);
     const { data } = await supabase.from("offers").select("*").order("created_at", { ascending: false });
     setOffers(data as Offer[] || []);
     setLoading(false);
-  }
+  }, [supabase]);
 
-  useEffect(() => { fetch(); }, []);
+  useEffect(() => { loadOffers(); }, [loadOffers]);
 
   function openNew() { setForm({ ...blankForm }); setEditing(null); setShowForm(true); }
   function openEdit(o: Offer) {
@@ -85,7 +85,7 @@ export default function AdminOffersPage() {
       ? await supabase.from("offers").update(payload).eq("id", editing.id)
       : await supabase.from("offers").insert(payload);
     if (error) toast.error(error.message);
-    else { toast.success(editing ? "Offer updated!" : "Offer created!"); setShowForm(false); fetch(); }
+    else { toast.success(editing ? "Offer updated!" : "Offer created!"); setShowForm(false); loadOffers(); }
     setSaving(false);
   }
 

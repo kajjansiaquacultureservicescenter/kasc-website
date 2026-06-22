@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
 import { Zap, Plus, Trash2, Loader2, X, Upload, Clock } from "lucide-react";
@@ -38,16 +38,16 @@ export default function AdminFlashDealsPage() {
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [form, setForm] = useState({ ...blankForm });
-  const supabase = createClient();
+  const supabase = useMemo(() => createClient(), []);
 
-  async function fetch() {
+  const loadDeals = useCallback(async () => {
     setLoading(true);
     const { data } = await supabase.from("flash_deals").select("*").order("created_at", { ascending: false });
     setDeals(data as FlashDeal[] || []);
     setLoading(false);
-  }
+  }, [supabase]);
 
-  useEffect(() => { fetch(); }, []);
+  useEffect(() => { loadDeals(); }, [loadDeals]);
 
   async function uploadImage(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -81,7 +81,7 @@ export default function AdminFlashDealsPage() {
     };
     const { error } = await supabase.from("flash_deals").insert(payload);
     if (error) toast.error(error.message);
-    else { toast.success("Flash deal created!"); setShowForm(false); fetch(); }
+    else { toast.success("Flash deal created!"); setShowForm(false); loadDeals(); }
     setSaving(false);
   }
 

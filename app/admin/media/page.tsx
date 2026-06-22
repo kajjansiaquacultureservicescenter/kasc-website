@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
 import { Video, Trash2, Plus, Loader2, Music2, X, Play } from "lucide-react";
@@ -52,16 +52,16 @@ export default function AdminMediaPage() {
   const [preview, setPreview] = useState<MediaEmbed | null>(null);
   const [form, setForm] = useState({ url: "", title: "", description: "" });
   const [platformDetected, setPlatformDetected] = useState<"youtube" | "tiktok" | null>(null);
-  const supabase = createClient();
+  const supabase = useMemo(() => createClient(), []);
 
-  async function fetchEmbeds() {
+  const fetchEmbeds = useCallback(async () => {
     setLoading(true);
     const { data } = await supabase.from("media_embeds").select("*").order("sort_order");
     setEmbeds(data as MediaEmbed[] || []);
     setLoading(false);
-  }
+  }, [supabase]);
 
-  useEffect(() => { fetchEmbeds(); }, []);
+  useEffect(() => { fetchEmbeds(); }, [fetchEmbeds]);
 
   function onUrlChange(url: string) {
     setForm({ ...form, url });
