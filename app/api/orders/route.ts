@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { NextRequest } from "next/server";
 import { z } from "zod";
 
@@ -36,10 +37,12 @@ export async function POST(request: NextRequest) {
 
     const { items, customer, payment_method, payment_reference } = parsed.data;
 
+    // Use SSR client only to check for a logged-in user
     const supabase = await createClient();
+    const admin = createAdminClient();
 
-    // Fetch delivery fee from settings
-    const { data: settings } = await supabase
+    // Fetch delivery fee from settings (service role bypasses RLS)
+    const { data: settings } = await admin
       .from("site_settings")
       .select("key, value")
       .in("key", ["delivery_fee_default", "delivery_fee_free_above"]);
@@ -57,8 +60,8 @@ export async function POST(request: NextRequest) {
     // Check if there's a logged-in user
     const { data: { user } } = await supabase.auth.getUser();
 
-    // Insert the order
-    const { data: order, error: orderError } = await supabase
+    // Insert the order (admin client bypasses RLS — public INSERT policy removed)
+    const { data: order, error: orderError } = await admin
       .from("orders")
       .insert({
         user_id: user?.id ?? null,
@@ -94,7 +97,7 @@ export async function POST(request: NextRequest) {
       subtotal: item.subtotal,
     }));
 
-    const { error: itemsError } = await supabase.from("order_items").insert(orderItems);
+    const { error: itemsError } = await admin.from("order_items").insert(orderItems);
 
     if (itemsError) {
       console.error("Order items error:", itemsError);
