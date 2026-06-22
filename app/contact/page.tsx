@@ -75,20 +75,22 @@ export default function ContactPage() {
         <div className="container-wide">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
-              { icon: Phone, label: "Call / WhatsApp", value: COMPANY.phone, href: `tel:${COMPANY.phone}`, color: "brand" },
-              { icon: Mail, label: "Email Us", value: COMPANY.email, href: `mailto:${COMPANY.email}`, color: "green" },
-              { icon: MapPin, label: "Visit Our Farm", value: COMPANY.farmAddress, href: "#map", color: "brand" },
-              { icon: Clock, label: "Working Hours", value: "Mon – Sat, 8am – 6pm EAT", href: null, color: "green" },
-            ].map(({ icon: Icon, label, value, href, color }) => (
+              { icon: Phone, label: "Call / WhatsApp", values: [{ text: COMPANY.phone, href: `tel:${COMPANY.phone}` }, { text: COMPANY.phone2, href: `tel:${COMPANY.phone2}` }], color: "brand" },
+              { icon: Mail, label: "Email Us", values: [{ text: COMPANY.email, href: `mailto:${COMPANY.email}` }], color: "green" },
+              { icon: MapPin, label: "Visit Our Farm", values: [{ text: COMPANY.farmAddress, href: "#map" }], color: "brand" },
+              { icon: Clock, label: "Working Hours", values: [{ text: "Mon – Sat, 8am – 6pm EAT", href: null }], color: "green" },
+            ].map(({ icon: Icon, label, values, color }) => (
               <div key={label} className={`p-6 rounded-2xl border ${color === "brand" ? "bg-[#eef8fd] border-[#a0d4ea]" : "bg-[#f0fcf4] border-[#beeecf]"}`}>
                 <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 ${color === "brand" ? "bg-[#0f5070]" : "bg-[#226640]"}`}>
                   <Icon size={20} className="text-white" />
                 </div>
                 <div className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">{label}</div>
-                {href ? (
-                  <a href={href} className={`font-semibold text-sm hover:underline ${color === "brand" ? "text-[#0f5070]" : "text-[#226640]"}`}>{value}</a>
-                ) : (
-                  <div className="font-semibold text-sm text-gray-700">{value}</div>
+                {values.map(({ text, href }) =>
+                  href ? (
+                    <a key={text} href={href} className={`block font-semibold text-sm hover:underline ${color === "brand" ? "text-[#0f5070]" : "text-[#226640]"}`}>{text}</a>
+                  ) : (
+                    <div key={text} className="font-semibold text-sm text-gray-700">{text}</div>
+                  )
                 )}
               </div>
             ))}

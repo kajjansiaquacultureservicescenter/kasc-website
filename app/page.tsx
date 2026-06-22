@@ -65,19 +65,19 @@ export default function HomePage() {
             <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur border border-white/20 text-sm text-blue-100 mb-8">
               <span className="w-2 h-2 rounded-full bg-[#3aaf6c] animate-pulse" />
-              East Africa&apos;s #1 Aquaculture Solutions Partner
+              Kajjansi Aquaculture Services Centre — Entebbe Road, Uganda
             </motion.div>
 
             <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }}
               className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.1] mb-6">
-              Your One-Stop{" "}
-              <span className="text-gradient block">Aquaculture Solutions</span>
-              Partner in East Africa
+              Your Premier Partner for{" "}
+              <span className="text-gradient block">Complete Aquaculture</span>
+              Solutions
             </motion.h1>
 
             <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.25 }}
               className="text-lg lg:text-xl text-gray-300 max-w-2xl mb-10 leading-relaxed">
-              From feasibility studies and pond construction to certified fingerlings, premium fish feed, dam liners, and hands-on training — Kajjansi Aquaculture Service Center empowers fish farmers to thrive across Uganda, East Africa, and beyond.
+              KASC is a premier aquaculture solutions provider serving commercial fish farmers with high-quality inputs, advanced farming technology, and expert technical consultancy — bridging gaps in the aquaculture value chain from pond construction to harvest.
             </motion.p>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4 }}
@@ -201,14 +201,14 @@ export default function HomePage() {
                 <span className="text-gradient">We Build Successful Farms.</span>
               </h2>
               <p className="text-gray-600 text-base leading-relaxed mb-8">
-                At Kajjansi Aquaculture Service Center, we combine deep field expertise, premium quality inputs, and genuine after-sales commitment. Over a decade of refining what it takes for fish farms to be truly profitable.
+                KASC is dedicated to bridging gaps in the aquaculture value chain by maintaining international operational standards — enabling clients to maximise profitability while achieving sustainable fish production.
               </p>
               <div className="space-y-4">
                 {[
-                  { title: "Certified Breeding Hatchery", desc: "Our on-site hatchery ensures fingerlings are disease-free, genetically sound, and ready for commercial stocking." },
-                  { title: "Full-Spectrum Service", desc: "From the initial site study to the first harvest — you never need to look elsewhere." },
-                  { title: "Regional Reach", desc: "Serving Uganda, Kenya, Tanzania, Rwanda, and South Africa with consistent quality." },
-                  { title: "After-Sales Commitment", desc: "We don't disappear after installation. Ongoing technical support is a core part of every service." },
+                  { title: "Total Farming Solutions", desc: "End-to-end aquaculture support — from pond construction and setup to harvesting and production management — making KASC your one-stop solution." },
+                  { title: "Quality Assurance", desc: "We supply durable HDPE geomembrane liners, reliable farming inputs, and precision monitoring equipment built for long-term performance." },
+                  { title: "Technical Excellence", desc: "Professional advisory and consultancy services ensure you achieve the highest possible return on investment using scientifically-backed best practices." },
+                  { title: "International Standards", desc: "We operate to ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018 — quality, environment, and safety built into everything we do." },
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4">
                     <CheckCircle2 size={18} className="text-[#2d8ab8] shrink-0 mt-0.5" />
@@ -285,7 +285,7 @@ export default function HomePage() {
                   <div className="h-full bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-1 transition-all duration-300">
                     <div className="relative h-48 bg-gradient-to-br from-[#eef8fd] to-[#f0fcf4] overflow-hidden">
                       <Image
-                        src={`https://images.unsplash.com/photo-${product.category === "fingerlings" ? "1560275619-4662e36fa65c" : product.category === "feed" ? "1586201375761-83865001e31c" : product.category === "liners" ? "1504711434969-e33886168f5c" : "1574943320219-553eb213f72d"}?w=400&q=80`}
+                        src={product.image}
                         alt={product.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                       {product.badge && (
                         <span className={cn("absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-semibold",

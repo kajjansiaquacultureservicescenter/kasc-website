@@ -25,10 +25,18 @@ export async function proxy(request: NextRequest) {
     }
   );
 
-  // Refresh session — must call getUser() not getSession() for security
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // Refresh session — must call getUser() not getSession() for security.
+  // Race against a 1.5s timeout: Supabase can be slow/paused; never block page loads.
+  let user: Awaited<ReturnType<typeof supabase.auth.getUser>>["data"]["user"] = null;
+  try {
+    const timedOut = new Promise<{ data: { user: null }; error: null }>((r) =>
+      setTimeout(() => r({ data: { user: null }, error: null }), 1500)
+    );
+    const result = await Promise.race([supabase.auth.getUser(), timedOut]);
+    user = result.data.user;
+  } catch {
+    // Supabase unreachable — treat as unauthenticated, pages still load
+  }
 
   const { pathname } = request.nextUrl;
 

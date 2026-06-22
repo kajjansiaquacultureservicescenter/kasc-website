@@ -65,7 +65,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed mb-5">
-              East Africa&apos;s premier one-stop aquaculture solutions partner. Empowering fish farmers with world-class inputs, infrastructure, and expertise since 2014.
+              Your premier partner for complete aquaculture solutions — providing high-quality inputs, advanced farming technology, and expert technical consultancy across East Africa.
             </p>
             <div className="flex items-center gap-2">
               {[
@@ -142,15 +142,16 @@ export default function Footer() {
             </h3>
             <ul className="space-y-4">
               <li>
-                <a href={`tel:${COMPANY.phone}`} className="flex items-start gap-3 group">
+                <div className="flex items-start gap-3">
                   <div className="w-8 h-8 rounded-lg bg-[#2d8ab8]/20 flex items-center justify-center shrink-0 mt-0.5">
                     <Phone size={14} className="text-[#5aafd4]" />
                   </div>
                   <div>
                     <div className="text-xs text-gray-500 mb-0.5">Phone / WhatsApp</div>
-                    <div className="text-sm text-gray-300 group-hover:text-[#5aafd4] transition-colors">{COMPANY.phone}</div>
+                    <a href={`tel:${COMPANY.phone}`} className="block text-sm text-gray-300 hover:text-[#5aafd4] transition-colors">{COMPANY.phone}</a>
+                    <a href={`tel:${COMPANY.phone2}`} className="block text-sm text-gray-300 hover:text-[#5aafd4] transition-colors">{COMPANY.phone2}</a>
                   </div>
-                </a>
+                </div>
               </li>
               <li>
                 <a href={`mailto:${COMPANY.email}`} className="flex items-start gap-3 group">

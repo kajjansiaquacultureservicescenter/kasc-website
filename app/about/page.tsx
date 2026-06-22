@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Users, Award, Globe, Fish, Leaf, Target, Eye, Heart } from "lucide-react";
+import { ArrowRight, CheckCircle2, Users, Award, Globe, Fish, Leaf, Target, Eye, Heart, ShieldCheck } from "lucide-react";
 import { COMPANY, STATS } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -37,8 +37,8 @@ export default function AboutPage() {
               <Fish size={14} className="text-[#5aafd4]" /> About KASC
             </div>
             <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 leading-tight">
-              Rooted in Kajjansi.{" "}
-              <span className="text-gradient">Serving All of East Africa.</span>
+              Based in Kajjansi.{" "}
+              <span className="text-gradient">Your Premier Aquaculture Partner.</span>
             </h1>
             <p className="text-xl text-gray-300 leading-relaxed max-w-2xl">
               {COMPANY.description}
@@ -65,13 +65,13 @@ export default function AboutPage() {
                 <span className="text-gradient">Leading Aquaculture Hub</span>
               </h2>
               <p className="text-gray-600 leading-relaxed mb-4">
-                Kajjansi Aquaculture Service Center was born out of a simple but powerful observation: fish farmers in Uganda and across East Africa were struggling — not because the land or water wasn&apos;t there, but because they lacked access to quality inputs, expert knowledge, and reliable infrastructure.
+                Kajjansi Aquaculture Services Centre (KASC) is a premier aquaculture solutions provider based in Kajjansi on Entebbe Road, Uganda. We serve as a comprehensive partner for commercial fish farmers — providing high-quality inputs, advanced farming technology, and expert technical consultancy services.
               </p>
               <p className="text-gray-600 leading-relaxed mb-4">
-                We started with a demonstration pond at Kajjansi and a commitment to change that reality. Today, we are a fully integrated aquaculture solutions company with our own hatchery, feed production, dam liner fabrication facility, and a team of certified aquaculture specialists.
+                KASC is dedicated to bridging gaps in the aquaculture value chain by maintaining international operational standards, enabling clients to maximise profitability while achieving sustainable fish production.
               </p>
               <p className="text-gray-600 leading-relaxed mb-8">
-                We serve clients in Uganda, Kenya, Tanzania, Rwanda, and South Africa — because we believe every fish farmer, regardless of location, deserves access to world-class aquaculture solutions.
+                We serve clients in Uganda, Kenya, Tanzania, Rwanda, and South Africa — because every fish farmer, regardless of location, deserves access to world-class aquaculture solutions.
               </p>
               <div className="grid grid-cols-2 gap-4">
                 {STATS.map((stat) => (
@@ -101,9 +101,9 @@ export default function AboutPage() {
         <div className="container-wide">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             {[
-              { icon: Target, label: "Our Mission", color: "brand", text: "To empower fish farmers across East Africa with world-class aquaculture inputs, infrastructure, and expertise — making profitable, sustainable fish farming accessible to all." },
-              { icon: Eye, label: "Our Vision", color: "green", text: "To be the most trusted and impactful aquaculture solutions company in Africa, transforming fish farming from subsistence to thriving commercial enterprise." },
-              { icon: Leaf, label: "Our Commitment", color: "amber", text: "We are committed to sustainability, profitability, and expansion for every farmer we work with — from their first fingerling to their hundredth successful harvest." },
+              { icon: Target, label: "Our Mission", color: "brand", text: "To deliver innovative, high-quality, and cost-effective aquaculture solutions that empower farmers to achieve their full production potential through scientifically backed practices and expert technical support." },
+              { icon: Eye, label: "Our Vision", color: "green", text: "To become the most trusted and reliable partner for sustainable aquaculture development throughout the East African region." },
+              { icon: Leaf, label: "Our Commitment", color: "amber", text: "We adhere to internationally recognised standards — ISO 9001:2015 (Quality), ISO 14001:2015 (Environment), and ISO 45001:2018 (Health & Safety) — ensuring consistent excellence across every service." },
             ].map(({ icon: Icon, label, color, text }) => (
               <div key={label} className={`p-8 rounded-2xl border ${color === "brand" ? "bg-[#eef8fd] border-[#a0d4ea]" : color === "green" ? "bg-[#f0fcf4] border-[#beeecf]" : "bg-[#fffbf0] border-[#fde5b0]"}`}>
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 ${color === "brand" ? "bg-[#0f5070]" : color === "green" ? "bg-[#226640]" : "bg-[#a05200]"}`}>
@@ -127,6 +127,32 @@ export default function AboutPage() {
                 </div>
                 <h3 className="font-bold text-[#071e2e] mb-2">{title}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ISO Standards */}
+      <section className="section-padding bg-white">
+        <div className="container-wide">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#eef8fd] text-[#0f5070] text-sm font-medium mb-4 border border-[#a0d4ea]">
+              <ShieldCheck size={14} className="text-[#2d8ab8]" /> Quality & Safety Standards
+            </div>
+            <h2 className="text-3xl font-bold text-[#071e2e] mb-3">Committed to International Standards</h2>
+            <p className="text-gray-500 leading-relaxed">
+              KASC adheres to internationally recognised management standards — giving our clients confidence that every product, service, and interaction meets global benchmarks for quality, environmental responsibility, and worker safety.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            {COMPANY.iso.map((std) => (
+              <div key={std.code} className="flex flex-col items-center text-center p-8 rounded-2xl border-2 border-[#a0d4ea] bg-[#eef8fd]">
+                <div className="w-14 h-14 rounded-2xl bg-[#0f5070] flex items-center justify-center mb-4">
+                  <ShieldCheck size={26} className="text-white" />
+                </div>
+                <div className="text-[#0f5070] font-bold text-lg font-display mb-1">{std.code}</div>
+                <div className="text-gray-600 text-sm leading-relaxed">{std.label}</div>
               </div>
             ))}
           </div>

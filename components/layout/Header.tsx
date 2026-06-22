@@ -36,6 +36,10 @@ export default function Header() {
               <Phone size={13} className="text-[#5aafd4]" />
               <span>{COMPANY.phone}</span>
             </a>
+            <a href={`tel:${COMPANY.phone2}`} className="flex items-center gap-1.5 hover:text-white transition-colors">
+              <Phone size={13} className="text-[#5aafd4]" />
+              <span>{COMPANY.phone2}</span>
+            </a>
             <a href={`mailto:${COMPANY.email}`} className="flex items-center gap-1.5 hover:text-white transition-colors">
               <Mail size={13} className="text-[#5aafd4]" />
               <span>{COMPANY.email}</span>
