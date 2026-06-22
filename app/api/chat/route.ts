@@ -87,59 +87,12 @@ function getRuleBasedResponse(userMessage: string): string {
   return DEFAULT_RESPONSE;
 }
 
-// ── AI-powered response (used when ANTHROPIC_API_KEY is set) ───────────────
-const SYSTEM_PROMPT = `You are the virtual assistant for Kajjansi Aquaculture Service Center (KASC), East Africa's premier aquaculture solutions company based at Kajjansi, Wakiso, Uganda.
-
-SERVICES: Consultancy & feasibility studies, fish pond construction, cage construction & installation, dam liner supply & installation (HDPE, 0.5/0.75/1.0mm), aquaculture training.
-
-PRODUCTS:
-- Nile Tilapia fingerlings: UGX 500 each
-- African Catfish fingerlings: UGX 600 each
-- Miracle Tilapia fingerlings: UGX 700 each
-- Starter Feed 1mm 45% protein: UGX 85,000/25kg
-- Grower Feed 3mm 38% protein: UGX 75,000/25kg
-- Dam Liner 0.5mm: UGX 12,000/m²
-- Dam Liner 0.75mm: UGX 16,000/m²
-- Dam Liner 1.0mm: UGX 22,000/m²
-
-CONTACTS: Phone/WhatsApp +256 700 000000, email info@kasc.ug, location: Kajjansi, Wakiso District. Hours: Mon–Sat 8am–6pm EAT.
-
-Be warm, concise, and professional. Always offer to connect with a specialist for complex queries. Use simple markdown formatting.`;
-
-async function getAIResponse(messages: { role: string; content: string }[]): Promise<string> {
-  const { default: Anthropic } = await import("@anthropic-ai/sdk");
-  const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-  const response = await client.messages.create({
-    model: "claude-haiku-4-5-20251001",
-    max_tokens: 400,
-    system: SYSTEM_PROMPT,
-    messages: messages.slice(-8) as any,
-  });
-  return response.content[0].type === "text" ? response.content[0].text : DEFAULT_RESPONSE;
-}
-
 // ── Route handler ───────────────────────────────────────────────────────────
 export async function POST(req: NextRequest) {
   try {
     const { messages } = await req.json();
     const lastUserMessage: string = messages?.findLast((m: any) => m.role === "user")?.content ?? "";
-
-    // Use AI if key is configured, otherwise fall back to rules
-    const hasApiKey =
-      process.env.ANTHROPIC_API_KEY &&
-      process.env.ANTHROPIC_API_KEY !== "your_anthropic_api_key";
-
-    let message: string;
-    if (hasApiKey) {
-      try {
-        message = await getAIResponse(messages);
-      } catch {
-        message = getRuleBasedResponse(lastUserMessage);
-      }
-    } else {
-      message = getRuleBasedResponse(lastUserMessage);
-    }
-
+    const message = getRuleBasedResponse(lastUserMessage);
     return NextResponse.json({ message });
   } catch {
     return NextResponse.json(
