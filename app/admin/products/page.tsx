@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState, useCallback, useMemo } from "react";
+import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
 import {
-  Plus, Trash2, Pencil, Loader2, X, PackageCheck, PackageX, Search, ChevronDown,
+  Plus, Trash2, Pencil, Loader2, X, PackageCheck, PackageX, Search, ChevronDown, Upload,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -20,6 +20,7 @@ type Product = {
   badge: string | null;
   in_stock: boolean;
   image_url: string | null;
+  images: string[];
   sort_order: number;
 };
 
@@ -29,7 +30,7 @@ const BADGES = ["", "Best Seller", "Premium", "New", "Most Popular", "Heavy Duty
 const EMPTY: Omit<Product, "id"> = {
   name: "", slug: "", category: "fingerlings", price: 0,
   unit: "per unit", description: "", specs: [], badge: null,
-  in_stock: true, image_url: "", sort_order: 0,
+  in_stock: true, image_url: "", images: [], sort_order: 0,
 };
 
 function slugify(s: string) {
@@ -40,11 +41,14 @@ export default function AdminProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [imgUploading, setImgUploading] = useState(false);
   const [search, setSearch] = useState("");
   const [catFilter, setCatFilter] = useState("all");
   const [editId, setEditId] = useState<string | "new" | null>(null);
   const [form, setForm] = useState<Omit<Product, "id">>(EMPTY);
   const [specsInput, setSpecsInput] = useState("");
+  const mainImgRef = useRef<HTMLInputElement>(null);
+  const extraImgRef = useRef<HTMLInputElement>(null);
   const supabase = useMemo(() => createClient(), []);
 
   const load = useCallback(async () => {
@@ -64,7 +68,7 @@ export default function AdminProductsPage() {
 
   function openEdit(p: Product) {
     const { id, ...rest } = p;
-    setForm({ ...rest });
+    setForm({ ...rest, images: Array.isArray(rest.images) ? rest.images : [] });
     setSpecsInput(p.specs?.join("\n") ?? "");
     setEditId(id);
   }
@@ -79,6 +83,34 @@ export default function AdminProductsPage() {
     });
   }
 
+  async function uploadProductImage(file: File): Promise<string | null> {
+    const ext = file.name.split(".").pop()?.toLowerCase() ?? "jpg";
+    const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+    const { error } = await supabase.storage.from("products").upload(path, file, { upsert: false });
+    if (error) { toast.error("Upload failed: " + error.message); return null; }
+    return supabase.storage.from("products").getPublicUrl(path).data.publicUrl;
+  }
+
+  async function handleMainImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (mainImgRef.current) mainImgRef.current.value = "";
+    if (!file) return;
+    setImgUploading(true);
+    const url = await uploadProductImage(file);
+    if (url) handleChange("image_url", url);
+    setImgUploading(false);
+  }
+
+  async function handleExtraImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (extraImgRef.current) extraImgRef.current.value = "";
+    if (!file) return;
+    setImgUploading(true);
+    const url = await uploadProductImage(file);
+    if (url) handleChange("images", [...(form.images ?? []), url]);
+    setImgUploading(false);
+  }
+
   async function handleSave(e: React.FormEvent) {
     e.preventDefault();
     if (!form.name.trim() || !form.slug.trim()) { toast.error("Name and slug are required"); return; }
@@ -90,6 +122,7 @@ export default function AdminProductsPage() {
       specs: specsInput.split("\n").map((s) => s.trim()).filter(Boolean),
       badge: form.badge || null,
       image_url: form.image_url || null,
+      images: form.images ?? [],
     };
 
     let error;
@@ -183,9 +216,7 @@ export default function AdminProductsPage() {
       ) : displayed.length === 0 ? (
         <div className="bg-white rounded-2xl border border-gray-100 p-16 text-center">
           <p className="text-gray-400 text-sm">
-            {products.length === 0
-              ? "No products yet — add one above, or sync from lib/data.ts"
-              : "No products match your filters"}
+            {products.length === 0 ? "No products yet — add one above" : "No products match your filters"}
           </p>
         </div>
       ) : (
@@ -275,12 +306,80 @@ export default function AdminProductsPage() {
 
             {/* Form */}
             <form onSubmit={handleSave} className="flex-1 overflow-y-auto px-6 py-5 space-y-4">
-              {/* Image preview */}
-              {form.image_url && (
-                <div className="relative h-40 rounded-xl overflow-hidden bg-[#eef8fd]">
-                  <Image src={form.image_url} alt="preview" fill className="object-cover" sizes="480px" />
+
+              {/* ── Main image ── */}
+              <div>
+                <label className="block text-xs font-medium text-gray-600 mb-2">Main Image</label>
+                {form.image_url && (
+                  <div className="relative h-40 rounded-xl overflow-hidden mb-2 bg-[#eef8fd] group">
+                    <Image src={form.image_url} alt="preview" fill className="object-cover" sizes="480px" />
+                    <button
+                      type="button"
+                      onClick={() => handleChange("image_url", "")}
+                      className="absolute top-2 right-2 p-1.5 rounded-lg bg-red-500 text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <X size={12} />
+                    </button>
+                  </div>
+                )}
+                <label className={`flex items-center justify-center gap-2 p-3 border-2 border-dashed rounded-xl cursor-pointer transition-all text-sm font-medium ${
+                  imgUploading
+                    ? "border-gray-200 bg-gray-50 cursor-not-allowed text-gray-400"
+                    : "border-[#2d8ab8]/40 hover:border-[#2d8ab8] hover:bg-[#eef8fd]/50 text-[#0f5070]"
+                }`}>
+                  {imgUploading
+                    ? <><Loader2 size={16} className="animate-spin" /> Uploading…</>
+                    : <><Upload size={16} /> {form.image_url ? "Replace main image" : "Upload main image"}</>}
+                  <input
+                    ref={mainImgRef}
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp"
+                    className="hidden"
+                    disabled={imgUploading}
+                    onChange={handleMainImageUpload}
+                  />
+                </label>
+              </div>
+
+              {/* ── Additional images ── */}
+              <div>
+                <label className="block text-xs font-medium text-gray-600 mb-2">
+                  More Images <span className="text-gray-400">(product gallery — customers can browse these)</span>
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {(form.images ?? []).map((url, i) => (
+                    <div key={i} className="relative w-20 h-20 rounded-lg overflow-hidden border border-gray-200 group">
+                      <Image src={url} alt="" fill className="object-cover" sizes="80px" />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const arr = [...(form.images ?? [])];
+                          arr.splice(i, 1);
+                          handleChange("images", arr);
+                        }}
+                        className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                      >
+                        <X size={14} className="text-white" />
+                      </button>
+                    </div>
+                  ))}
+                  <label className={`w-20 h-20 flex flex-col items-center justify-center border-2 border-dashed rounded-lg cursor-pointer transition-all ${
+                    imgUploading ? "border-gray-200 cursor-not-allowed" : "border-gray-300 hover:border-[#2d8ab8] hover:bg-[#eef8fd]/30"
+                  }`}>
+                    {imgUploading
+                      ? <Loader2 size={18} className="text-gray-300 animate-spin" />
+                      : <><Plus size={18} className="text-gray-400" /><span className="text-[10px] text-gray-400 mt-0.5">Add</span></>}
+                    <input
+                      ref={extraImgRef}
+                      type="file"
+                      accept="image/jpeg,image/png,image/webp"
+                      className="hidden"
+                      disabled={imgUploading}
+                      onChange={handleExtraImageUpload}
+                    />
+                  </label>
                 </div>
-              )}
+              </div>
 
               <div>
                 <label className="block text-xs font-medium text-gray-600 mb-1">Product Name *</label>
@@ -357,16 +456,6 @@ export default function AdminProductsPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-gray-600 mb-1">Image URL</label>
-                <input
-                  value={form.image_url ?? ""}
-                  onChange={(e) => handleChange("image_url", e.target.value)}
-                  placeholder="https://images.unsplash.com/photo-..."
-                  className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]"
-                />
-              </div>
-
-              <div>
                 <label className="block text-xs font-medium text-gray-600 mb-1">Description</label>
                 <textarea
                   value={form.description ?? ""}
@@ -424,7 +513,7 @@ export default function AdminProductsPage() {
               </button>
               <button
                 onClick={handleSave as unknown as React.MouseEventHandler}
-                disabled={saving}
+                disabled={saving || imgUploading}
                 className="flex-1 py-2.5 rounded-xl bg-[#0f5070] text-white text-sm font-semibold hover:bg-[#0a3d57] transition-all disabled:opacity-60 flex items-center justify-center gap-2"
               >
                 {saving && <Loader2 size={14} className="animate-spin" />}

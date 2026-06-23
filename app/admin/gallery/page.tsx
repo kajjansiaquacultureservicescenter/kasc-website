@@ -43,10 +43,18 @@ export default function AdminGalleryPage() {
   async function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
-    if (!form.title.trim()) { toast.error("Please enter a title first"); return; }
+    if (!form.title.trim()) {
+      toast.error("Please enter a title first");
+      if (fileRef.current) fileRef.current.value = "";
+      return;
+    }
 
     const maxMB = 10;
-    if (file.size > maxMB * 1024 * 1024) { toast.error(`File must be under ${maxMB}MB`); return; }
+    if (file.size > maxMB * 1024 * 1024) {
+      toast.error(`File must be under ${maxMB}MB`);
+      if (fileRef.current) fileRef.current.value = "";
+      return;
+    }
 
     setUploading(true);
     const ext = file.name.split(".").pop();

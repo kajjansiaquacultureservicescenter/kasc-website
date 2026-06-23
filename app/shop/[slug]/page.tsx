@@ -7,6 +7,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { formatPrice, cn } from "@/lib/utils";
 import ProductActions from "@/components/shop/ProductActions";
 import AddToCartButton from "@/components/shop/AddToCartButton";
+import ProductImageGallery from "@/components/shop/ProductImageGallery";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -56,6 +57,8 @@ export default async function ProductPage({ params }: Props) {
 
   const relatedProducts = (related ?? []).filter(p => p.category === product.category).slice(0, 4);
   const heroImg = product.image_url || FALLBACK_IMAGES[product.category] || FALLBACK_IMAGES.equipment;
+  const extraImages: string[] = Array.isArray(product.images) ? product.images : [];
+  const allImages = [heroImg, ...extraImages];
   const specs: string[] = Array.isArray(product.specs) ? product.specs : [];
 
   return (
@@ -82,23 +85,13 @@ export default async function ProductPage({ params }: Props) {
         <div className="bg-white rounded-3xl border border-gray-100 shadow-[var(--shadow-card)] overflow-hidden mb-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
             {/* Image panel */}
-            <div className="relative min-h-[340px] lg:min-h-[520px] bg-gradient-to-br from-[#eef8fd] to-[#f0fcf4]">
-              <Image
-                src={heroImg}
-                alt={product.name} fill className="object-cover"
-                priority
-              />
-              {product.badge && (
-                <span className={cn("absolute top-5 left-5 px-3 py-1.5 rounded-full text-sm font-bold shadow-md", BADGE_STYLE[product.badge] ?? "bg-gray-800 text-white")}>
-                  {product.badge}
-                </span>
-              )}
-              {!product.in_stock && (
-                <div className="absolute inset-0 bg-white/75 flex items-center justify-center">
-                  <span className="px-5 py-2 bg-gray-800 text-white font-semibold rounded-full">Out of Stock</span>
-                </div>
-              )}
-            </div>
+            <ProductImageGallery
+              images={allImages}
+              name={product.name}
+              badge={product.badge}
+              badgeStyle={BADGE_STYLE[product.badge ?? ""] ?? "bg-gray-800 text-white"}
+              inStock={product.in_stock}
+            />
 
             {/* Details panel */}
             <div className="p-7 lg:p-10 flex flex-col">

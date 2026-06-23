@@ -6,7 +6,7 @@ import { logout } from "@/lib/actions/auth";
 import {
   Fish, LayoutDashboard, Package, Video, MessageSquare,
   Settings, LogOut, Image, ShoppingBag, Newspaper,
-  Tag, Zap, ExternalLink,
+  Tag, Zap, ExternalLink, Globe,
 } from "lucide-react";
 
 const NAV = [
@@ -19,6 +19,7 @@ const NAV = [
   { href: "/admin/offers",       label: "Offers",       icon: Tag },
   { href: "/admin/flash-deals",  label: "Flash Deals",  icon: Zap },
   { href: "/admin/products",     label: "Products",     icon: Package },
+  { href: "/admin/site-images",  label: "Site Images",  icon: Globe },
   { href: "/admin/settings",     label: "Settings",     icon: Settings },
 ];
 
