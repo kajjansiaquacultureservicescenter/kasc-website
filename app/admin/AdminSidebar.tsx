@@ -6,21 +6,23 @@ import { logout } from "@/lib/actions/auth";
 import {
   Fish, LayoutDashboard, Package, Video, MessageSquare,
   Settings, LogOut, Image, ShoppingBag, Newspaper,
-  Tag, Zap, ExternalLink, Globe,
+  Tag, Zap, ExternalLink, Globe, Home, Star,
 } from "lucide-react";
 
 const NAV = [
-  { href: "/admin",              label: "Dashboard",    icon: LayoutDashboard },
-  { href: "/admin/orders",       label: "Orders",       icon: ShoppingBag },
-  { href: "/admin/inquiries",    label: "Inquiries",    icon: MessageSquare },
-  { href: "/admin/gallery",      label: "Gallery",      icon: Image },
-  { href: "/admin/media",        label: "Videos",       icon: Video },
-  { href: "/admin/news",         label: "News",         icon: Newspaper },
-  { href: "/admin/offers",       label: "Offers",       icon: Tag },
-  { href: "/admin/flash-deals",  label: "Flash Deals",  icon: Zap },
-  { href: "/admin/products",     label: "Products",     icon: Package },
-  { href: "/admin/site-images",  label: "Site Images",  icon: Globe },
-  { href: "/admin/settings",     label: "Settings",     icon: Settings },
+  { href: "/admin",                label: "Dashboard",      icon: LayoutDashboard },
+  { href: "/admin/orders",         label: "Orders",         icon: ShoppingBag },
+  { href: "/admin/inquiries",      label: "Inquiries",      icon: MessageSquare },
+  { href: "/admin/homepage",       label: "Homepage",       icon: Home },
+  { href: "/admin/testimonials",   label: "Testimonials",   icon: Star },
+  { href: "/admin/gallery",        label: "Gallery",        icon: Image },
+  { href: "/admin/media",          label: "Videos",         icon: Video },
+  { href: "/admin/news",           label: "News",           icon: Newspaper },
+  { href: "/admin/offers",         label: "Offers",         icon: Tag },
+  { href: "/admin/flash-deals",    label: "Flash Deals",    icon: Zap },
+  { href: "/admin/products",       label: "Products",       icon: Package },
+  { href: "/admin/site-images",    label: "Site Images",    icon: Globe },
+  { href: "/admin/settings",       label: "Settings",       icon: Settings },
 ];
 
 export default function AdminSidebar({

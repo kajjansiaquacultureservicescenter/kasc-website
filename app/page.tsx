@@ -10,7 +10,7 @@ import {
   Microscope, Building2, Grid3x3, Layers,
   GraduationCap, CheckCircle2, Phone, MapPin, Play
 } from "lucide-react";
-import { SERVICES, STATS, TESTIMONIALS } from "@/lib/data";
+import { SERVICES, STATS } from "@/lib/data";
 import { formatPrice, cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
 
@@ -62,12 +62,34 @@ function SlideIn({ children, delay = 0, direction = "left", className = "" }: {
 const SERVICE_ICONS: Record<string, React.ElementType> = { Microscope, Building2, Grid3x3, Layers, GraduationCap };
 const STAT_ICONS: Record<string, React.ElementType> = { Users, Award, Globe, Fish };
 
+function youtubeId(url: string): string | null {
+  return url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/)?.[1] ?? null;
+}
+
+type DbTestimonial = { id: string; name: string; role: string; content: string; rating: number; avatar_url: string | null };
+
 export default function HomePage() {
   const [featuredProducts, setFeaturedProducts] = useState<FeaturedProduct[]>([]);
+  const [heroVideoUrl, setHeroVideoUrl] = useState<string>("");
+  const [testimonials, setTestimonials] = useState<DbTestimonial[]>([]);
+  const [farmSettings, setFarmSettings] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    createClient()
-      .from("products")
+    const sb = createClient();
+
+    sb.from("site_settings").select("key, value").eq("category", "homepage")
+      .then(({ data }) => {
+        const m: Record<string, string> = {};
+        for (const row of data ?? []) m[row.key] = row.value;
+        if (m.hero_video_url) setHeroVideoUrl(m.hero_video_url);
+        setFarmSettings(m);
+      });
+
+    sb.from("testimonials").select("id, name, role, content, rating, avatar_url")
+      .eq("is_active", true).order("sort_order").order("created_at")
+      .then(({ data }) => { if (data?.length) setTestimonials(data as DbTestimonial[]); });
+
+    sb.from("products")
       .select("id, name, slug, category, description, price, unit, badge, image_url, in_stock")
       .eq("in_stock", true)
       .order("sort_order")
@@ -269,15 +291,27 @@ export default function HomePage() {
 
             <SlideIn direction="right" delay={0.1}>
               <div className="relative">
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/3]">
-                  <Image src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80" alt="Fish farm" fill className="object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#071e2e]/40 to-transparent" />
-                  <Link href="/farm" className="absolute inset-0 flex items-center justify-center group">
-                    <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
-                      <Play size={24} className="text-[#0f5070] ml-1" fill="currentColor" />
-                    </div>
-                  </Link>
-                </div>
+                {youtubeId(heroVideoUrl) ? (
+                  <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-video">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${youtubeId(heroVideoUrl)}?rel=0&modestbranding=1`}
+                      title="KASC Farm Video"
+                      className="w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                ) : (
+                  <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/3]">
+                    <Image src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80" alt="Fish farm" fill className="object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#071e2e]/40 to-transparent" />
+                    <Link href="/farm" className="absolute inset-0 flex items-center justify-center group">
+                      <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
+                        <Play size={24} className="text-[#0f5070] ml-1" fill="currentColor" />
+                      </div>
+                    </Link>
+                  </div>
+                )}
                 <div className="absolute -bottom-5 -left-5 card-glass rounded-2xl p-4 shadow-xl border border-white/60">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-[#f0fcf4] flex items-center justify-center">
@@ -407,8 +441,8 @@ export default function HomePage() {
           </FadeIn>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {TESTIMONIALS.map((t, i) => (
-              <FadeIn key={t.name} delay={i * 0.08}>
+            {testimonials.map((t, i) => (
+              <FadeIn key={t.id} delay={i * 0.08}>
                 <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-shadow h-full flex flex-col">
                   <div className="flex items-center gap-1 mb-4">
                     {Array.from({ length: t.rating }).map((_, j) => (
@@ -417,9 +451,13 @@ export default function HomePage() {
                   </div>
                   <p className="text-gray-600 text-sm leading-relaxed mb-5 italic flex-1">&ldquo;{t.content}&rdquo;</p>
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0f5070] to-[#226640] flex items-center justify-center text-white font-bold text-sm">
-                      {t.avatar}
-                    </div>
+                    {t.avatar_url ? (
+                      <Image src={t.avatar_url} alt={t.name} width={40} height={40} className="w-10 h-10 rounded-full object-cover shrink-0" />
+                    ) : (
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0f5070] to-[#226640] flex items-center justify-center text-white font-bold text-sm shrink-0">
+                        {t.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+                      </div>
+                    )}
                     <div>
                       <div className="font-semibold text-[#071e2e] text-sm">{t.name}</div>
                       <div className="text-gray-400 text-xs">{t.role}</div>
@@ -438,17 +476,16 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
             <SlideIn direction="left">
               <div className="grid grid-cols-2 gap-4">
-                {["https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=400&q=80",
-                  "https://images.unsplash.com/photo-1560275619-4662e36fa65c?w=400&q=80",
-                  "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80",
-                  "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=80"
-                ].map((src, i) => (
-                  <div key={i} className={cn("relative rounded-2xl overflow-hidden shadow-lg", i === 0 && "col-span-2")}>
-                    <div className={i === 0 ? "h-52" : "h-36"} style={{ position: "relative" }}>
-                      <Image src={src} alt={`Farm ${i + 1}`} fill className="object-cover hover:scale-105 transition-transform duration-500" />
+                {["farm_image_1","farm_image_2","farm_image_3","farm_image_4"].map((key, i) => {
+                  const src = farmSettings[key] || ["https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=400&q=80","https://images.unsplash.com/photo-1560275619-4662e36fa65c?w=400&q=80","https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80","https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=80"][i];
+                  return (
+                    <div key={key} className={cn("relative rounded-2xl overflow-hidden shadow-lg", i === 0 && "col-span-2")}>
+                      <div className={i === 0 ? "h-52" : "h-36"} style={{ position: "relative" }}>
+                        <Image src={src} alt={`Farm ${i + 1}`} fill className="object-cover hover:scale-105 transition-transform duration-500" />
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </SlideIn>
 
@@ -457,13 +494,17 @@ export default function HomePage() {
                 <MapPin size={14} className="text-[#2d8ab8]" /> Our Demonstration Farm
               </div>
               <h2 className="text-3xl lg:text-4xl font-bold text-[#071e2e] mb-5">
-                See It Live at the{" "}<span className="text-gradient">Kajjansi Farm</span>
+                {farmSettings.farm_heading ? (
+                  <>{farmSettings.farm_heading.split("Kajjansi Farm").map((part, j, arr) => j < arr.length - 1 ? <>{part}<span className="text-gradient">Kajjansi Farm</span></> : part)}</>
+                ) : (
+                  <>See It Live at the{" "}<span className="text-gradient">Kajjansi Farm</span></>
+                )}
               </h2>
               <p className="text-gray-600 leading-relaxed mb-4">
-                Our demonstration and training farm at Kajjansi, Wakiso is where we breed fingerlings, test feed formulas, train farmers, and demonstrate what modern aquaculture looks like in East Africa.
+                {farmSettings.farm_desc_1 || "Our demonstration and training farm at Kajjansi, Wakiso is where we breed fingerlings, test feed formulas, train farmers, and demonstrate what modern aquaculture looks like in East Africa."}
               </p>
               <p className="text-gray-600 leading-relaxed mb-8">
-                Visit us, observe our operations, and see for yourself how we raise healthy Nile Tilapia, African Catfish, and Miracle Tilapia using best-practice methods.
+                {farmSettings.farm_desc_2 || "Visit us, observe our operations, and see for yourself how we raise healthy Nile Tilapia, African Catfish, and Miracle Tilapia using best-practice methods."}
               </p>
               <div className="grid grid-cols-2 gap-4 mb-8">
                 {[{ label: "Fingerling Hatchery", icon: Fish }, { label: "Training Center", icon: GraduationCap },

@@ -8,6 +8,7 @@ import { Settings, Loader2, Save } from "lucide-react";
 type Setting = { key: string; value: string; label: string; category: string };
 
 const CATEGORY_LABELS: Record<string, string> = {
+  homepage: "Homepage Content",
   contact:  "Contact Information",
   social:   "Social Media Links",
   shop:     "Shop Settings",
