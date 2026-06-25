@@ -3,12 +3,13 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { NAV_ITEMS, COMPANY } from "@/lib/data";
+import { NAV_ITEMS } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { Menu, X, ChevronDown, Phone, Mail, MapPin, ShoppingCart, User, LogIn } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
 import { createClient } from "@/lib/supabase/client";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
+import { useSiteContact } from "@/lib/useSiteContact";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,6 +18,7 @@ export default function Header() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const pathname = usePathname();
+  const contact = useSiteContact();
 
   useEffect(() => {
     const supabase = createClient();
@@ -44,22 +46,24 @@ export default function Header() {
       <div className="bg-[#071e2e] text-gray-300 text-sm hidden lg:block">
         <div className="container-wide flex items-center justify-between py-2">
           <div className="flex items-center gap-6">
-            <a href={`tel:${COMPANY.phone}`} className="flex items-center gap-1.5 hover:text-white transition-colors">
+            <a href={`tel:${contact.phone}`} className="flex items-center gap-1.5 hover:text-white transition-colors">
               <Phone size={13} className="text-[#5aafd4]" />
-              <span>{COMPANY.phone}</span>
+              <span>{contact.phone}</span>
             </a>
-            <a href={`tel:${COMPANY.phone2}`} className="flex items-center gap-1.5 hover:text-white transition-colors">
-              <Phone size={13} className="text-[#5aafd4]" />
-              <span>{COMPANY.phone2}</span>
-            </a>
-            <a href={`mailto:${COMPANY.email}`} className="flex items-center gap-1.5 hover:text-white transition-colors">
+            {contact.phone2 && (
+              <a href={`tel:${contact.phone2}`} className="flex items-center gap-1.5 hover:text-white transition-colors">
+                <Phone size={13} className="text-[#5aafd4]" />
+                <span>{contact.phone2}</span>
+              </a>
+            )}
+            <a href={`mailto:${contact.email}`} className="flex items-center gap-1.5 hover:text-white transition-colors">
               <Mail size={13} className="text-[#5aafd4]" />
-              <span>{COMPANY.email}</span>
+              <span>{contact.email}</span>
             </a>
           </div>
           <div className="flex items-center gap-1.5 text-gray-400">
             <MapPin size={13} className="text-[#5aafd4]" />
-            <span>{COMPANY.address}</span>
+            <span>{contact.address}</span>
           </div>
         </div>
       </div>
@@ -194,7 +198,7 @@ export default function Header() {
               )}
             </button>
             <a
-              href={`https://wa.me/${COMPANY.social.whatsapp}`}
+              href={`https://wa.me/${contact.whatsapp}`}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#25D366] hover:bg-[#20bc5a] text-white text-sm font-medium transition-colors"
@@ -288,7 +292,7 @@ export default function Header() {
                 </Link>
               )}
               <a
-                href={`https://wa.me/${COMPANY.social.whatsapp}`}
+                href={`https://wa.me/${contact.whatsapp}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[#25D366] text-white text-sm font-medium"

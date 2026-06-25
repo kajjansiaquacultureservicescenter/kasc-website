@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
-import { COMPANY, NAV_ITEMS, SERVICES } from "@/lib/data";
+import { NAV_ITEMS, SERVICES } from "@/lib/data";
 import { Phone, Mail, MapPin, PlayCircle, ArrowRight } from "lucide-react";
+import { useSiteContact } from "@/lib/useSiteContact";
 
 const SocialIcons = {
   Facebook: () => (
@@ -23,6 +26,8 @@ const SocialIcons = {
 };
 
 export default function Footer() {
+  const contact = useSiteContact();
+
   return (
     <footer className="bg-[#071e2e] text-gray-300">
       {/* CTA Band */}
@@ -41,7 +46,7 @@ export default function Footer() {
               Get Free Consultation <ArrowRight size={16} />
             </Link>
             <a
-              href={`tel:${COMPANY.phone}`}
+              href={`tel:${contact.phone}`}
               className="btn-secondary whitespace-nowrap"
             >
               <Phone size={16} /> Call Us Now
@@ -69,14 +74,14 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-2">
               {[
-                { icon: SocialIcons.Facebook, href: COMPANY.social.facebook, label: "Facebook" },
-                { icon: SocialIcons.Twitter, href: COMPANY.social.twitter, label: "Twitter" },
-                { icon: SocialIcons.Instagram, href: COMPANY.social.instagram, label: "Instagram" },
-                { icon: PlayCircle, href: COMPANY.social.youtube, label: "YouTube" },
+                { icon: SocialIcons.Facebook, href: contact.facebook, label: "Facebook" },
+                { icon: SocialIcons.Twitter, href: contact.twitter, label: "Twitter" },
+                { icon: SocialIcons.Instagram, href: contact.instagram, label: "Instagram" },
+                { icon: PlayCircle, href: contact.youtube, label: "YouTube" },
               ].map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
-                  href={href}
+                  href={href || "#"}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
@@ -148,19 +153,21 @@ export default function Footer() {
                   </div>
                   <div>
                     <div className="text-xs text-gray-500 mb-0.5">Phone / WhatsApp</div>
-                    <a href={`tel:${COMPANY.phone}`} className="block text-sm text-gray-300 hover:text-[#5aafd4] transition-colors">{COMPANY.phone}</a>
-                    <a href={`tel:${COMPANY.phone2}`} className="block text-sm text-gray-300 hover:text-[#5aafd4] transition-colors">{COMPANY.phone2}</a>
+                    <a href={`tel:${contact.phone}`} className="block text-sm text-gray-300 hover:text-[#5aafd4] transition-colors">{contact.phone}</a>
+                    {contact.phone2 && (
+                      <a href={`tel:${contact.phone2}`} className="block text-sm text-gray-300 hover:text-[#5aafd4] transition-colors">{contact.phone2}</a>
+                    )}
                   </div>
                 </div>
               </li>
               <li>
-                <a href={`mailto:${COMPANY.email}`} className="flex items-start gap-3 group">
+                <a href={`mailto:${contact.email}`} className="flex items-start gap-3 group">
                   <div className="w-8 h-8 rounded-lg bg-[#2d8ab8]/20 flex items-center justify-center shrink-0 mt-0.5">
                     <Mail size={14} className="text-[#5aafd4]" />
                   </div>
                   <div>
                     <div className="text-xs text-gray-500 mb-0.5">Email</div>
-                    <div className="text-sm text-gray-300 group-hover:text-[#5aafd4] transition-colors">{COMPANY.email}</div>
+                    <div className="text-sm text-gray-300 group-hover:text-[#5aafd4] transition-colors">{contact.email}</div>
                   </div>
                 </a>
               </li>
@@ -171,7 +178,7 @@ export default function Footer() {
                   </div>
                   <div>
                     <div className="text-xs text-gray-500 mb-0.5">Office & Farm</div>
-                    <div className="text-sm text-gray-300">{COMPANY.farmAddress}</div>
+                    <div className="text-sm text-gray-300">{contact.address}</div>
                   </div>
                 </div>
               </li>

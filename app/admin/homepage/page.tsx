@@ -12,6 +12,13 @@ const HERO_VIDEO_KEY = "hero_video_url";
 const FARM_KEYS = ["farm_heading", "farm_desc_1", "farm_desc_2", "farm_image_1", "farm_image_2", "farm_image_3", "farm_image_4"];
 const IMAGE_KEYS = new Set(["farm_image_1", "farm_image_2", "farm_image_3", "farm_image_4"]);
 const TEXTAREA_KEYS = new Set(["farm_desc_1", "farm_desc_2"]);
+const STAT_KEYS = ["stat_1_value", "stat_1_label", "stat_2_value", "stat_2_label", "stat_3_value", "stat_3_label", "stat_4_value", "stat_4_label"];
+const STAT_DEFAULTS = [
+  { value: "stat_1_value", label: "stat_1_label", defaultValue: "500+", defaultLabel: "Fish Farmers Served" },
+  { value: "stat_2_value", label: "stat_2_label", defaultValue: "10+",  defaultLabel: "Years of Experience" },
+  { value: "stat_3_value", label: "stat_3_label", defaultValue: "5",    defaultLabel: "Countries Covered" },
+  { value: "stat_4_value", label: "stat_4_label", defaultValue: "1M+",  defaultLabel: "Fingerlings Supplied" },
+];
 
 export default function AdminHomepagePage() {
   const [settings, setSettings] = useState<Record<string, string>>({});
@@ -24,7 +31,7 @@ export default function AdminHomepagePage() {
 
   const load = useCallback(async () => {
     setLoading(true);
-    const { data } = await supabase.from("site_settings").select("key, value, label").eq("category", "homepage");
+    const { data } = await supabase.from("site_settings").select("key, value, label").in("category", ["homepage"]);
     const s: Record<string, string> = {};
     const l: Record<string, string> = {};
     for (const row of data ?? []) { s[row.key] = row.value; l[row.key] = row.label; }
@@ -159,8 +166,18 @@ export default function AdminHomepagePage() {
                 <div key={key} className={i === 0 ? "col-span-2" : ""}>
                   <div className="text-xs text-gray-500 mb-1.5">{i === 0 ? "Large photo (top)" : `Photo ${i + 1}`}</div>
                   <div className={`relative rounded-xl overflow-hidden bg-gray-100 mb-2 ${i === 0 ? "h-48" : "h-28"}`}>
-                    {settings[key] && (
-                      <Image src={settings[key]} alt="" fill className="object-cover" sizes={i === 0 ? "600px" : "300px"} />
+                    {settings[key] ? (
+                      <>
+                        <Image src={settings[key]} alt="" fill className="object-cover" sizes={i === 0 ? "600px" : "300px"} />
+                        <button
+                          onClick={() => setSettings((s) => ({ ...s, [key]: "" }))}
+                          className="absolute top-2 right-2 w-6 h-6 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-red-600 transition-colors"
+                        >
+                          <X size={12} />
+                        </button>
+                      </>
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs">No photo set</div>
                     )}
                     {imgUploading === key && (
                       <div className="absolute inset-0 bg-white/70 flex items-center justify-center">
@@ -185,6 +202,48 @@ export default function AdminHomepagePage() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+
+        {/* ── Stats & Numbers ── */}
+        <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+          <div className="flex items-center justify-between mb-5">
+            <h2 className="font-bold text-[#071e2e] font-display">Stats &amp; Numbers</h2>
+            <button
+              onClick={() => saveKeys(STAT_KEYS, "Stats")}
+              disabled={!!saving}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#071e2e] text-white text-xs font-semibold hover:bg-[#0f3a52] disabled:opacity-60 transition-all"
+            >
+              {saving === "Stats" ? <Loader2 size={13} className="animate-spin" /> : <Save size={13} />} Save Stats
+            </button>
+          </div>
+          <p className="text-xs text-gray-400 mb-5">These numbers appear in the hero section and the blue stats band on the homepage.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {STAT_DEFAULTS.map((stat, i) => (
+              <div key={i} className="p-4 rounded-xl border border-gray-100 bg-gray-50">
+                <div className="text-xs font-semibold text-gray-500 mb-3">Stat #{i + 1}</div>
+                <div className="space-y-2">
+                  <div>
+                    <label className="block text-xs text-gray-500 mb-1">Number / Value</label>
+                    <input
+                      value={settings[stat.value] ?? stat.defaultValue}
+                      onChange={(e) => setSettings((s) => ({ ...s, [stat.value]: e.target.value }))}
+                      placeholder={stat.defaultValue}
+                      className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm font-bold text-[#071e2e] focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs text-gray-500 mb-1">Label</label>
+                    <input
+                      value={settings[stat.label] ?? stat.defaultLabel}
+                      onChange={(e) => setSettings((s) => ({ ...s, [stat.label]: e.target.value }))}
+                      placeholder={stat.defaultLabel}
+                      className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]"
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

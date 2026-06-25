@@ -10,7 +10,7 @@ import {
   Microscope, Building2, Grid3x3, Layers,
   GraduationCap, CheckCircle2, Phone, MapPin, Play
 } from "lucide-react";
-import { SERVICES, STATS } from "@/lib/data";
+import { SERVICES } from "@/lib/data";
 import { formatPrice, cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
 
@@ -105,6 +105,13 @@ export default function HomePage() {
       });
   }, []);
 
+  const dbStats = [
+    { value: farmSettings.stat_1_value || "500+", label: farmSettings.stat_1_label || "Fish Farmers Served", icon: "Users" },
+    { value: farmSettings.stat_2_value || "10+",  label: farmSettings.stat_2_label || "Years of Experience", icon: "Award" },
+    { value: farmSettings.stat_3_value || "5",    label: farmSettings.stat_3_label || "Countries Covered",   icon: "Globe" },
+    { value: farmSettings.stat_4_value || "1M+",  label: farmSettings.stat_4_label || "Fingerlings Supplied", icon: "Fish"  },
+  ];
+
   return (
     <div className="overflow-x-hidden">
       {/* HERO */}
@@ -162,7 +169,7 @@ export default function HomePage() {
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.55 }}
               className="flex flex-wrap items-center gap-6 mt-14 pt-8 border-t border-white/10">
-              {STATS.map((stat) => {
+              {dbStats.map((stat) => {
                 const Icon = STAT_ICONS[stat.icon];
                 return (
                   <div key={stat.value} className="flex items-center gap-3">
@@ -411,7 +418,7 @@ export default function HomePage() {
       <section className="py-16 bg-gradient-to-r from-[#0a2d43] via-[#0f5070] to-[#226640]">
         <div className="container-wide">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {STATS.map((stat, i) => {
+            {dbStats.map((stat, i) => {
               const Icon = STAT_ICONS[stat.icon];
               return (
                 <FadeIn key={stat.value} delay={i * 0.1} className="text-center">
