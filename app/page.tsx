@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
@@ -10,8 +10,30 @@ import {
   Microscope, Building2, Grid3x3, Layers,
   GraduationCap, CheckCircle2, Phone, MapPin, Play
 } from "lucide-react";
-import { COMPANY, SERVICES, PRODUCTS, STATS, TESTIMONIALS } from "@/lib/data";
+import { SERVICES, STATS, TESTIMONIALS } from "@/lib/data";
 import { formatPrice, cn } from "@/lib/utils";
+import { createClient } from "@/lib/supabase/client";
+
+type FeaturedProduct = {
+  id: string;
+  name: string;
+  slug: string;
+  category: string;
+  description: string | null;
+  price: number;
+  unit: string;
+  badge: string | null;
+  image_url: string | null;
+  in_stock: boolean;
+};
+
+const FALLBACK_IMG: Record<string, string> = {
+  fingerlings: "https://images.unsplash.com/photo-1560275619-4662e36fa65c?w=400&q=80",
+  feed:        "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&q=80",
+  liners:      "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&q=80",
+  nets:        "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400&q=80",
+  equipment:   "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=400&q=80",
+};
 
 function FadeIn({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null);
@@ -41,6 +63,26 @@ const SERVICE_ICONS: Record<string, React.ElementType> = { Microscope, Building2
 const STAT_ICONS: Record<string, React.ElementType> = { Users, Award, Globe, Fish };
 
 export default function HomePage() {
+  const [featuredProducts, setFeaturedProducts] = useState<FeaturedProduct[]>([]);
+
+  useEffect(() => {
+    createClient()
+      .from("products")
+      .select("id, name, slug, category, description, price, unit, badge, image_url, in_stock")
+      .eq("in_stock", true)
+      .order("sort_order")
+      .order("name")
+      .then(({ data }) => {
+        if (!data) return;
+        const sorted = [...data].sort((a, b) => {
+          if (a.badge === "Best Seller" && b.badge !== "Best Seller") return -1;
+          if (b.badge === "Best Seller" && a.badge !== "Best Seller") return 1;
+          return 0;
+        });
+        setFeaturedProducts(sorted.slice(0, 8));
+      });
+  }, []);
+
   return (
     <div className="overflow-x-hidden">
       {/* HERO */}
@@ -278,42 +320,52 @@ export default function HomePage() {
             <Link href="/shop" className="btn-outline shrink-0">View All Products <ArrowRight size={16} /></Link>
           </FadeIn>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {PRODUCTS.slice(0, 8).map((product, i) => (
-              <FadeIn key={product.id} delay={i * 0.06}>
-                <Link href={`/shop/${product.slug}`} className="group block h-full">
-                  <div className="h-full bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-1 transition-all duration-300">
-                    <div className="relative h-48 bg-gradient-to-br from-[#eef8fd] to-[#f0fcf4] overflow-hidden">
-                      <Image
-                        src={product.image}
-                        alt={product.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                      {product.badge && (
-                        <span className={cn("absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-semibold",
-                          product.badge === "Best Seller" ? "bg-[#f4a020] text-white" : product.badge === "Premium" ? "bg-[#0f5070] text-white" :
-                          product.badge === "New" ? "bg-[#226640] text-white" : "bg-gray-800 text-white")}>
-                          {product.badge}
-                        </span>
-                      )}
-                    </div>
-                    <div className="p-4">
-                      <div className="text-xs font-medium text-[#2d8ab8] uppercase tracking-wide mb-1 capitalize">{product.category}</div>
-                      <h3 className="font-semibold text-[#071e2e] text-sm mb-2 line-clamp-2 group-hover:text-[#0f5070] transition-colors font-display">{product.name}</h3>
-                      <p className="text-gray-500 text-xs leading-relaxed line-clamp-2 mb-3">{product.description}</p>
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <div className="text-[#0f5070] font-bold text-base">{formatPrice(product.price)}</div>
-                          <div className="text-gray-400 text-xs">{product.unit}</div>
+          {featuredProducts.length === 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {Array.from({ length: 8 }).map((_, i) => (
+                <div key={i} className="h-72 bg-gray-100 rounded-2xl animate-pulse" />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {featuredProducts.map((product, i) => {
+                const img = product.image_url || FALLBACK_IMG[product.category] || FALLBACK_IMG.equipment;
+                return (
+                  <FadeIn key={product.id} delay={i * 0.06}>
+                    <Link href={`/shop/${product.slug}`} className="group block h-full">
+                      <div className="h-full bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-1 transition-all duration-300">
+                        <div className="relative h-48 bg-gradient-to-br from-[#eef8fd] to-[#f0fcf4] overflow-hidden">
+                          <Image src={img} alt={product.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                          {product.badge && (
+                            <span className={cn("absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-semibold",
+                              product.badge === "Best Seller" ? "bg-[#f4a020] text-white" :
+                              product.badge === "Premium" ? "bg-[#0f5070] text-white" :
+                              product.badge === "New" ? "bg-[#226640] text-white" : "bg-gray-800 text-white")}>
+                              {product.badge}
+                            </span>
+                          )}
                         </div>
-                        <div className="w-8 h-8 rounded-lg bg-[#eef8fd] flex items-center justify-center group-hover:bg-[#0f5070] transition-colors">
-                          <ArrowRight size={14} className="text-[#0f5070] group-hover:text-white transition-colors" />
+                        <div className="p-4">
+                          <div className="text-xs font-medium text-[#2d8ab8] uppercase tracking-wide mb-1 capitalize">{product.category}</div>
+                          <h3 className="font-semibold text-[#071e2e] text-sm mb-2 line-clamp-2 group-hover:text-[#0f5070] transition-colors font-display">{product.name}</h3>
+                          <p className="text-gray-500 text-xs leading-relaxed line-clamp-2 mb-3">{product.description}</p>
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <div className="text-[#0f5070] font-bold text-base">{formatPrice(product.price)}</div>
+                              <div className="text-gray-400 text-xs">{product.unit}</div>
+                            </div>
+                            <div className="w-8 h-8 rounded-lg bg-[#eef8fd] flex items-center justify-center group-hover:bg-[#0f5070] transition-colors">
+                              <ArrowRight size={14} className="text-[#0f5070] group-hover:text-white transition-colors" />
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </Link>
-              </FadeIn>
-            ))}
-          </div>
+                    </Link>
+                  </FadeIn>
+                );
+              })}
+            </div>
+          )}
 
           <FadeIn className="text-center mt-10">
             <Link href="/shop" className="btn-primary px-8">Browse Full Shop <ArrowRight size={16} /></Link>
