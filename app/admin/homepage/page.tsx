@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
 import Image from "next/image";
-import { Loader2, Save, Upload, X, Youtube, Home } from "lucide-react";
+import { Loader2, Save, Upload, X, PlayCircle, Home } from "lucide-react";
 
 type Setting = { key: string; value: string; label: string };
 
@@ -86,7 +86,7 @@ export default function AdminHomepagePage() {
         <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
           <div className="flex items-center justify-between mb-5">
             <div className="flex items-center gap-2">
-              <Youtube size={18} className="text-red-500" />
+              <PlayCircle size={18} className="text-red-500" />
               <h2 className="font-bold text-[#071e2e] font-display">Homepage Video</h2>
             </div>
             <button
