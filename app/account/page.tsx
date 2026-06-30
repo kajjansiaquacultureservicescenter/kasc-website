@@ -21,7 +21,7 @@ export default async function AccountPage() {
   return (
     <div className="space-y-6">
       <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-        <h2 className="font-bold text-[#071e2e] font-display mb-5">Profile Information</h2>
+        <h2 className="font-bold text-[#0c4a6e] font-display mb-5">Profile Information</h2>
         <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {[
             { label: "Full name",    value: profile?.full_name || "—" },
@@ -31,14 +31,14 @@ export default async function AccountPage() {
           ].map(({ label, value }) => (
             <div key={label}>
               <dt className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-1">{label}</dt>
-              <dd className="text-sm font-medium text-[#071e2e]">{value}</dd>
+              <dd className="text-sm font-medium text-[#0c4a6e]">{value}</dd>
             </div>
           ))}
         </dl>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="bg-gradient-to-br from-[#0f5070] to-[#2d8ab8] rounded-2xl p-6 text-white">
+        <div className="bg-gradient-to-br from-[#0284c7] to-[#38bdf8] rounded-2xl p-6 text-white">
           <div className="text-3xl font-bold mb-1">{orderCount ?? 0}</div>
           <div className="text-sm text-blue-100">Total orders placed</div>
         </div>

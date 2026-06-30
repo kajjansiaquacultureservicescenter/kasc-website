@@ -6,7 +6,7 @@ type Rule = { keywords: string[]; response: string };
 const RULES: Rule[] = [
   {
     keywords: ["hello", "hi", "hey", "good morning", "good afternoon", "good evening", "howdy", "greetings"],
-    response: "Hello! 👋 Welcome to Kajjansi Aquaculture Service Center (KASC). I'm here to help you with information about our fish farming services, products, and pricing. What can I help you with today?",
+    response: "Hello! 👋 Welcome to Kajjansi Aquaculture Service Centre (KASC). I'm here to help you with information about our fish farming services, products, and pricing. What can I help you with today?",
   },
   {
     keywords: ["fingerling", "tilapia", "catfish", "miracle", "fry", "juvenile", "seed"],
@@ -58,7 +58,7 @@ const RULES: Rule[] = [
   },
   {
     keywords: ["farm", "demonstration", "visit", "tour", "kajansi farm"],
-    response: "Our demonstration farm at Kajjansi is open for visits! 🌿\n\n**At the farm you'll find:**\n🐟 Live breeding hatchery\n🏊 Demonstration ponds\n🎓 Training center\n🔬 Water quality lab\n🏭 Liner fabrication shop\n\nFarm visits are great for learning and seeing operations firsthand. We'd love to host you!\n\nBook a visit: 📞 **+256 700 000000**",
+    response: "Our demonstration farm at Kajjansi is open for visits! 🌿\n\n**At the farm you'll find:**\n🐟 Live breeding hatchery\n🏊 Demonstration ponds\n🎓 Training centre\n🔬 Water quality lab\n🏭 Liner fabrication shop\n\nFarm visits are great for learning and seeing operations firsthand. We'd love to host you!\n\nBook a visit: 📞 **+256 700 000000**",
   },
   {
     keywords: ["water", "quality", "test", "ph", "oxygen", "ammonia", "parameter"],

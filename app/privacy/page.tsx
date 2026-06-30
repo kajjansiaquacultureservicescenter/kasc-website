@@ -4,7 +4,7 @@ import { ShieldCheck, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | KASC",
-  description: "How Kajjansi Aquaculture Service Center collects, uses, and protects your personal information.",
+  description: "How Kajjansi Aquaculture Service Centre collects, uses, and protects your personal information.",
 };
 
 const LAST_UPDATED = "22 June 2026";
@@ -12,7 +12,7 @@ const LAST_UPDATED = "22 June 2026";
 function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
     <section id={id} className="mb-10">
-      <h2 className="text-xl font-bold text-[#071e2e] font-display mb-4 pb-2 border-b border-gray-100">{title}</h2>
+      <h2 className="text-xl font-bold text-[#0c4a6e] font-display mb-4 pb-2 border-b border-gray-100">{title}</h2>
       <div className="space-y-3 text-gray-600 text-sm leading-relaxed">{children}</div>
     </section>
   );
@@ -38,11 +38,11 @@ export default function PrivacyPage() {
       {/* Hero */}
       <section className="relative py-20 lg:py-28 gradient-hero overflow-hidden">
         <div className="absolute inset-0 noise-overlay" />
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-[#1a6b94]/20 blur-3xl" />
+        <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-[#0ea5e9]/20 blur-3xl" />
         <div className="container-wide relative z-10">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-blue-100 text-sm mb-6">
-              <ShieldCheck size={14} className="text-[#5aafd4]" /> Legal
+              <ShieldCheck size={14} className="text-[#7dd3fc]" /> Legal
             </div>
             <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight font-display">
               Privacy Policy
@@ -69,9 +69,9 @@ export default function PrivacyPage() {
                     <a
                       key={id}
                       href={`#${id}`}
-                      className="flex items-center gap-2 text-sm text-gray-500 hover:text-[#0f5070] py-1 transition-colors group"
+                      className="flex items-center gap-2 text-sm text-gray-500 hover:text-[#0284c7] py-1 transition-colors group"
                     >
-                      <ArrowRight size={11} className="text-[#2d8ab8] group-hover:translate-x-0.5 transition-transform" />
+                      <ArrowRight size={11} className="text-[#38bdf8] group-hover:translate-x-0.5 transition-transform" />
                       {label}
                     </a>
                   ))}
@@ -84,7 +84,7 @@ export default function PrivacyPage() {
 
               <Section id="intro" title="1. Introduction">
                 <p>
-                  Kajjansi Aquaculture Service Center (&quot;KASC&quot;, &quot;we&quot;, &quot;our&quot;, or &quot;us&quot;) is committed to protecting your personal information. This Privacy Policy describes how we collect, use, store, and share information when you visit our website, create an account, place an order, or contact us.
+                  Kajjansi Aquaculture Service Centre (&quot;KASC&quot;, &quot;we&quot;, &quot;our&quot;, or &quot;us&quot;) is committed to protecting your personal information. This Privacy Policy describes how we collect, use, store, and share information when you visit our website, create an account, place an order, or contact us.
                 </p>
                 <p>
                   By using our website or services, you consent to the practices described in this policy. If you do not agree, please refrain from using our services.
@@ -185,7 +185,7 @@ export default function PrivacyPage() {
                   <li><strong>Portability:</strong> Request your data in a portable, machine-readable format</li>
                 </ul>
                 <p>
-                  To exercise any of these rights, contact us at <a href="mailto:aquqtechuganda1@gmail.com" className="text-[#0f5070] hover:underline">aquqtechuganda1@gmail.com</a>. We will respond within 30 days. Some requests may require us to verify your identity before processing.
+                  To exercise any of these rights, contact us at <a href="mailto:aquqtechuganda1@gmail.com" className="text-[#0284c7] hover:underline">aquqtechuganda1@gmail.com</a>. We will respond within 30 days. Some requests may require us to verify your identity before processing.
                 </p>
               </Section>
 
@@ -221,24 +221,24 @@ export default function PrivacyPage() {
                   For any privacy-related questions, requests, or concerns, please contact our data management team:
                 </p>
                 <div className="bg-[#f8fafc] rounded-2xl p-5 border border-gray-100 mt-2">
-                  <p className="font-semibold text-[#071e2e] mb-1">Kajjansi Aquaculture Service Center</p>
+                  <p className="font-semibold text-[#0c4a6e] mb-1">Kajjansi Aquaculture Service Centre</p>
                   <p>Entebbe Road, Kajjansi, Wakiso District, Uganda</p>
                   <p className="mt-2">
                     <strong>Phone:</strong>{" "}
-                    <a href="tel:+256705641626" className="text-[#0f5070] hover:underline">+256 705 641626</a>{" "}
+                    <a href="tel:+256705641626" className="text-[#0284c7] hover:underline">+256 705 641626</a>{" "}
                     &nbsp;|&nbsp;{" "}
-                    <a href="tel:+256782520244" className="text-[#0f5070] hover:underline">+256 782 520244</a>
+                    <a href="tel:+256782520244" className="text-[#0284c7] hover:underline">+256 782 520244</a>
                   </p>
                   <p>
                     <strong>Email:</strong>{" "}
-                    <a href="mailto:aquqtechuganda1@gmail.com" className="text-[#0f5070] hover:underline">aquqtechuganda1@gmail.com</a>
+                    <a href="mailto:aquqtechuganda1@gmail.com" className="text-[#0284c7] hover:underline">aquqtechuganda1@gmail.com</a>
                   </p>
                 </div>
                 <p className="mt-4">
                   You may also review our{" "}
-                  <Link href="/terms" className="text-[#0f5070] hover:underline font-medium">Terms of Service</Link>{" "}
+                  <Link href="/terms" className="text-[#0284c7] hover:underline font-medium">Terms of Service</Link>{" "}
                   or visit our{" "}
-                  <Link href="/contact" className="text-[#0f5070] hover:underline font-medium">Contact page</Link>.
+                  <Link href="/contact" className="text-[#0284c7] hover:underline font-medium">Contact page</Link>.
                 </p>
               </Section>
 

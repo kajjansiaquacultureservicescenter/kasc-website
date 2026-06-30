@@ -43,26 +43,26 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       {/* Top bar */}
-      <div className="bg-[#071e2e] text-gray-300 text-sm hidden lg:block">
+      <div className="bg-[#0c4a6e] text-gray-300 text-sm hidden lg:block">
         <div className="container-wide flex items-center justify-between py-2">
           <div className="flex items-center gap-6">
             <a href={`tel:${contact.phone}`} className="flex items-center gap-1.5 hover:text-white transition-colors">
-              <Phone size={13} className="text-[#5aafd4]" />
+              <Phone size={13} className="text-[#7dd3fc]" />
               <span>{contact.phone}</span>
             </a>
             {contact.phone2 && (
               <a href={`tel:${contact.phone2}`} className="flex items-center gap-1.5 hover:text-white transition-colors">
-                <Phone size={13} className="text-[#5aafd4]" />
+                <Phone size={13} className="text-[#7dd3fc]" />
                 <span>{contact.phone2}</span>
               </a>
             )}
             <a href={`mailto:${contact.email}`} className="flex items-center gap-1.5 hover:text-white transition-colors">
-              <Mail size={13} className="text-[#5aafd4]" />
+              <Mail size={13} className="text-[#7dd3fc]" />
               <span>{contact.email}</span>
             </a>
           </div>
           <div className="flex items-center gap-1.5 text-gray-400">
-            <MapPin size={13} className="text-[#5aafd4]" />
+            <MapPin size={13} className="text-[#7dd3fc]" />
             <span>{contact.address}</span>
           </div>
         </div>
@@ -73,8 +73,8 @@ export default function Header() {
         className={cn(
           "transition-all duration-300",
           scrolled
-            ? "bg-[#0a2d43]/95 backdrop-blur-xl shadow-2xl"
-            : "bg-[#0a2d43]"
+            ? "bg-[#075985]/95 backdrop-blur-xl shadow-2xl"
+            : "bg-[#075985]"
         )}
       >
         <div className="container-wide flex items-center justify-between h-16 lg:h-20">
@@ -87,8 +87,8 @@ export default function Header() {
               <div className="text-white font-bold text-sm lg:text-lg leading-tight font-display">
                 Kajjansi
               </div>
-              <div className="text-[#5aafd4] text-[10px] lg:text-xs font-medium leading-tight tracking-wide">
-                Aquaculture Service Center
+              <div className="text-[#7dd3fc] text-[10px] lg:text-xs font-medium leading-tight tracking-wide">
+                Aquaculture Service Centre
               </div>
             </div>
           </Link>
@@ -104,7 +104,7 @@ export default function Header() {
                     className={cn(
                       "flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
                       pathname.startsWith(item.href) && item.href !== "/"
-                        ? "text-[#5aafd4] bg-white/10"
+                        ? "text-[#7dd3fc] bg-white/10"
                         : "text-gray-200 hover:text-white hover:bg-white/10"
                     )}
                   >
@@ -117,7 +117,7 @@ export default function Header() {
                     className={cn(
                       "flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
                       (pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href)))
-                        ? "text-[#5aafd4] bg-white/10"
+                        ? "text-[#7dd3fc] bg-white/10"
                         : "text-gray-200 hover:text-white hover:bg-white/10"
                     )}
                   >
@@ -146,11 +146,11 @@ export default function Header() {
                             className={cn(
                               "flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-150",
                               pathname === child.href
-                                ? "bg-[#eef8fd] text-[#0f5070]"
-                                : "text-gray-700 hover:bg-gray-50 hover:text-[#0f5070]"
+                                ? "bg-[#f0f9ff] text-[#0284c7]"
+                                : "text-gray-700 hover:bg-gray-50 hover:text-[#0284c7]"
                             )}
                           >
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#2d8ab8] shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8] shrink-0" />
                             {child.label}
                           </Link>
                         ))}
@@ -164,13 +164,13 @@ export default function Header() {
 
           {/* Right actions */}
           <div className="flex items-center gap-3">
-            <Link href="/shop" className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[#2d8ab8]/40 text-[#5aafd4] hover:bg-white/10 text-sm font-medium transition-colors">
+            <Link href="/shop" className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[#38bdf8]/40 text-[#7dd3fc] hover:bg-white/10 text-sm font-medium transition-colors">
               Shop
             </Link>
             {user ? (
               <Link
                 href="/account"
-                className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[#2d8ab8]/40 text-[#5aafd4] hover:bg-white/10 text-sm font-medium transition-colors"
+                className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[#38bdf8]/40 text-[#7dd3fc] hover:bg-white/10 text-sm font-medium transition-colors"
               >
                 <User size={15} />
                 My Account
@@ -178,7 +178,7 @@ export default function Header() {
             ) : (
               <Link
                 href="/auth/login"
-                className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[#2d8ab8]/40 text-[#5aafd4] hover:bg-white/10 text-sm font-medium transition-colors"
+                className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[#38bdf8]/40 text-[#7dd3fc] hover:bg-white/10 text-sm font-medium transition-colors"
               >
                 <LogIn size={15} />
                 Sign In
@@ -250,7 +250,7 @@ export default function Header() {
                       />
                     </button>
                     {activeDropdown === item.href && (
-                      <div className="ml-4 mt-1 space-y-1 border-l-2 border-[#2d8ab8]/30 pl-4">
+                      <div className="ml-4 mt-1 space-y-1 border-l-2 border-[#38bdf8]/30 pl-4">
                         {item.children.map((child) => (
                           <Link
                             key={child.href}
@@ -269,7 +269,7 @@ export default function Header() {
                     className={cn(
                       "flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-colors",
                       pathname === item.href
-                        ? "text-[#5aafd4] bg-white/10"
+                        ? "text-[#7dd3fc] bg-white/10"
                         : "text-gray-200 hover:text-white hover:bg-white/10"
                     )}
                   >
@@ -283,11 +283,11 @@ export default function Header() {
                 <ShoppingCart size={15} /> Shop Now
               </Link>
               {user ? (
-                <Link href="/account" className="flex items-center justify-center gap-2 py-2.5 rounded-lg border border-[#2d8ab8]/40 text-[#5aafd4] text-sm font-medium">
+                <Link href="/account" className="flex items-center justify-center gap-2 py-2.5 rounded-lg border border-[#38bdf8]/40 text-[#7dd3fc] text-sm font-medium">
                   <User size={15} /> My Account
                 </Link>
               ) : (
-                <Link href="/auth/login" className="flex items-center justify-center gap-2 py-2.5 rounded-lg border border-[#2d8ab8]/40 text-[#5aafd4] text-sm font-medium">
+                <Link href="/auth/login" className="flex items-center justify-center gap-2 py-2.5 rounded-lg border border-[#38bdf8]/40 text-[#7dd3fc] text-sm font-medium">
                   <LogIn size={15} /> Sign In
                 </Link>
               )}

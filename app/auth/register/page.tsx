@@ -20,11 +20,11 @@ function RegisterForm() {
         <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
           <CheckCircle2 size={32} className="text-green-600" />
         </div>
-        <h2 className="text-xl font-bold text-[#071e2e] font-display mb-2">Account created!</h2>
+        <h2 className="text-xl font-bold text-[#0c4a6e] font-display mb-2">Account created!</h2>
         <p className="text-gray-500 text-sm mb-6">{state.success}</p>
         <Link
           href={`/auth/login?returnTo=${returnTo}`}
-          className="inline-block py-3 px-8 rounded-xl bg-gradient-to-r from-[#0f5070] to-[#226640] text-white font-semibold text-sm hover:opacity-90 transition-all"
+          className="inline-block py-3 px-8 rounded-xl bg-gradient-to-r from-[#0284c7] to-[#226640] text-white font-semibold text-sm hover:opacity-90 transition-all"
         >
           Sign in now
         </Link>
@@ -35,7 +35,7 @@ function RegisterForm() {
   return (
     <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-10">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-[#071e2e] font-display mb-1">Create an account</h1>
+        <h1 className="text-2xl font-bold text-[#0c4a6e] font-display mb-1">Create an account</h1>
         <p className="text-gray-500 text-sm">Join KASC to track orders and more</p>
       </div>
 
@@ -54,7 +54,7 @@ function RegisterForm() {
             autoComplete="name"
             required
             placeholder="John Ssali"
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8] focus:border-transparent transition-all"
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8] focus:border-transparent transition-all"
           />
         </div>
 
@@ -66,7 +66,7 @@ function RegisterForm() {
             autoComplete="email"
             required
             placeholder="you@example.com"
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8] focus:border-transparent transition-all"
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8] focus:border-transparent transition-all"
           />
         </div>
 
@@ -78,7 +78,7 @@ function RegisterForm() {
             autoComplete="tel"
             required
             placeholder="+256 700 000000"
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8] focus:border-transparent transition-all"
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8] focus:border-transparent transition-all"
           />
         </div>
 
@@ -92,7 +92,7 @@ function RegisterForm() {
               required
               minLength={8}
               placeholder="At least 8 characters"
-              className="w-full px-4 py-3 pr-12 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8] focus:border-transparent transition-all"
+              className="w-full px-4 py-3 pr-12 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8] focus:border-transparent transition-all"
             />
             <button
               type="button"
@@ -109,7 +109,7 @@ function RegisterForm() {
 
       <p className="mt-6 text-center text-sm text-gray-500">
         Already have an account?{" "}
-        <Link href={`/auth/login?returnTo=${returnTo}`} className="text-[#0f5070] font-semibold hover:underline">
+        <Link href={`/auth/login?returnTo=${returnTo}`} className="text-[#0284c7] font-semibold hover:underline">
           Sign in
         </Link>
       </p>
@@ -123,7 +123,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-[#0f5070] to-[#226640] text-white font-semibold text-sm hover:opacity-90 transition-all disabled:opacity-60 flex items-center justify-center gap-2 mt-2"
+      className="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-[#0284c7] to-[#226640] text-white font-semibold text-sm hover:opacity-90 transition-all disabled:opacity-60 flex items-center justify-center gap-2 mt-2"
     >
       {pending && <Loader2 size={15} className="animate-spin" />}
       Create account

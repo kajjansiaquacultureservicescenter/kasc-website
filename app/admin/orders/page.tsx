@@ -111,7 +111,7 @@ export default function AdminOrdersPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-[#071e2e] font-display">Orders</h1>
+          <h1 className="text-2xl font-bold text-[#0c4a6e] font-display">Orders</h1>
           <p className="text-gray-500 text-sm mt-1">{orders.length} order{orders.length !== 1 ? "s" : ""}</p>
         </div>
         <button onClick={fetchOrders} className="flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 text-sm hover:bg-gray-50 transition-all">
@@ -127,7 +127,7 @@ export default function AdminOrdersPage() {
             onClick={() => setFilterStatus(s)}
             className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all capitalize ${
               filterStatus === s
-                ? "bg-[#071e2e] text-white"
+                ? "bg-[#0c4a6e] text-white"
                 : "bg-white border border-gray-200 text-gray-600 hover:border-gray-400"
             }`}
           >
@@ -158,9 +158,9 @@ export default function AdminOrdersPage() {
             <tbody className="divide-y divide-gray-50">
               {orders.map((order) => (
                 <tr key={order.id} className="hover:bg-[#f8fafc] transition-all">
-                  <td className="px-4 py-3 font-mono font-semibold text-[#071e2e] text-xs">{order.order_number}</td>
+                  <td className="px-4 py-3 font-mono font-semibold text-[#0c4a6e] text-xs">{order.order_number}</td>
                   <td className="px-4 py-3">
-                    <div className="font-medium text-[#071e2e]">{order.guest_name || "User"}</div>
+                    <div className="font-medium text-[#0c4a6e]">{order.guest_name || "User"}</div>
                     <div className="text-xs text-gray-400">{order.guest_phone || order.guest_email || ""}</div>
                   </td>
                   <td className="px-4 py-3 font-semibold">UGX {Number(order.total_amount).toLocaleString()}</td>
@@ -180,7 +180,7 @@ export default function AdminOrdersPage() {
                   <td className="px-4 py-3">
                     <button
                       onClick={() => setSelected(order)}
-                      className="px-3 py-1.5 rounded-lg bg-[#071e2e] text-white text-xs hover:bg-[#0f3a52] transition-all"
+                      className="px-3 py-1.5 rounded-lg bg-[#0c4a6e] text-white text-xs hover:bg-[#075985] transition-all"
                     >
                       Details
                     </button>
@@ -199,7 +199,7 @@ export default function AdminOrdersPage() {
           <div className="w-full max-w-md bg-white shadow-2xl overflow-y-auto flex flex-col">
             <div className="flex items-center justify-between p-6 border-b">
               <div>
-                <h2 className="font-bold text-[#071e2e] font-display">{selected.order_number}</h2>
+                <h2 className="font-bold text-[#0c4a6e] font-display">{selected.order_number}</h2>
                 <p className="text-xs text-gray-400">{new Date(selected.created_at).toLocaleString("en-UG")}</p>
               </div>
               <button onClick={() => setSelected(null)} className="p-2 rounded-xl hover:bg-gray-100 transition-all">
@@ -212,7 +212,7 @@ export default function AdminOrdersPage() {
               <div>
                 <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">Customer</h3>
                 <div className="space-y-1 text-sm">
-                  <div className="font-semibold text-[#071e2e]">{selected.guest_name || "Registered user"}</div>
+                  <div className="font-semibold text-[#0c4a6e]">{selected.guest_name || "Registered user"}</div>
                   {selected.guest_email && <div className="text-gray-500">{selected.guest_email}</div>}
                   {selected.guest_phone && <div className="text-gray-500">{selected.guest_phone}</div>}
                   {selected.delivery_address && <div className="text-gray-500">{selected.delivery_address}, {selected.delivery_district}</div>}
@@ -227,7 +227,7 @@ export default function AdminOrdersPage() {
                   {selected.order_items?.map((item) => (
                     <div key={item.id} className="flex items-center justify-between text-sm p-3 bg-[#f8fafc] rounded-xl">
                       <div>
-                        <div className="font-medium text-[#071e2e]">{item.product_name}</div>
+                        <div className="font-medium text-[#0c4a6e]">{item.product_name}</div>
                         <div className="text-xs text-gray-400">Qty: {item.quantity} × UGX {Number(item.product_price).toLocaleString()}</div>
                       </div>
                       <div className="font-semibold">UGX {Number(item.subtotal).toLocaleString()}</div>
@@ -241,7 +241,7 @@ export default function AdminOrdersPage() {
                   <div className="flex justify-between text-gray-500">
                     <span>Delivery</span><span>UGX {Number(selected.delivery_fee).toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between font-bold text-[#071e2e]">
+                  <div className="flex justify-between font-bold text-[#0c4a6e]">
                     <span>Total</span><span>UGX {Number(selected.total_amount).toLocaleString()}</span>
                   </div>
                 </div>
@@ -260,7 +260,7 @@ export default function AdminOrdersPage() {
                     value={selected.payment_status}
                     onChange={(e) => updateOrderStatus(selected.id, "payment_status", e.target.value)}
                     disabled={updating}
-                    className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]"
+                    className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]"
                   >
                     {PAYMENT_STATUS.map((s) => (
                       <option key={s} value={s}>{s}</option>
@@ -276,7 +276,7 @@ export default function AdminOrdersPage() {
                   value={selected.status}
                   onChange={(e) => updateOrderStatus(selected.id, "status", e.target.value)}
                   disabled={updating}
-                  className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]"
+                  className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]"
                 >
                   {STATUS_OPTIONS.map((s) => (
                     <option key={s} value={s} className="capitalize">{s}</option>
@@ -292,7 +292,7 @@ export default function AdminOrdersPage() {
                   rows={3}
                   placeholder="Internal notes..."
                   onBlur={(e) => saveNotes(selected.id, e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8] resize-none"
+                  className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8] resize-none"
                 />
               </div>
             </div>

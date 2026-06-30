@@ -4,7 +4,7 @@ import { FileText, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Terms of Service | KASC",
-  description: "Terms and conditions governing use of the Kajjansi Aquaculture Service Center website, shop, and services.",
+  description: "Terms and conditions governing use of the Kajjansi Aquaculture Service Centre website, shop, and services.",
 };
 
 const LAST_UPDATED = "22 June 2026";
@@ -12,7 +12,7 @@ const LAST_UPDATED = "22 June 2026";
 function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
     <section id={id} className="mb-10">
-      <h2 className="text-xl font-bold text-[#071e2e] font-display mb-4 pb-2 border-b border-gray-100">{title}</h2>
+      <h2 className="text-xl font-bold text-[#0c4a6e] font-display mb-4 pb-2 border-b border-gray-100">{title}</h2>
       <div className="space-y-3 text-gray-600 text-sm leading-relaxed">{children}</div>
     </section>
   );
@@ -40,11 +40,11 @@ export default function TermsPage() {
       {/* Hero */}
       <section className="relative py-20 lg:py-28 gradient-hero overflow-hidden">
         <div className="absolute inset-0 noise-overlay" />
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-[#1a6b94]/20 blur-3xl" />
+        <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-[#0ea5e9]/20 blur-3xl" />
         <div className="container-wide relative z-10">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-blue-100 text-sm mb-6">
-              <FileText size={14} className="text-[#5aafd4]" /> Legal
+              <FileText size={14} className="text-[#7dd3fc]" /> Legal
             </div>
             <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight font-display">
               Terms of Service
@@ -71,9 +71,9 @@ export default function TermsPage() {
                     <a
                       key={id}
                       href={`#${id}`}
-                      className="flex items-center gap-2 text-sm text-gray-500 hover:text-[#0f5070] py-1 transition-colors group"
+                      className="flex items-center gap-2 text-sm text-gray-500 hover:text-[#0284c7] py-1 transition-colors group"
                     >
-                      <ArrowRight size={11} className="text-[#2d8ab8] group-hover:translate-x-0.5 transition-transform" />
+                      <ArrowRight size={11} className="text-[#38bdf8] group-hover:translate-x-0.5 transition-transform" />
                       {label}
                     </a>
                   ))}
@@ -86,7 +86,7 @@ export default function TermsPage() {
 
               <Section id="acceptance" title="1. Acceptance of Terms">
                 <p>
-                  By accessing or using the Kajjansi Aquaculture Service Center (&quot;KASC&quot;, &quot;we&quot;, &quot;our&quot;, or &quot;us&quot;) website at kasc-website.vercel.app, placing an order through our online shop, or engaging any of our services, you agree to be bound by these Terms of Service (&quot;Terms&quot;). If you do not agree to these Terms, please do not use our website or services.
+                  By accessing or using the Kajjansi Aquaculture Service Centre (&quot;KASC&quot;, &quot;we&quot;, &quot;our&quot;, or &quot;us&quot;) website at kasc-website.vercel.app, placing an order through our online shop, or engaging any of our services, you agree to be bound by these Terms of Service (&quot;Terms&quot;). If you do not agree to these Terms, please do not use our website or services.
                 </p>
                 <p>
                   These Terms apply to all visitors, customers, and registered users of our platform. We reserve the right to update these Terms at any time, and continued use of the site after changes constitutes acceptance.
@@ -176,7 +176,7 @@ export default function TermsPage() {
 
               <Section id="ip" title="7. Intellectual Property">
                 <p>
-                  All content on this website — including text, images, logos, product photographs, technical guides, training materials, and software — is the property of Kajjansi Aquaculture Service Center or its content suppliers and is protected by applicable intellectual property laws.
+                  All content on this website — including text, images, logos, product photographs, technical guides, training materials, and software — is the property of Kajjansi Aquaculture Service Centre or its content suppliers and is protected by applicable intellectual property laws.
                 </p>
                 <p>
                   You may not reproduce, redistribute, republish, or use any content from this site for commercial purposes without prior written permission from KASC. Personal, non-commercial use with appropriate attribution is permitted.
@@ -230,20 +230,20 @@ export default function TermsPage() {
               <Section id="contact" title="13. Contact Us">
                 <p>For questions about these Terms, please reach out:</p>
                 <div className="bg-[#f8fafc] rounded-2xl p-5 border border-gray-100 mt-2">
-                  <p className="font-semibold text-[#071e2e] mb-1">Kajjansi Aquaculture Service Center</p>
+                  <p className="font-semibold text-[#0c4a6e] mb-1">Kajjansi Aquaculture Service Centre</p>
                   <p>Entebbe Road, Kajjansi, Wakiso District, Uganda</p>
                   <p className="mt-2">
-                    <strong>Phone:</strong> <a href="tel:+256705641626" className="text-[#0f5070] hover:underline">+256 705 641626</a> &nbsp;|&nbsp; <a href="tel:+256782520244" className="text-[#0f5070] hover:underline">+256 782 520244</a>
+                    <strong>Phone:</strong> <a href="tel:+256705641626" className="text-[#0284c7] hover:underline">+256 705 641626</a> &nbsp;|&nbsp; <a href="tel:+256782520244" className="text-[#0284c7] hover:underline">+256 782 520244</a>
                   </p>
                   <p>
-                    <strong>Email:</strong> <a href="mailto:aquqtechuganda1@gmail.com" className="text-[#0f5070] hover:underline">aquqtechuganda1@gmail.com</a>
+                    <strong>Email:</strong> <a href="mailto:aquqtechuganda1@gmail.com" className="text-[#0284c7] hover:underline">aquqtechuganda1@gmail.com</a>
                   </p>
                 </div>
                 <p className="mt-4">
                   You may also visit our{" "}
-                  <Link href="/contact" className="text-[#0f5070] hover:underline font-medium">Contact page</Link>{" "}
+                  <Link href="/contact" className="text-[#0284c7] hover:underline font-medium">Contact page</Link>{" "}
                   or read our{" "}
-                  <Link href="/privacy" className="text-[#0f5070] hover:underline font-medium">Privacy Policy</Link>.
+                  <Link href="/privacy" className="text-[#0284c7] hover:underline font-medium">Privacy Policy</Link>.
                 </p>
               </Section>
 

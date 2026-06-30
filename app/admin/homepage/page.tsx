@@ -82,8 +82,8 @@ export default function AdminHomepagePage() {
     <div>
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-1">
-          <Home size={22} className="text-[#0f5070]" />
-          <h1 className="text-2xl font-bold text-[#071e2e] font-display">Homepage Content</h1>
+          <Home size={22} className="text-[#0284c7]" />
+          <h1 className="text-2xl font-bold text-[#0c4a6e] font-display">Homepage Content</h1>
         </div>
         <p className="text-gray-500 text-sm">Edit the text and media shown on the homepage. Changes are live immediately after saving.</p>
       </div>
@@ -94,12 +94,12 @@ export default function AdminHomepagePage() {
           <div className="flex items-center justify-between mb-5">
             <div className="flex items-center gap-2">
               <PlayCircle size={18} className="text-red-500" />
-              <h2 className="font-bold text-[#071e2e] font-display">Homepage Video</h2>
+              <h2 className="font-bold text-[#0c4a6e] font-display">Homepage Video</h2>
             </div>
             <button
               onClick={() => saveKey(HERO_VIDEO_KEY)}
               disabled={saving === HERO_VIDEO_KEY}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#071e2e] text-white text-xs font-semibold hover:bg-[#0f3a52] disabled:opacity-60 transition-all"
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0c4a6e] text-white text-xs font-semibold hover:bg-[#075985] disabled:opacity-60 transition-all"
             >
               {saving === HERO_VIDEO_KEY ? <Loader2 size={13} className="animate-spin" /> : <Save size={13} />} Save
             </button>
@@ -109,7 +109,7 @@ export default function AdminHomepagePage() {
             value={settings[HERO_VIDEO_KEY] ?? ""}
             onChange={(e) => setSettings((s) => ({ ...s, [HERO_VIDEO_KEY]: e.target.value }))}
             placeholder="https://www.youtube.com/watch?v=..."
-            className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]"
+            className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]"
           />
           {settings[HERO_VIDEO_KEY] && (
             <div className="mt-3 flex items-center gap-2">
@@ -125,11 +125,11 @@ export default function AdminHomepagePage() {
         {/* ── Farm Section ── */}
         <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
           <div className="flex items-center justify-between mb-5">
-            <h2 className="font-bold text-[#071e2e] font-display">Our Demonstration Farm Section</h2>
+            <h2 className="font-bold text-[#0c4a6e] font-display">Our Demonstration Farm Section</h2>
             <button
               onClick={() => saveKeys(FARM_KEYS.filter((k) => !IMAGE_KEYS.has(k)), "Farm Section text")}
               disabled={!!saving}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#071e2e] text-white text-xs font-semibold hover:bg-[#0f3a52] disabled:opacity-60 transition-all"
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0c4a6e] text-white text-xs font-semibold hover:bg-[#075985] disabled:opacity-60 transition-all"
             >
               {saving ? <Loader2 size={13} className="animate-spin" /> : <Save size={13} />} Save Text
             </button>
@@ -141,7 +141,7 @@ export default function AdminHomepagePage() {
               <input
                 value={settings["farm_heading"] ?? ""}
                 onChange={(e) => setSettings((s) => ({ ...s, farm_heading: e.target.value }))}
-                className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]"
+                className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]"
               />
             </div>
             {["farm_desc_1", "farm_desc_2"].map((key) => (
@@ -151,7 +151,7 @@ export default function AdminHomepagePage() {
                   value={settings[key] ?? ""}
                   onChange={(e) => setSettings((s) => ({ ...s, [key]: e.target.value }))}
                   rows={3}
-                  className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8] resize-none"
+                  className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8] resize-none"
                 />
               </div>
             ))}
@@ -181,11 +181,11 @@ export default function AdminHomepagePage() {
                     )}
                     {imgUploading === key && (
                       <div className="absolute inset-0 bg-white/70 flex items-center justify-center">
-                        <Loader2 size={20} className="animate-spin text-[#0f5070]" />
+                        <Loader2 size={20} className="animate-spin text-[#0284c7]" />
                       </div>
                     )}
                   </div>
-                  <label className={`flex items-center gap-2 px-3 py-2 border-2 border-dashed rounded-lg cursor-pointer text-xs transition-all ${imgUploading === key ? "border-gray-200 text-gray-400 cursor-not-allowed" : "border-[#2d8ab8]/40 hover:border-[#2d8ab8] text-[#0f5070]"}`}>
+                  <label className={`flex items-center gap-2 px-3 py-2 border-2 border-dashed rounded-lg cursor-pointer text-xs transition-all ${imgUploading === key ? "border-gray-200 text-gray-400 cursor-not-allowed" : "border-[#38bdf8]/40 hover:border-[#38bdf8] text-[#0284c7]"}`}>
                     <Upload size={13} /> {settings[key] ? "Replace photo" : "Upload photo"}
                     <input
                       ref={(el) => { fileRefs.current[key] = el; }}
@@ -197,7 +197,7 @@ export default function AdminHomepagePage() {
                     value={settings[key] ?? ""}
                     onChange={(e) => setSettings((s) => ({ ...s, [key]: e.target.value }))}
                     placeholder="Or paste image URL..."
-                    className="mt-2 w-full px-3 py-2 rounded-lg border border-gray-200 text-xs focus:outline-none focus:ring-1 focus:ring-[#2d8ab8]"
+                    className="mt-2 w-full px-3 py-2 rounded-lg border border-gray-200 text-xs focus:outline-none focus:ring-1 focus:ring-[#38bdf8]"
                   />
                 </div>
               ))}
@@ -208,11 +208,11 @@ export default function AdminHomepagePage() {
         {/* ── Stats & Numbers ── */}
         <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
           <div className="flex items-center justify-between mb-5">
-            <h2 className="font-bold text-[#071e2e] font-display">Stats &amp; Numbers</h2>
+            <h2 className="font-bold text-[#0c4a6e] font-display">Stats &amp; Numbers</h2>
             <button
               onClick={() => saveKeys(STAT_KEYS, "Stats")}
               disabled={!!saving}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#071e2e] text-white text-xs font-semibold hover:bg-[#0f3a52] disabled:opacity-60 transition-all"
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0c4a6e] text-white text-xs font-semibold hover:bg-[#075985] disabled:opacity-60 transition-all"
             >
               {saving === "Stats" ? <Loader2 size={13} className="animate-spin" /> : <Save size={13} />} Save Stats
             </button>
@@ -229,7 +229,7 @@ export default function AdminHomepagePage() {
                       value={settings[stat.value] ?? stat.defaultValue}
                       onChange={(e) => setSettings((s) => ({ ...s, [stat.value]: e.target.value }))}
                       placeholder={stat.defaultValue}
-                      className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm font-bold text-[#071e2e] focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]"
+                      className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm font-bold text-[#0c4a6e] focus:outline-none focus:ring-2 focus:ring-[#38bdf8]"
                     />
                   </div>
                   <div>
@@ -238,7 +238,7 @@ export default function AdminHomepagePage() {
                       value={settings[stat.label] ?? stat.defaultLabel}
                       onChange={(e) => setSettings((s) => ({ ...s, [stat.label]: e.target.value }))}
                       placeholder={stat.defaultLabel}
-                      className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]"
+                      className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]"
                     />
                   </div>
                 </div>

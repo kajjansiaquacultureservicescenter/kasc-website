@@ -43,9 +43,9 @@ const SORT_OPTIONS = [
 
 const BADGE_STYLE: Record<string, string> = {
   "Best Seller":  "bg-[#f4a020] text-white",
-  "Premium":      "bg-[#0f5070] text-white",
+  "Premium":      "bg-[#0284c7] text-white",
   "New":          "bg-[#226640] text-white",
-  "Most Popular": "bg-[#2d8ab8] text-white",
+  "Most Popular": "bg-[#38bdf8] text-white",
   "Heavy Duty":   "bg-gray-800 text-white",
   "Essential":    "bg-purple-700 text-white",
 };
@@ -93,7 +93,7 @@ export default function ShopClient({ products }: { products: ShopProduct[] }) {
   return (
     <div className="min-h-screen bg-[#f8fafc]">
       {/* Shop Header Banner */}
-      <div className="bg-gradient-to-r from-[#0a2d43] via-[#0f5070] to-[#226640] py-12 lg:py-16">
+      <div className="bg-gradient-to-r from-[#075985] via-[#0284c7] to-[#226640] py-12 lg:py-16">
         <div className="container-wide">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
             <div>
@@ -133,7 +133,7 @@ export default function ShopClient({ products }: { products: ShopProduct[] }) {
             {/* Categories */}
             <div className="bg-white rounded-2xl border border-gray-100 shadow-[var(--shadow-card)] overflow-hidden">
               <div className="px-5 py-4 border-b border-gray-50">
-                <h3 className="font-bold text-[#071e2e] text-sm font-display">Categories</h3>
+                <h3 className="font-bold text-[#0c4a6e] text-sm font-display">Categories</h3>
               </div>
               <div className="p-3 space-y-1">
                 {CATEGORIES.map(({ id, label, icon: Icon, count }) => (
@@ -143,8 +143,8 @@ export default function ShopClient({ products }: { products: ShopProduct[] }) {
                     className={cn(
                       "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all",
                       category === id
-                        ? "bg-[#0f5070] text-white"
-                        : "text-gray-600 hover:bg-[#f0f7ff] hover:text-[#0f5070]"
+                        ? "bg-[#0284c7] text-white"
+                        : "text-gray-600 hover:bg-[#f0f7ff] hover:text-[#0284c7]"
                     )}
                   >
                     <Icon size={15} className="shrink-0" />
@@ -161,13 +161,13 @@ export default function ShopClient({ products }: { products: ShopProduct[] }) {
             {/* Filters */}
             <div className="bg-white rounded-2xl border border-gray-100 shadow-[var(--shadow-card)] overflow-hidden">
               <div className="px-5 py-4 border-b border-gray-50">
-                <h3 className="font-bold text-[#071e2e] text-sm font-display">Filters</h3>
+                <h3 className="font-bold text-[#0c4a6e] text-sm font-display">Filters</h3>
               </div>
               <div className="p-4 space-y-4">
                 <label className="flex items-center gap-3 cursor-pointer group">
                   <div className={cn(
                     "w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all",
-                    inStockOnly ? "bg-[#0f5070] border-[#0f5070]" : "border-gray-300 group-hover:border-[#2d8ab8]"
+                    inStockOnly ? "bg-[#0284c7] border-[#0284c7]" : "border-gray-300 group-hover:border-[#38bdf8]"
                   )}>
                     {inStockOnly && <CheckCircle2 size={11} className="text-white" />}
                   </div>
@@ -178,7 +178,7 @@ export default function ShopClient({ products }: { products: ShopProduct[] }) {
             </div>
 
             {/* Help box */}
-            <div className="bg-gradient-to-br from-[#0f5070] to-[#226640] rounded-2xl p-5 text-white">
+            <div className="bg-gradient-to-br from-[#0284c7] to-[#226640] rounded-2xl p-5 text-white">
               <h3 className="font-bold mb-2 font-display text-sm">Need Help Ordering?</h3>
               <p className="text-blue-100 text-xs leading-relaxed mb-4">
                 Call or WhatsApp us and we&apos;ll help you pick the right products for your farm.
@@ -202,7 +202,7 @@ export default function ShopClient({ products }: { products: ShopProduct[] }) {
                     value={search}
                     onChange={e => setSearch(e.target.value)}
                     placeholder="Search products (e.g. tilapia, liner, grader…)"
-                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#2d8ab8] focus:ring-2 focus:ring-[#2d8ab8]/10 transition-all"
+                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#38bdf8] focus:ring-2 focus:ring-[#38bdf8]/10 transition-all"
                   />
                   {search && (
                     <button onClick={() => setSearch("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
@@ -215,7 +215,7 @@ export default function ShopClient({ products }: { products: ShopProduct[] }) {
                 <div className="relative">
                   <button
                     onClick={() => setSortOpen(!sortOpen)}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:border-[#2d8ab8] hover:text-[#0f5070] transition-all whitespace-nowrap"
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:border-[#38bdf8] hover:text-[#0284c7] transition-all whitespace-nowrap"
                   >
                     <ArrowUpDown size={14} />
                     {SORT_OPTIONS.find(s => s.id === sort)?.label}
@@ -226,7 +226,7 @@ export default function ShopClient({ products }: { products: ShopProduct[] }) {
                       {SORT_OPTIONS.map(opt => (
                         <button key={opt.id} onClick={() => { setSort(opt.id); setSortOpen(false); }}
                           className={cn("w-full text-left px-4 py-2.5 text-sm hover:bg-[#f0f7ff] transition-colors",
-                            sort === opt.id ? "text-[#0f5070] font-semibold bg-[#eef8fd]" : "text-gray-700")}>
+                            sort === opt.id ? "text-[#0284c7] font-semibold bg-[#f0f9ff]" : "text-gray-700")}>
                           {opt.label}
                         </button>
                       ))}
@@ -236,10 +236,10 @@ export default function ShopClient({ products }: { products: ShopProduct[] }) {
 
                 {/* View toggle */}
                 <div className="flex items-center gap-1 p-1 bg-gray-100 rounded-xl">
-                  <button onClick={() => setView("grid")} className={cn("p-2 rounded-lg transition-all", view === "grid" ? "bg-white shadow text-[#0f5070]" : "text-gray-400 hover:text-gray-600")}>
+                  <button onClick={() => setView("grid")} className={cn("p-2 rounded-lg transition-all", view === "grid" ? "bg-white shadow text-[#0284c7]" : "text-gray-400 hover:text-gray-600")}>
                     <Grid3X3 size={16} />
                   </button>
-                  <button onClick={() => setView("list")} className={cn("p-2 rounded-lg transition-all", view === "list" ? "bg-white shadow text-[#0f5070]" : "text-gray-400 hover:text-gray-600")}>
+                  <button onClick={() => setView("list")} className={cn("p-2 rounded-lg transition-all", view === "list" ? "bg-white shadow text-[#0284c7]" : "text-gray-400 hover:text-gray-600")}>
                     <List size={16} />
                   </button>
                 </div>
@@ -255,7 +255,7 @@ export default function ShopClient({ products }: { products: ShopProduct[] }) {
                 <div className="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-gray-100">
                   <span className="text-xs text-gray-400">Active filters:</span>
                   {category !== "all" && (
-                    <button onClick={() => setCategory("all")} className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#eef8fd] text-[#0f5070] text-xs font-medium border border-[#a0d4ea] hover:bg-[#d6eef8] transition-colors">
+                    <button onClick={() => setCategory("all")} className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f0f9ff] text-[#0284c7] text-xs font-medium border border-[#bae6fd] hover:bg-[#e0f2fe] transition-colors">
                       <Tag size={11} /> {CATEGORIES.find(c => c.id === category)?.label}
                       <X size={10} />
                     </button>
@@ -281,8 +281,8 @@ export default function ShopClient({ products }: { products: ShopProduct[] }) {
             {/* Results count */}
             <div className="flex items-center justify-between mb-4 px-1">
               <p className="text-sm text-gray-500">
-                Showing <span className="font-semibold text-[#071e2e]">{filtered.length}</span> of {products.length} products
-                {search && <span> for &ldquo;<span className="text-[#0f5070]">{search}</span>&rdquo;</span>}
+                Showing <span className="font-semibold text-[#0c4a6e]">{filtered.length}</span> of {products.length} products
+                {search && <span> for &ldquo;<span className="text-[#0284c7]">{search}</span>&rdquo;</span>}
               </p>
             </div>
 
@@ -290,7 +290,7 @@ export default function ShopClient({ products }: { products: ShopProduct[] }) {
             {filtered.length === 0 && (
               <div className="bg-white rounded-2xl border border-gray-100 p-16 text-center">
                 <Search size={32} className="text-gray-300 mx-auto mb-3" />
-                <h3 className="font-semibold text-[#071e2e] mb-1">No products found</h3>
+                <h3 className="font-semibold text-[#0c4a6e] mb-1">No products found</h3>
                 <p className="text-gray-400 text-sm mb-4">Try adjusting your search or filters.</p>
                 <button onClick={() => { setSearch(""); setCategory("all"); setInStockOnly(false); }} className="btn-outline text-sm">
                   Clear Filters
@@ -304,7 +304,7 @@ export default function ShopClient({ products }: { products: ShopProduct[] }) {
                 {filtered.map((product) => (
                   <div key={product.id} className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-1 transition-all duration-300 flex flex-col group">
                     {/* Image */}
-                    <div className="relative h-36 sm:h-52 bg-gradient-to-br from-[#eef8fd] to-[#f0fcf4] overflow-hidden">
+                    <div className="relative h-36 sm:h-52 bg-gradient-to-br from-[#f0f9ff] to-[#f0fcf4] overflow-hidden">
                       <Link href={`/shop/${product.slug}`}>
                         <Image
                           src={productImg(product)}
@@ -322,23 +322,23 @@ export default function ShopClient({ products }: { products: ShopProduct[] }) {
                         </div>
                       )}
                       <Link href={`/shop/${product.slug}`}
-                        className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur rounded-lg text-xs font-semibold text-[#0f5070] shadow-sm hover:bg-white">
+                        className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur rounded-lg text-xs font-semibold text-[#0284c7] shadow-sm hover:bg-white">
                         <Eye size={12} /> Quick View
                       </Link>
                     </div>
 
                     <div className="p-3 sm:p-4 flex flex-col flex-1">
                       <div className="flex items-center gap-1.5 mb-1">
-                        <span className="text-[10px] sm:text-xs font-semibold text-[#2d8ab8] uppercase tracking-wide capitalize">{product.category}</span>
+                        <span className="text-[10px] sm:text-xs font-semibold text-[#38bdf8] uppercase tracking-wide capitalize">{product.category}</span>
                       </div>
                       <Link href={`/shop/${product.slug}`}>
-                        <h3 className="font-bold text-[#071e2e] text-xs sm:text-sm mb-1.5 line-clamp-2 hover:text-[#0f5070] transition-colors font-display leading-snug">{product.name}</h3>
+                        <h3 className="font-bold text-[#0c4a6e] text-xs sm:text-sm mb-1.5 line-clamp-2 hover:text-[#0284c7] transition-colors font-display leading-snug">{product.name}</h3>
                       </Link>
                       <p className="text-gray-500 text-xs leading-relaxed line-clamp-2 mb-2 flex-1 hidden sm:block">{product.description}</p>
 
                       <div className="hidden sm:flex flex-wrap gap-1.5 mb-3">
                         {product.specs?.slice(0, 2).map(spec => (
-                          <span key={spec} className="text-xs px-2 py-0.5 rounded-full bg-[#f0f7ff] text-[#0f5070] border border-[#d6eef8]">{spec}</span>
+                          <span key={spec} className="text-xs px-2 py-0.5 rounded-full bg-[#f0f7ff] text-[#0284c7] border border-[#e0f2fe]">{spec}</span>
                         ))}
                       </div>
 
@@ -349,7 +349,7 @@ export default function ShopClient({ products }: { products: ShopProduct[] }) {
 
                       <div className="flex items-center justify-between gap-2 pt-2 border-t border-gray-50">
                         <div>
-                          <div className="text-[#0f5070] font-bold text-sm sm:text-base leading-none">{formatPrice(product.price)}</div>
+                          <div className="text-[#0284c7] font-bold text-sm sm:text-base leading-none">{formatPrice(product.price)}</div>
                           <div className="text-gray-400 text-[10px] sm:text-xs mt-0.5">{product.unit}</div>
                         </div>
                         <AddToCartButton product={product} variant="icon" />
@@ -367,7 +367,7 @@ export default function ShopClient({ products }: { products: ShopProduct[] }) {
                 {filtered.map((product) => (
                   <div key={product.id} className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-all duration-300 group">
                     <div className="flex flex-col sm:flex-row">
-                      <div className="relative w-full sm:w-48 h-44 sm:h-auto bg-gradient-to-br from-[#eef8fd] to-[#f0fcf4] shrink-0 overflow-hidden">
+                      <div className="relative w-full sm:w-48 h-44 sm:h-auto bg-gradient-to-br from-[#f0f9ff] to-[#f0fcf4] shrink-0 overflow-hidden">
                         <Link href={`/shop/${product.slug}`}>
                           <Image
                             src={productImg(product, "400")}
@@ -383,26 +383,26 @@ export default function ShopClient({ products }: { products: ShopProduct[] }) {
 
                       <div className="flex-1 p-5 flex flex-col sm:flex-row gap-4">
                         <div className="flex-1">
-                          <div className="text-xs font-semibold text-[#2d8ab8] uppercase tracking-wide capitalize mb-1">{product.category}</div>
+                          <div className="text-xs font-semibold text-[#38bdf8] uppercase tracking-wide capitalize mb-1">{product.category}</div>
                           <Link href={`/shop/${product.slug}`}>
-                            <h3 className="font-bold text-[#071e2e] text-base mb-2 hover:text-[#0f5070] transition-colors font-display">{product.name}</h3>
+                            <h3 className="font-bold text-[#0c4a6e] text-base mb-2 hover:text-[#0284c7] transition-colors font-display">{product.name}</h3>
                           </Link>
                           <p className="text-gray-500 text-sm leading-relaxed mb-3 line-clamp-2">{product.description}</p>
                           <div className="flex flex-wrap gap-1.5">
                             {product.specs?.slice(0, 3).map(spec => (
-                              <span key={spec} className="text-xs px-2 py-0.5 rounded-full bg-[#f0f7ff] text-[#0f5070] border border-[#d6eef8]">{spec}</span>
+                              <span key={spec} className="text-xs px-2 py-0.5 rounded-full bg-[#f0f7ff] text-[#0284c7] border border-[#e0f2fe]">{spec}</span>
                             ))}
                           </div>
                         </div>
 
                         <div className="sm:w-44 flex flex-col items-start sm:items-end justify-between gap-3 shrink-0">
                           <div className="text-right">
-                            <div className="text-[#0f5070] font-bold text-xl">{formatPrice(product.price)}</div>
+                            <div className="text-[#0284c7] font-bold text-xl">{formatPrice(product.price)}</div>
                             <div className="text-gray-400 text-xs">{product.unit}</div>
                           </div>
                           <div className="w-full sm:w-40 space-y-2">
                             <AddToCartButton product={product} />
-                            <Link href={`/shop/${product.slug}`} className="flex items-center justify-center gap-1.5 w-full py-2 rounded-xl border border-gray-200 text-sm text-gray-600 hover:border-[#2d8ab8] hover:text-[#0f5070] transition-all">
+                            <Link href={`/shop/${product.slug}`} className="flex items-center justify-center gap-1.5 w-full py-2 rounded-xl border border-gray-200 text-sm text-gray-600 hover:border-[#38bdf8] hover:text-[#0284c7] transition-all">
                               <Eye size={13} /> View Details
                             </Link>
                           </div>

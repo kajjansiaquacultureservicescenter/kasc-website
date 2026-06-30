@@ -43,11 +43,11 @@ export default function CartDrawer() {
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100 shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#0f5070] to-[#226640] flex items-center justify-center">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#0284c7] to-[#226640] flex items-center justify-center">
               <ShoppingCart size={17} className="text-white" />
             </div>
             <div>
-              <h2 className="font-bold text-[#071e2e] font-display">Your Cart</h2>
+              <h2 className="font-bold text-[#0c4a6e] font-display">Your Cart</h2>
               <p className="text-xs text-gray-400">{itemCount} {itemCount === 1 ? "item" : "items"}</p>
             </div>
           </div>
@@ -63,7 +63,7 @@ export default function CartDrawer() {
               <div className="w-20 h-20 rounded-full bg-[#f8fafc] flex items-center justify-center mb-4">
                 <ShoppingBag size={32} className="text-gray-300" />
               </div>
-              <h3 className="font-semibold text-[#071e2e] mb-1">Your cart is empty</h3>
+              <h3 className="font-semibold text-[#0c4a6e] mb-1">Your cart is empty</h3>
               <p className="text-gray-400 text-sm mb-6">Add products from our shop to place an order.</p>
               <button onClick={closeCart} className="btn-primary text-sm">
                 Browse Shop <ArrowRight size={14} />
@@ -74,7 +74,7 @@ export default function CartDrawer() {
               {items.map((item) => (
                 <div key={item.id} className="flex gap-3 p-3 rounded-2xl bg-[#f8fafc] border border-gray-100 hover:border-gray-200 transition-colors group">
                   {/* Thumbnail */}
-                  <div className="relative w-16 h-16 rounded-xl overflow-hidden bg-gradient-to-br from-[#eef8fd] to-[#f0fcf4] shrink-0">
+                  <div className="relative w-16 h-16 rounded-xl overflow-hidden bg-gradient-to-br from-[#f0f9ff] to-[#f0fcf4] shrink-0">
                     <Image
                       src={`https://images.unsplash.com/photo-${CATEGORY_IMAGES[item.category] ?? "1617817546668-b5db71eef39e"}?w=120&q=80`}
                       alt={item.name} fill className="object-cover"
@@ -83,7 +83,7 @@ export default function CartDrawer() {
 
                   <div className="flex-1 min-w-0">
                     <Link href={`/shop/${item.slug}`} onClick={closeCart}
-                      className="text-sm font-semibold text-[#071e2e] hover:text-[#0f5070] transition-colors line-clamp-2 leading-tight block mb-1">
+                      className="text-sm font-semibold text-[#0c4a6e] hover:text-[#0284c7] transition-colors line-clamp-2 leading-tight block mb-1">
                       {item.name}
                     </Link>
                     <div className="flex items-center gap-1 mb-2">
@@ -96,21 +96,21 @@ export default function CartDrawer() {
                       <div className="flex items-center gap-1 bg-white border border-gray-200 rounded-lg overflow-hidden">
                         <button
                           onClick={() => updateQty(item.id, item.quantity - 1)}
-                          className="w-7 h-7 flex items-center justify-center text-gray-500 hover:bg-gray-100 hover:text-[#0f5070] transition-colors"
+                          className="w-7 h-7 flex items-center justify-center text-gray-500 hover:bg-gray-100 hover:text-[#0284c7] transition-colors"
                         >
                           <Minus size={12} />
                         </button>
-                        <span className="w-7 text-center text-sm font-semibold text-[#071e2e]">{item.quantity}</span>
+                        <span className="w-7 text-center text-sm font-semibold text-[#0c4a6e]">{item.quantity}</span>
                         <button
                           onClick={() => updateQty(item.id, item.quantity + 1)}
-                          className="w-7 h-7 flex items-center justify-center text-gray-500 hover:bg-gray-100 hover:text-[#0f5070] transition-colors"
+                          className="w-7 h-7 flex items-center justify-center text-gray-500 hover:bg-gray-100 hover:text-[#0284c7] transition-colors"
                         >
                           <Plus size={12} />
                         </button>
                       </div>
 
                       <div className="flex items-center gap-2">
-                        <span className="font-bold text-sm text-[#0f5070]">
+                        <span className="font-bold text-sm text-[#0284c7]">
                           {formatPrice(item.price * item.quantity)}
                         </span>
                         <button
@@ -148,8 +148,8 @@ export default function CartDrawer() {
               </div>
               <div className="h-px bg-gray-100" />
               <div className="flex items-center justify-between">
-                <span className="font-bold text-[#071e2e]">Estimated Total</span>
-                <span className="font-bold text-xl text-[#0f5070]">{formatPrice(subtotal)}</span>
+                <span className="font-bold text-[#0c4a6e]">Estimated Total</span>
+                <span className="font-bold text-xl text-[#0284c7]">{formatPrice(subtotal)}</span>
               </div>
             </div>
 
@@ -161,7 +161,7 @@ export default function CartDrawer() {
             >
               Proceed to Order <ArrowRight size={15} />
             </Link>
-            <button onClick={closeCart} className="w-full text-center text-sm text-gray-400 hover:text-[#0f5070] transition-colors py-1">
+            <button onClick={closeCart} className="w-full text-center text-sm text-gray-400 hover:text-[#0284c7] transition-colors py-1">
               Continue Shopping
             </button>
           </div>

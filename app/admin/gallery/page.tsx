@@ -102,13 +102,13 @@ export default function AdminGalleryPage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-[#071e2e] font-display">Gallery</h1>
+        <h1 className="text-2xl font-bold text-[#0c4a6e] font-display">Gallery</h1>
         <p className="text-gray-500 text-sm mt-1">{photos.length} photo{photos.length !== 1 ? "s" : ""} uploaded</p>
       </div>
 
       {/* Upload form */}
       <div className="bg-white rounded-2xl border border-gray-100 p-6 mb-6 shadow-sm">
-        <h2 className="font-bold text-[#071e2e] mb-4 font-display">Upload New Photo</h2>
+        <h2 className="font-bold text-[#0c4a6e] mb-4 font-display">Upload New Photo</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
           <div className="md:col-span-2">
             <label className="block text-xs font-medium text-gray-600 mb-1">Title *</label>
@@ -116,7 +116,7 @@ export default function AdminGalleryPage() {
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
               placeholder="e.g. Tilapia fingerlings in hatchery"
-              className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]"
+              className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]"
             />
           </div>
           <div>
@@ -124,7 +124,7 @@ export default function AdminGalleryPage() {
             <select
               value={form.category}
               onChange={(e) => setForm({ ...form, category: e.target.value })}
-              className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]"
+              className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]"
             >
               {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
             </select>
@@ -135,18 +135,18 @@ export default function AdminGalleryPage() {
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
               placeholder="Brief description of the photo"
-              className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]"
+              className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]"
             />
           </div>
         </div>
 
         <label className={`flex items-center justify-center gap-3 p-6 border-2 border-dashed rounded-2xl cursor-pointer transition-all ${
-          uploading ? "border-gray-200 bg-gray-50 cursor-not-allowed" : "border-[#2d8ab8]/40 hover:border-[#2d8ab8] hover:bg-[#eef8fd]/50"
+          uploading ? "border-gray-200 bg-gray-50 cursor-not-allowed" : "border-[#38bdf8]/40 hover:border-[#38bdf8] hover:bg-[#f0f9ff]/50"
         }`}>
           {uploading ? (
-            <><Loader2 size={20} className="animate-spin text-[#0f5070]" /><span className="text-sm text-[#0f5070]">Uploading...</span></>
+            <><Loader2 size={20} className="animate-spin text-[#0284c7]" /><span className="text-sm text-[#0284c7]">Uploading...</span></>
           ) : (
-            <><Upload size={20} className="text-[#0f5070]" /><span className="text-sm text-[#0f5070] font-medium">Click to select image (JPG, PNG, WebP — max 10MB)</span></>
+            <><Upload size={20} className="text-[#0284c7]" /><span className="text-sm text-[#0284c7] font-medium">Click to select image (JPG, PNG, WebP — max 10MB)</span></>
           )}
           <input
             ref={fileRef}
@@ -166,7 +166,7 @@ export default function AdminGalleryPage() {
             key={c}
             onClick={() => setFilterCat(c)}
             className={`px-3 py-1.5 rounded-full text-xs font-medium capitalize transition-all ${
-              filterCat === c ? "bg-[#071e2e] text-white" : "bg-white border border-gray-200 text-gray-600 hover:border-gray-400"
+              filterCat === c ? "bg-[#0c4a6e] text-white" : "bg-white border border-gray-200 text-gray-600 hover:border-gray-400"
             }`}
           >
             {c}
@@ -205,7 +205,7 @@ export default function AdminGalleryPage() {
                 </div>
               </div>
               <div className="p-3">
-                <div className="text-xs font-semibold text-[#071e2e] truncate">{photo.title}</div>
+                <div className="text-xs font-semibold text-[#0c4a6e] truncate">{photo.title}</div>
                 <div className="flex items-center justify-between mt-1">
                   <span className="text-xs text-gray-400 capitalize">{photo.category}</span>
                   {photo.is_featured && <span className="text-xs text-yellow-600 font-medium">★ Featured</span>}

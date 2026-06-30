@@ -86,8 +86,8 @@ export default function AdminSettingsPage() {
     <div>
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-1">
-          <Settings size={22} className="text-[#0f5070]" />
-          <h1 className="text-2xl font-bold text-[#071e2e] font-display">Settings</h1>
+          <Settings size={22} className="text-[#0284c7]" />
+          <h1 className="text-2xl font-bold text-[#0c4a6e] font-display">Settings</h1>
         </div>
         <p className="text-gray-500 text-sm">Update contact details, social links, and site content</p>
       </div>
@@ -99,12 +99,12 @@ export default function AdminSettingsPage() {
           {Object.entries(grouped).map(([category, items]) => (
             <div key={category} className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
               <div className="flex items-center justify-between mb-5">
-                <h2 className="font-bold text-[#071e2e] font-display">{CATEGORY_LABELS[category] || category}</h2>
+                <h2 className="font-bold text-[#0c4a6e] font-display">{CATEGORY_LABELS[category] || category}</h2>
                 <div className="flex items-center gap-2">
                   {category === "homepage" && (
                     <Link
                       href="/admin/homepage"
-                      className="flex items-center gap-1.5 px-3 py-2 rounded-xl border border-gray-200 text-gray-600 hover:text-[#0f5070] text-xs font-semibold transition-all"
+                      className="flex items-center gap-1.5 px-3 py-2 rounded-xl border border-gray-200 text-gray-600 hover:text-[#0284c7] text-xs font-semibold transition-all"
                     >
                       <ExternalLink size={12} /> Homepage Editor
                     </Link>
@@ -112,7 +112,7 @@ export default function AdminSettingsPage() {
                   <button
                     onClick={() => saveCategory(category)}
                     disabled={saving === category}
-                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#071e2e] text-white text-xs font-semibold hover:bg-[#0f3a52] disabled:opacity-60 transition-all"
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0c4a6e] text-white text-xs font-semibold hover:bg-[#075985] disabled:opacity-60 transition-all"
                   >
                     {saving === category ? <Loader2 size={13} className="animate-spin" /> : <Save size={13} />}
                     Save
@@ -150,13 +150,13 @@ export default function AdminSettingsPage() {
                           )}
                           {uploading === s.key && (
                             <div className="absolute inset-0 bg-white/75 flex items-center justify-center">
-                              <Loader2 size={18} className="animate-spin text-[#0f5070]" />
+                              <Loader2 size={18} className="animate-spin text-[#0284c7]" />
                             </div>
                           )}
                         </div>
                         {/* Controls */}
                         <div className="flex-1 flex flex-col gap-2">
-                          <label className={`flex items-center gap-2 px-3 py-2.5 border-2 border-dashed rounded-xl cursor-pointer text-xs font-medium transition-all ${uploading === s.key ? "border-gray-200 text-gray-400 cursor-not-allowed" : "border-[#2d8ab8]/40 hover:border-[#2d8ab8] text-[#0f5070] hover:bg-blue-50"}`}>
+                          <label className={`flex items-center gap-2 px-3 py-2.5 border-2 border-dashed rounded-xl cursor-pointer text-xs font-medium transition-all ${uploading === s.key ? "border-gray-200 text-gray-400 cursor-not-allowed" : "border-[#38bdf8]/40 hover:border-[#38bdf8] text-[#0284c7] hover:bg-blue-50"}`}>
                             <Upload size={13} />
                             {values[s.key] ? "Replace with new photo" : "Upload photo"}
                             <input
@@ -172,7 +172,7 @@ export default function AdminSettingsPage() {
                             value={values[s.key] ?? ""}
                             onChange={(e) => setValues((v) => ({ ...v, [s.key]: e.target.value }))}
                             placeholder="Or paste an image URL..."
-                            className="w-full px-3 py-2 rounded-xl border border-gray-200 text-xs focus:outline-none focus:ring-2 focus:ring-[#2d8ab8] transition-all"
+                            className="w-full px-3 py-2 rounded-xl border border-gray-200 text-xs focus:outline-none focus:ring-2 focus:ring-[#38bdf8] transition-all"
                           />
                           <p className="text-[10px] text-gray-400">Upload a photo from your device, or paste a URL above.</p>
                         </div>
@@ -185,7 +185,7 @@ export default function AdminSettingsPage() {
                         value={values[s.key] ?? ""}
                         onChange={(e) => setValues((v) => ({ ...v, [s.key]: e.target.value }))}
                         placeholder={s.label}
-                        className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8] transition-all"
+                        className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8] transition-all"
                       />
                     </div>
                   )

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#071e2e] via-[#0f3a52] to-[#1a5f3c] flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-[#0c4a6e] via-[#075985] to-[#1a5f3c] flex flex-col">
       <div className="p-6">
         <Link href="/" className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors">
           <div className="w-8 h-8 rounded-full overflow-hidden bg-white shrink-0">
@@ -20,7 +20,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         {children}
       </div>
       <div className="p-6 text-center text-white/40 text-xs">
-        © {new Date().getFullYear()} Kajjansi Aquaculture Service Center
+        © {new Date().getFullYear()} Kajjansi Aquaculture Service Centre
       </div>
     </div>
   );

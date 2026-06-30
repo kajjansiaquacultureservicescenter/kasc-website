@@ -105,10 +105,10 @@ export default function AdminOffersPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-[#071e2e] font-display">Offers</h1>
+          <h1 className="text-2xl font-bold text-[#0c4a6e] font-display">Offers</h1>
           <p className="text-gray-500 text-sm mt-1">{offers.length} offer{offers.length !== 1 ? "s" : ""}</p>
         </div>
-        <button onClick={openNew} className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#071e2e] text-white text-sm font-semibold hover:bg-[#0f3a52] transition-all">
+        <button onClick={openNew} className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0c4a6e] text-white text-sm font-semibold hover:bg-[#075985] transition-all">
           <Plus size={15} /> New Offer
         </button>
       </div>
@@ -119,7 +119,7 @@ export default function AdminOffersPage() {
         <div className="bg-white rounded-2xl border border-gray-100 p-16 text-center">
           <Tag size={40} className="mx-auto text-gray-200 mb-3" />
           <p className="text-gray-400 text-sm mb-4">No offers yet</p>
-          <button onClick={openNew} className="px-4 py-2 rounded-xl bg-[#071e2e] text-white text-sm">Create first offer</button>
+          <button onClick={openNew} className="px-4 py-2 rounded-xl bg-[#0c4a6e] text-white text-sm">Create first offer</button>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -130,7 +130,7 @@ export default function AdminOffersPage() {
               )}
               <div className="p-4">
                 {o.badge_text && <span className="inline-block px-2 py-0.5 rounded-full bg-[#f4a020] text-white text-xs font-bold mb-2">{o.badge_text}</span>}
-                <h3 className="font-semibold text-[#071e2e] text-sm mb-1">{o.title}</h3>
+                <h3 className="font-semibold text-[#0c4a6e] text-sm mb-1">{o.title}</h3>
                 {o.description && <p className="text-xs text-gray-500 mb-2 line-clamp-2">{o.description}</p>}
                 {o.discount_value && (
                   <p className="text-xs text-gray-500">
@@ -156,34 +156,34 @@ export default function AdminOffersPage() {
           <div className="flex-1 bg-black/40 backdrop-blur-sm" onClick={() => setShowForm(false)} />
           <div className="w-full max-w-md bg-white shadow-2xl overflow-y-auto flex flex-col">
             <div className="flex items-center justify-between p-6 border-b">
-              <h2 className="font-bold text-[#071e2e] font-display">{editing ? "Edit Offer" : "New Offer"}</h2>
+              <h2 className="font-bold text-[#0c4a6e] font-display">{editing ? "Edit Offer" : "New Offer"}</h2>
               <button onClick={() => setShowForm(false)} className="p-2 rounded-xl hover:bg-gray-100"><X size={18} /></button>
             </div>
             <div className="p-6 space-y-4 flex-1">
               <div><label className="text-xs font-medium text-gray-600 mb-1 block">Title *</label>
-                <input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="Offer title" className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]" /></div>
+                <input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="Offer title" className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]" /></div>
               <div><label className="text-xs font-medium text-gray-600 mb-1 block">Badge text</label>
-                <input value={form.badge_text} onChange={(e) => setForm({ ...form, badge_text: e.target.value })} placeholder="e.g. 30% OFF, FREE DELIVERY" className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]" /></div>
+                <input value={form.badge_text} onChange={(e) => setForm({ ...form, badge_text: e.target.value })} placeholder="e.g. 30% OFF, FREE DELIVERY" className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]" /></div>
               <div><label className="text-xs font-medium text-gray-600 mb-1 block">Description</label>
-                <textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} rows={3} className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8] resize-none" /></div>
+                <textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} rows={3} className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8] resize-none" /></div>
               <div className="grid grid-cols-2 gap-3">
                 <div><label className="text-xs font-medium text-gray-600 mb-1 block">Discount type</label>
-                  <select value={form.discount_type} onChange={(e) => setForm({ ...form, discount_type: e.target.value })} className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]">
+                  <select value={form.discount_type} onChange={(e) => setForm({ ...form, discount_type: e.target.value })} className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]">
                     {DISCOUNT_TYPES.map((t) => <option key={t.value} value={t.value}>{t.label}</option>)}
                   </select></div>
                 <div><label className="text-xs font-medium text-gray-600 mb-1 block">Discount value</label>
-                  <input type="number" value={form.discount_value} onChange={(e) => setForm({ ...form, discount_value: e.target.value })} placeholder="e.g. 20" className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]" /></div>
+                  <input type="number" value={form.discount_value} onChange={(e) => setForm({ ...form, discount_value: e.target.value })} placeholder="e.g. 20" className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]" /></div>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div><label className="text-xs font-medium text-gray-600 mb-1 block">Starts</label>
-                  <input type="datetime-local" value={form.starts_at} onChange={(e) => setForm({ ...form, starts_at: e.target.value })} className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]" /></div>
+                  <input type="datetime-local" value={form.starts_at} onChange={(e) => setForm({ ...form, starts_at: e.target.value })} className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]" /></div>
                 <div><label className="text-xs font-medium text-gray-600 mb-1 block">Ends</label>
-                  <input type="datetime-local" value={form.ends_at} onChange={(e) => setForm({ ...form, ends_at: e.target.value })} className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]" /></div>
+                  <input type="datetime-local" value={form.ends_at} onChange={(e) => setForm({ ...form, ends_at: e.target.value })} className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]" /></div>
               </div>
               <div>
                 <label className="text-xs font-medium text-gray-600 mb-1 block">Offer image</label>
                 {form.image_url && <div className="mb-2 relative h-24 rounded-xl overflow-hidden"><Image src={form.image_url} alt="Offer" fill className="object-cover" sizes="400px" /></div>}
-                <label className={`flex items-center gap-2 px-3 py-2.5 border border-dashed rounded-xl cursor-pointer text-sm ${uploading ? "border-gray-200 bg-gray-50" : "border-[#2d8ab8]/40 hover:border-[#2d8ab8] text-[#0f5070]"}`}>
+                <label className={`flex items-center gap-2 px-3 py-2.5 border border-dashed rounded-xl cursor-pointer text-sm ${uploading ? "border-gray-200 bg-gray-50" : "border-[#38bdf8]/40 hover:border-[#38bdf8] text-[#0284c7]"}`}>
                   {uploading ? <Loader2 size={14} className="animate-spin" /> : <Upload size={14} />} {uploading ? "Uploading..." : "Upload image"}
                   <input type="file" accept="image/*" className="hidden" disabled={uploading} onChange={uploadImage} />
                 </label>
@@ -195,7 +195,7 @@ export default function AdminOffersPage() {
             </div>
             <div className="p-6 border-t flex gap-3">
               <button onClick={() => setShowForm(false)} className="flex-1 py-2.5 rounded-xl border border-gray-200 text-sm font-medium">Cancel</button>
-              <button onClick={save} disabled={saving} className="flex-1 py-2.5 rounded-xl bg-[#071e2e] text-white text-sm font-semibold disabled:opacity-60 flex items-center justify-center gap-2">
+              <button onClick={save} disabled={saving} className="flex-1 py-2.5 rounded-xl bg-[#0c4a6e] text-white text-sm font-semibold disabled:opacity-60 flex items-center justify-center gap-2">
                 {saving && <Loader2 size={14} className="animate-spin" />} Save
               </button>
             </div>

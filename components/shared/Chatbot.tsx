@@ -22,7 +22,7 @@ export default function Chatbot() {
     {
       role: "assistant",
       content:
-        "Hello! 👋 Welcome to Kajjansi Aquaculture Service Center. I'm your virtual assistant. I can help you with information about our fish farming services, products, pricing, or how to get started. What can I help you with today?",
+        "Hello! 👋 Welcome to Kajjansi Aquaculture Service Centre. I'm your virtual assistant. I can help you with information about our fish farming services, products, pricing, or how to get started. What can I help you with today?",
       time: "",
     },
   ]);
@@ -109,7 +109,7 @@ export default function Chatbot() {
         onClick={() => { setIsOpen(true); setHasUnread(false); }}
         className={cn(
           "fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-2xl transition-all duration-300 flex items-center justify-center",
-          "bg-gradient-to-br from-[#1a6b94] to-[#226640] hover:shadow-[0_8px_30px_rgba(26,107,148,0.5)] hover:scale-110",
+          "bg-gradient-to-br from-[#0ea5e9] to-[#226640] hover:shadow-[0_8px_30px_rgba(14,165,233,0.5)] hover:scale-110",
           isOpen && "opacity-0 pointer-events-none scale-75"
         )}
         aria-label="Open chat"
@@ -129,7 +129,7 @@ export default function Chatbot() {
         )}
       >
         {/* Header */}
-        <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-[#0f5070] to-[#226640] rounded-t-2xl shrink-0">
+        <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-[#0284c7] to-[#226640] rounded-t-2xl shrink-0">
           <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
             <Fish size={20} className="text-white" />
           </div>
@@ -170,7 +170,7 @@ export default function Chatbot() {
                     className={cn(
                       "w-7 h-7 rounded-full flex items-center justify-center shrink-0",
                       msg.role === "assistant"
-                        ? "bg-gradient-to-br from-[#1a6b94] to-[#226640]"
+                        ? "bg-gradient-to-br from-[#0ea5e9] to-[#226640]"
                         : "bg-gray-200"
                     )}
                   >
@@ -186,7 +186,7 @@ export default function Chatbot() {
                         "px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed",
                         msg.role === "assistant"
                           ? "bg-white text-gray-800 rounded-bl-md shadow-sm border border-gray-100"
-                          : "bg-gradient-to-br from-[#0f5070] to-[#226640] text-white rounded-br-md"
+                          : "bg-gradient-to-br from-[#0284c7] to-[#226640] text-white rounded-br-md"
                       )}
                     >
                       {msg.content}
@@ -200,7 +200,7 @@ export default function Chatbot() {
 
               {isLoading && (
                 <div className="flex gap-2.5 items-end">
-                  <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#1a6b94] to-[#226640] flex items-center justify-center">
+                  <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#0ea5e9] to-[#226640] flex items-center justify-center">
                     <Bot size={14} className="text-white" />
                   </div>
                   <div className="bg-white px-4 py-3 rounded-2xl rounded-bl-md shadow-sm border border-gray-100">
@@ -226,7 +226,7 @@ export default function Chatbot() {
                       setInput(q);
                       setTimeout(() => inputRef.current?.focus(), 0);
                     }}
-                    className="text-xs px-3 py-1.5 rounded-full bg-[#eef8fd] text-[#0f5070] hover:bg-[#d6eef8] border border-[#a0d4ea] transition-colors"
+                    className="text-xs px-3 py-1.5 rounded-full bg-[#f0f9ff] text-[#0284c7] hover:bg-[#e0f2fe] border border-[#bae6fd] transition-colors"
                   >
                     {q}
                   </button>
@@ -244,13 +244,13 @@ export default function Chatbot() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask about our services…"
-                className="flex-1 text-sm px-3.5 py-2.5 rounded-xl bg-gray-50 border border-gray-200 outline-none focus:border-[#2d8ab8] focus:bg-white transition-all"
+                className="flex-1 text-sm px-3.5 py-2.5 rounded-xl bg-gray-50 border border-gray-200 outline-none focus:border-[#38bdf8] focus:bg-white transition-all"
                 disabled={isLoading}
               />
               <button
                 type="submit"
                 disabled={!input.trim() || isLoading}
-                className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0f5070] to-[#226640] flex items-center justify-center text-white disabled:opacity-40 disabled:cursor-not-allowed hover:shadow-md transition-all active:scale-95"
+                className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0284c7] to-[#226640] flex items-center justify-center text-white disabled:opacity-40 disabled:cursor-not-allowed hover:shadow-md transition-all active:scale-95"
               >
                 {isLoading ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
               </button>

@@ -33,7 +33,7 @@ export default function AddToCartButton({ product, qty = 1, variant = "full", cl
           "w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200 shrink-0",
           added
             ? "bg-[#226640] text-white scale-95"
-            : "bg-[#eef8fd] text-[#0f5070] hover:bg-[#0f5070] hover:text-white hover:scale-110",
+            : "bg-[#f0f9ff] text-[#0284c7] hover:bg-[#0284c7] hover:text-white hover:scale-110",
           className
         )}
       >
@@ -49,7 +49,7 @@ export default function AddToCartButton({ product, qty = 1, variant = "full", cl
         "flex items-center justify-center gap-2 w-full py-2.5 rounded-xl font-semibold text-sm transition-all duration-200",
         added
           ? "bg-[#226640] text-white"
-          : "bg-[#0f5070] text-white hover:bg-[#0a2d43] active:scale-95",
+          : "bg-[#0284c7] text-white hover:bg-[#075985] active:scale-95",
         className
       )}
     >

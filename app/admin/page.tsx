@@ -75,7 +75,7 @@ export default async function AdminDashboard() {
   };
 
   const inquiryBadge: Record<string, string> = {
-    new:     "bg-[#eef8fd] text-[#0f5070]",
+    new:     "bg-[#f0f9ff] text-[#0284c7]",
     read:    "bg-gray-100 text-gray-500",
     replied: "bg-green-50 text-green-700",
   };
@@ -83,7 +83,7 @@ export default async function AdminDashboard() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-[#071e2e] font-display">Dashboard</h1>
+        <h1 className="text-2xl font-bold text-[#0c4a6e] font-display">Dashboard</h1>
         <p className="text-gray-500 mt-1 text-sm">Live overview of your store and inquiries.</p>
       </div>
 
@@ -93,15 +93,15 @@ export default async function AdminDashboard() {
           <div key={label} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
             <div className="flex items-center justify-between mb-4">
               <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
-                color === "brand" ? "bg-[#eef8fd]" : color === "green" ? "bg-[#f0fcf4]" : "bg-[#fffbf0]"
+                color === "brand" ? "bg-[#f0f9ff]" : color === "green" ? "bg-[#f0fcf4]" : "bg-[#fffbf0]"
               }`}>
                 <Icon size={18} className={
-                  color === "brand" ? "text-[#0f5070]" : color === "green" ? "text-[#226640]" : "text-[#a05200]"
+                  color === "brand" ? "text-[#0284c7]" : color === "green" ? "text-[#226640]" : "text-[#a05200]"
                 } />
               </div>
               <TrendingUp size={14} className="text-gray-300" />
             </div>
-            <div className="text-3xl font-bold text-[#071e2e] mb-1">{value}</div>
+            <div className="text-3xl font-bold text-[#0c4a6e] mb-1">{value}</div>
             <div className="text-sm font-medium text-gray-700 mb-0.5">{label}</div>
             <div className="text-xs text-gray-400">{sub}</div>
           </div>
@@ -112,8 +112,8 @@ export default async function AdminDashboard() {
         {/* Recent orders */}
         <div className="lg:col-span-3 bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
           <div className="flex items-center justify-between mb-5">
-            <h2 className="font-bold text-[#071e2e] font-display">Recent Orders</h2>
-            <Link href="/admin/orders" className="text-xs text-[#0f5070] hover:underline flex items-center gap-1">
+            <h2 className="font-bold text-[#0c4a6e] font-display">Recent Orders</h2>
+            <Link href="/admin/orders" className="text-xs text-[#0284c7] hover:underline flex items-center gap-1">
               View all <ArrowRight size={11} />
             </Link>
           </div>
@@ -127,14 +127,14 @@ export default async function AdminDashboard() {
                 >
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-semibold text-[#071e2e]">{order.order_number}</span>
+                      <span className="text-sm font-semibold text-[#0c4a6e]">{order.order_number}</span>
                       <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusColor[order.status] ?? "bg-gray-100 text-gray-500"}`}>
                         {order.status}
                       </span>
                     </div>
                     <div className="text-xs text-gray-500">{order.guest_name || "Registered user"}</div>
                   </div>
-                  <div className="text-sm font-bold text-[#071e2e] shrink-0">
+                  <div className="text-sm font-bold text-[#0c4a6e] shrink-0">
                     UGX {Number(order.total_amount).toLocaleString()}
                   </div>
                 </Link>
@@ -148,8 +148,8 @@ export default async function AdminDashboard() {
         {/* Recent inquiries */}
         <div className="lg:col-span-2 bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
           <div className="flex items-center justify-between mb-5">
-            <h2 className="font-bold text-[#071e2e] font-display">Inquiries</h2>
-            <Link href="/admin/inquiries" className="text-xs text-[#0f5070] hover:underline flex items-center gap-1">
+            <h2 className="font-bold text-[#0c4a6e] font-display">Inquiries</h2>
+            <Link href="/admin/inquiries" className="text-xs text-[#0284c7] hover:underline flex items-center gap-1">
               View all <ArrowRight size={11} />
             </Link>
           </div>
@@ -158,12 +158,12 @@ export default async function AdminDashboard() {
               {recentInquiries.map((inq) => (
                 <div key={inq.id} className="p-3 rounded-xl bg-[#f8fafc] border border-transparent hover:border-gray-200 transition-all">
                   <div className="flex items-start gap-2">
-                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#0f5070] to-[#226640] flex items-center justify-center text-white font-bold text-xs shrink-0 mt-0.5">
+                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#0284c7] to-[#226640] flex items-center justify-center text-white font-bold text-xs shrink-0 mt-0.5">
                       {inq.name.slice(0, 2).toUpperCase()}
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-1.5 flex-wrap">
-                        <span className="text-xs font-semibold text-[#071e2e]">{inq.name}</span>
+                        <span className="text-xs font-semibold text-[#0c4a6e]">{inq.name}</span>
                         <span className={`px-1.5 py-0.5 rounded-full text-xs font-medium ${inquiryBadge[inq.status] ?? "bg-gray-100 text-gray-500"}`}>
                           {inq.status}
                         </span>
@@ -183,7 +183,7 @@ export default async function AdminDashboard() {
       {/* Quick links */}
       <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
         {[
-          { href: "/admin/gallery",     label: "Upload Photos",  icon: Image,       bg: "from-[#0f5070] to-[#2d8ab8]" },
+          { href: "/admin/gallery",     label: "Upload Photos",  icon: Image,       bg: "from-[#0284c7] to-[#38bdf8]" },
           { href: "/admin/media",       label: "Add Video",      icon: Zap,         bg: "from-[#226640] to-[#3aaf6c]" },
           { href: "/admin/news",        label: "Write News",     icon: Newspaper,   bg: "from-[#a05200] to-[#f4a020]" },
           { href: "/admin/flash-deals", label: "Flash Deal",     icon: ShoppingBag, bg: "from-[#5b21b6] to-[#7c3aed]" },

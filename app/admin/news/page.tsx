@@ -118,10 +118,10 @@ export default function AdminNewsPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-[#071e2e] font-display">News</h1>
+          <h1 className="text-2xl font-bold text-[#0c4a6e] font-display">News</h1>
           <p className="text-gray-500 text-sm mt-1">{articles.length} article{articles.length !== 1 ? "s" : ""}</p>
         </div>
-        <button onClick={openNew} className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#071e2e] text-white text-sm font-semibold hover:bg-[#0f3a52] transition-all">
+        <button onClick={openNew} className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0c4a6e] text-white text-sm font-semibold hover:bg-[#075985] transition-all">
           <Plus size={15} /> New Article
         </button>
       </div>
@@ -132,7 +132,7 @@ export default function AdminNewsPage() {
         <div className="bg-white rounded-2xl border border-gray-100 p-16 text-center">
           <Newspaper size={40} className="mx-auto text-gray-200 mb-3" />
           <p className="text-gray-400 text-sm mb-4">No articles yet</p>
-          <button onClick={openNew} className="px-4 py-2 rounded-xl bg-[#071e2e] text-white text-sm">Write first article</button>
+          <button onClick={openNew} className="px-4 py-2 rounded-xl bg-[#0c4a6e] text-white text-sm">Write first article</button>
         </div>
       ) : (
         <div className="space-y-3">
@@ -145,7 +145,7 @@ export default function AdminNewsPage() {
               )}
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="font-semibold text-[#071e2e] text-sm">{a.title}</span>
+                  <span className="font-semibold text-[#0c4a6e] text-sm">{a.title}</span>
                   <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${a.is_published ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-500"}`}>
                     {a.is_published ? "Published" : "Draft"}
                   </span>
@@ -175,24 +175,24 @@ export default function AdminNewsPage() {
           <div className="flex-1 bg-black/40 backdrop-blur-sm" onClick={closeEditor} />
           <div className="w-full max-w-lg bg-white shadow-2xl overflow-y-auto flex flex-col">
             <div className="flex items-center justify-between p-6 border-b">
-              <h2 className="font-bold text-[#071e2e] font-display">{isNew ? "New Article" : "Edit Article"}</h2>
+              <h2 className="font-bold text-[#0c4a6e] font-display">{isNew ? "New Article" : "Edit Article"}</h2>
               <button onClick={closeEditor} className="p-2 rounded-xl hover:bg-gray-100"><X size={18} /></button>
             </div>
             <div className="p-6 space-y-4 flex-1">
               <div>
                 <label className="text-xs font-medium text-gray-600 mb-1 block">Title *</label>
                 <input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value, slug: toSlug(e.target.value) })}
-                  placeholder="Article title" className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]" />
+                  placeholder="Article title" className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]" />
               </div>
               <div>
                 <label className="text-xs font-medium text-gray-600 mb-1 block">Slug (auto-generated)</label>
                 <input value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })}
-                  placeholder="article-url-slug" className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]" />
+                  placeholder="article-url-slug" className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[#38bdf8]" />
               </div>
               <div>
                 <label className="text-xs font-medium text-gray-600 mb-1 block">Excerpt</label>
                 <input value={form.excerpt} onChange={(e) => setForm({ ...form, excerpt: e.target.value })}
-                  placeholder="Short summary shown in article lists" className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]" />
+                  placeholder="Short summary shown in article lists" className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]" />
               </div>
               <div>
                 <label className="text-xs font-medium text-gray-600 mb-1 block">Cover image</label>
@@ -201,7 +201,7 @@ export default function AdminNewsPage() {
                     <Image src={form.cover_image_url} alt="Cover" fill className="object-cover" sizes="400px" />
                   </div>
                 )}
-                <label className={`flex items-center gap-2 px-4 py-2.5 border border-dashed rounded-xl cursor-pointer text-sm transition-all ${uploading ? "border-gray-200 bg-gray-50" : "border-[#2d8ab8]/40 hover:border-[#2d8ab8] hover:bg-[#eef8fd]/50 text-[#0f5070]"}`}>
+                <label className={`flex items-center gap-2 px-4 py-2.5 border border-dashed rounded-xl cursor-pointer text-sm transition-all ${uploading ? "border-gray-200 bg-gray-50" : "border-[#38bdf8]/40 hover:border-[#38bdf8] hover:bg-[#f0f9ff]/50 text-[#0284c7]"}`}>
                   {uploading ? <Loader2 size={14} className="animate-spin" /> : <Upload size={14} />}
                   {uploading ? "Uploading..." : "Upload cover image"}
                   <input type="file" accept="image/*" className="hidden" disabled={uploading} onChange={uploadCover} />
@@ -210,7 +210,7 @@ export default function AdminNewsPage() {
               <div>
                 <label className="text-xs font-medium text-gray-600 mb-1 block">Content</label>
                 <textarea value={form.content} onChange={(e) => setForm({ ...form, content: e.target.value })}
-                  rows={10} placeholder="Write your article content here..." className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8] resize-none" />
+                  rows={10} placeholder="Write your article content here..." className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8] resize-none" />
               </div>
               <div className="flex items-center gap-3">
                 <input type="checkbox" id="publish" checked={form.is_published} onChange={(e) => setForm({ ...form, is_published: e.target.checked })} className="w-4 h-4 rounded" />
@@ -219,7 +219,7 @@ export default function AdminNewsPage() {
             </div>
             <div className="p-6 border-t flex gap-3">
               <button onClick={closeEditor} className="flex-1 py-2.5 rounded-xl border border-gray-200 text-sm font-medium hover:bg-gray-50">Cancel</button>
-              <button onClick={save} disabled={saving} className="flex-1 py-2.5 rounded-xl bg-[#071e2e] text-white text-sm font-semibold hover:bg-[#0f3a52] disabled:opacity-60 flex items-center justify-center gap-2">
+              <button onClick={save} disabled={saving} className="flex-1 py-2.5 rounded-xl bg-[#0c4a6e] text-white text-sm font-semibold hover:bg-[#075985] disabled:opacity-60 flex items-center justify-center gap-2">
                 {saving && <Loader2 size={14} className="animate-spin" />} Save Article
               </button>
             </div>

@@ -26,11 +26,11 @@ export default function ServicesPage() {
       {/* Hero */}
       <section className="relative py-24 lg:py-32 gradient-hero overflow-hidden">
         <div className="absolute inset-0 noise-overlay" />
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-[#1a6b94]/20 blur-3xl" />
+        <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-[#0ea5e9]/20 blur-3xl" />
         <div className="container-wide relative z-10">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-blue-100 text-sm mb-6">
-              <Waves size={14} className="text-[#5aafd4]" /> What We Offer
+              <Waves size={14} className="text-[#7dd3fc]" /> What We Offer
             </div>
             <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 leading-tight">
               Complete Aquaculture Services,{" "}
@@ -56,30 +56,30 @@ export default function ServicesPage() {
               const Icon = ICONS[service.icon];
               return (
                 <div key={service.id} className={cn("rounded-3xl overflow-hidden border shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-all duration-300 hover:-translate-y-1 group",
-                  i === 0 ? "lg:col-span-2 border-[#a0d4ea]" : "border-gray-100")}>
+                  i === 0 ? "lg:col-span-2 border-[#bae6fd]" : "border-gray-100")}>
                   <div className={cn("p-8 lg:p-10 flex flex-col lg:flex-row gap-8",
-                    service.color === "brand" ? "bg-gradient-to-br from-[#eef8fd] to-white" :
+                    service.color === "brand" ? "bg-gradient-to-br from-[#f0f9ff] to-white" :
                     service.color === "green" ? "bg-gradient-to-br from-[#f0fcf4] to-white" :
                     "bg-gradient-to-br from-[#fffbf0] to-white")}>
                     <div className={cn("w-16 h-16 rounded-2xl flex items-center justify-center shrink-0",
-                      service.color === "brand" ? "bg-[#0f5070]" : service.color === "green" ? "bg-[#226640]" : "bg-[#a05200]")}>
+                      service.color === "brand" ? "bg-[#0284c7]" : service.color === "green" ? "bg-[#226640]" : "bg-[#a05200]")}>
                       <Icon size={28} className="text-white" />
                     </div>
 
                     <div className="flex-1">
-                      <h2 className="text-2xl font-bold text-[#071e2e] mb-2 font-display group-hover:text-[#0f5070] transition-colors">{service.title}</h2>
+                      <h2 className="text-2xl font-bold text-[#0c4a6e] mb-2 font-display group-hover:text-[#0284c7] transition-colors">{service.title}</h2>
                       <p className="text-gray-400 text-sm font-medium uppercase tracking-wide mb-4">{service.subtitle}</p>
                       <p className="text-gray-600 leading-relaxed mb-6">{service.description}</p>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
                         {service.features.map((f) => (
                           <div key={f} className="flex items-start gap-2 text-sm text-gray-700">
-                            <CheckCircle2 size={15} className={cn("shrink-0 mt-0.5", service.color === "brand" ? "text-[#2d8ab8]" : service.color === "green" ? "text-[#3aaf6c]" : "text-[#f4a020]")} />
+                            <CheckCircle2 size={15} className={cn("shrink-0 mt-0.5", service.color === "brand" ? "text-[#38bdf8]" : service.color === "green" ? "text-[#3aaf6c]" : "text-[#f4a020]")} />
                             {f}
                           </div>
                         ))}
                       </div>
                       <Link href={`/services/${service.slug}`} className={cn("inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all",
-                        service.color === "brand" ? "bg-[#0f5070] text-white hover:bg-[#0a2d43]" :
+                        service.color === "brand" ? "bg-[#0284c7] text-white hover:bg-[#075985]" :
                         service.color === "green" ? "bg-[#226640] text-white hover:bg-[#184a2e]" :
                         "bg-[#a05200] text-white hover:bg-[#6b3700]")}>
                         Learn More <ArrowRight size={15} />
@@ -97,24 +97,24 @@ export default function ServicesPage() {
       <section className="section-padding gradient-section">
         <div className="container-wide">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#eef8fd] text-[#0f5070] text-sm font-medium mb-4 border border-[#a0d4ea]">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#f0f9ff] text-[#0284c7] text-sm font-medium mb-4 border border-[#bae6fd]">
               How We Work
             </div>
-            <h2 className="text-3xl font-bold text-[#071e2e] mb-3">Our 6-Step Service Process</h2>
+            <h2 className="text-3xl font-bold text-[#0c4a6e] mb-3">Our 6-Step Service Process</h2>
             <p className="text-gray-500">From first contact to a fully running farm — here is exactly what to expect when you work with KASC.</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {PROCESS.map((p) => (
               <div key={p.step} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-[var(--shadow-card)] relative overflow-hidden group hover:shadow-[var(--shadow-card-hover)] transition-shadow">
-                <div className="absolute top-0 right-0 text-7xl font-bold text-gray-50 select-none leading-none -mt-2 -mr-2 font-display group-hover:text-[#eef8fd] transition-colors">
+                <div className="absolute top-0 right-0 text-7xl font-bold text-gray-50 select-none leading-none -mt-2 -mr-2 font-display group-hover:text-[#f0f9ff] transition-colors">
                   {p.step}
                 </div>
                 <div className="relative z-10">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0f5070] to-[#226640] flex items-center justify-center mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0284c7] to-[#226640] flex items-center justify-center mb-4">
                     <span className="text-white font-bold text-sm">{p.step}</span>
                   </div>
-                  <h3 className="font-bold text-[#071e2e] mb-2">{p.title}</h3>
+                  <h3 className="font-bold text-[#0c4a6e] mb-2">{p.title}</h3>
                   <p className="text-gray-500 text-sm leading-relaxed">{p.desc}</p>
                 </div>
               </div>
@@ -124,7 +124,7 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-gradient-to-r from-[#0a2d43] to-[#226640]">
+      <section className="py-20 bg-gradient-to-r from-[#075985] to-[#226640]">
         <div className="container-wide text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Ready to Get Started?</h2>
           <p className="text-blue-100 max-w-lg mx-auto mb-8">Speak to one of our aquaculture specialists today. Consultations are free and come with no obligation.</p>

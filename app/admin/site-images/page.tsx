@@ -113,7 +113,7 @@ export default function SiteImagesPage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-[#071e2e] font-display">Site Images</h1>
+        <h1 className="text-2xl font-bold text-[#0c4a6e] font-display">Site Images</h1>
         <p className="text-gray-500 text-sm mt-1">
           All images used across the website — {images.length} total. To replace a product or gallery image, edit it from its respective section.
         </p>
@@ -127,7 +127,7 @@ export default function SiteImagesPage() {
             onClick={() => setTab(key)}
             className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold border transition-all ${
               tab === key
-                ? "bg-[#071e2e] text-white border-[#071e2e]"
+                ? "bg-[#0c4a6e] text-white border-[#0c4a6e]"
                 : "bg-white text-gray-600 border-gray-200 hover:border-gray-400"
             }`}
           >
@@ -147,7 +147,7 @@ export default function SiteImagesPage() {
         <button
           onClick={fetchAll}
           disabled={loading}
-          className="flex items-center gap-2 text-xs text-gray-500 hover:text-[#0f5070] transition-colors"
+          className="flex items-center gap-2 text-xs text-gray-500 hover:text-[#0284c7] transition-colors"
         >
           <RefreshCw size={13} className={loading ? "animate-spin" : ""} />
           Refresh
@@ -188,7 +188,7 @@ export default function SiteImagesPage() {
                 )}
               </div>
               <div className="p-3">
-                <div className="text-xs font-semibold text-[#071e2e] truncate">{entry.label}</div>
+                <div className="text-xs font-semibold text-[#0c4a6e] truncate">{entry.label}</div>
                 <div className="text-[10px] text-gray-400 mt-0.5">{entry.sourceLabel}</div>
               </div>
             </div>

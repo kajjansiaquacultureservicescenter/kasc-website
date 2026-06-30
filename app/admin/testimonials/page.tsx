@@ -99,12 +99,12 @@ export default function AdminTestimonialsPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-[#071e2e] font-display">Customer Stories</h1>
+          <h1 className="text-2xl font-bold text-[#0c4a6e] font-display">Customer Stories</h1>
           <p className="text-gray-500 text-sm mt-1">{testimonials.length} testimonials — shown on the homepage</p>
         </div>
         <button
           onClick={openNew}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0f5070] text-white font-semibold text-sm hover:bg-[#0a3d57] transition-all"
+          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0284c7] text-white font-semibold text-sm hover:bg-[#0369a1] transition-all"
         >
           <Plus size={16} /> Add Testimonial
         </button>
@@ -124,12 +124,12 @@ export default function AdminTestimonialsPage() {
                 {t.avatar_url ? (
                   <Image src={t.avatar_url} alt={t.name} width={44} height={44} className="w-11 h-11 rounded-full object-cover shrink-0" />
                 ) : (
-                  <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#0f5070] to-[#226640] flex items-center justify-center text-white font-bold text-sm shrink-0">
+                  <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#0284c7] to-[#226640] flex items-center justify-center text-white font-bold text-sm shrink-0">
                     {t.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
                   </div>
                 )}
                 <div className="flex-1 min-w-0">
-                  <div className="font-semibold text-[#071e2e] text-sm">{t.name}</div>
+                  <div className="font-semibold text-[#0c4a6e] text-sm">{t.name}</div>
                   <div className="text-xs text-gray-400">{t.role}</div>
                   <div className="flex items-center gap-0.5 mt-1">
                     {[1,2,3,4,5].map((s) => (
@@ -147,7 +147,7 @@ export default function AdminTestimonialsPage() {
                   {t.is_active ? "Visible" : "Hidden"}
                 </button>
                 <div className="flex gap-1">
-                  <button onClick={() => openEdit(t)} className="p-1.5 rounded-lg hover:bg-[#eef8fd] text-gray-400 hover:text-[#0f5070] transition-all">
+                  <button onClick={() => openEdit(t)} className="p-1.5 rounded-lg hover:bg-[#f0f9ff] text-gray-400 hover:text-[#0284c7] transition-all">
                     <Pencil size={14} />
                   </button>
                   <button onClick={() => handleDelete(t)} className="p-1.5 rounded-lg hover:bg-red-50 text-gray-400 hover:text-red-500 transition-all">
@@ -166,7 +166,7 @@ export default function AdminTestimonialsPage() {
           <div className="flex-1 bg-black/40 backdrop-blur-sm" onClick={closeForm} />
           <div className="w-full max-w-lg bg-white shadow-2xl flex flex-col">
             <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100 shrink-0">
-              <h2 className="font-bold text-[#071e2e] font-display text-lg">
+              <h2 className="font-bold text-[#0c4a6e] font-display text-lg">
                 {editId === "new" ? "Add Testimonial" : "Edit Testimonial"}
               </h2>
               <button onClick={closeForm} className="p-2 rounded-xl hover:bg-gray-100 text-gray-400 transition-all">
@@ -192,7 +192,7 @@ export default function AdminTestimonialsPage() {
                       <UserCircle2 size={28} className="text-gray-300" />
                     </div>
                   )}
-                  <label className={`flex items-center gap-2 px-3 py-2 border-2 border-dashed rounded-xl cursor-pointer text-sm transition-all ${imgUploading ? "border-gray-200 text-gray-400 cursor-not-allowed" : "border-[#2d8ab8]/40 hover:border-[#2d8ab8] text-[#0f5070]"}`}>
+                  <label className={`flex items-center gap-2 px-3 py-2 border-2 border-dashed rounded-xl cursor-pointer text-sm transition-all ${imgUploading ? "border-gray-200 text-gray-400 cursor-not-allowed" : "border-[#38bdf8]/40 hover:border-[#38bdf8] text-[#0284c7]"}`}>
                     {imgUploading ? <><Loader2 size={14} className="animate-spin" /> Uploading…</> : <><Upload size={14} /> Upload photo</>}
                     <input ref={avatarRef} type="file" accept="image/jpeg,image/png,image/webp" className="hidden" disabled={imgUploading} onChange={handleAvatarUpload} />
                   </label>
@@ -202,20 +202,20 @@ export default function AdminTestimonialsPage() {
               <div>
                 <label className="block text-xs font-medium text-gray-600 mb-1">Customer Name *</label>
                 <input value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} required placeholder="e.g. John Mugisha"
-                  className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]" />
+                  className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]" />
               </div>
 
               <div>
                 <label className="block text-xs font-medium text-gray-600 mb-1">Role / Location</label>
                 <input value={form.role} onChange={(e) => setForm((f) => ({ ...f, role: e.target.value }))} placeholder="e.g. Fish Farmer, Masaka"
-                  className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]" />
+                  className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]" />
               </div>
 
               <div>
                 <label className="block text-xs font-medium text-gray-600 mb-1">Their Words *</label>
                 <textarea value={form.content} onChange={(e) => setForm((f) => ({ ...f, content: e.target.value }))} required rows={4}
                   placeholder="What did they say about KASC?"
-                  className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8] resize-none" />
+                  className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8] resize-none" />
               </div>
 
               <div>
@@ -235,7 +235,7 @@ export default function AdminTestimonialsPage() {
                 <div>
                   <label className="block text-xs font-medium text-gray-600 mb-1">Sort Order</label>
                   <input type="number" value={form.sort_order} onChange={(e) => setForm((f) => ({ ...f, sort_order: Number(e.target.value) }))}
-                    className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]" />
+                    className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]" />
                 </div>
                 <div className="flex items-end pb-0.5">
                   <label className="flex items-center gap-3 cursor-pointer">
@@ -252,7 +252,7 @@ export default function AdminTestimonialsPage() {
             <div className="px-6 py-4 border-t border-gray-100 shrink-0 flex gap-3">
               <button onClick={closeForm} className="flex-1 py-2.5 rounded-xl border border-gray-200 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-all">Cancel</button>
               <button onClick={handleSave as unknown as React.MouseEventHandler} disabled={saving || imgUploading}
-                className="flex-1 py-2.5 rounded-xl bg-[#0f5070] text-white text-sm font-semibold hover:bg-[#0a3d57] transition-all disabled:opacity-60 flex items-center justify-center gap-2">
+                className="flex-1 py-2.5 rounded-xl bg-[#0284c7] text-white text-sm font-semibold hover:bg-[#0369a1] transition-all disabled:opacity-60 flex items-center justify-center gap-2">
                 {saving && <Loader2 size={14} className="animate-spin" />}
                 {editId === "new" ? "Add" : "Save Changes"}
               </button>

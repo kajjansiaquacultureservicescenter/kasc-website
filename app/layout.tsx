@@ -18,11 +18,11 @@ const plusJakarta = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "Kajjansi Aquaculture Service Center | Fish Farming Solutions in East Africa",
-    template: "%s | Kajjansi Aquaculture Service Center",
+    default: "Kajjansi Aquaculture Service Centre | Fish Farming Solutions in East Africa",
+    template: "%s | Kajjansi Aquaculture Service Centre",
   },
   description:
-    "East Africa's premier one-stop aquaculture solutions center. Offering fish pond construction, dam liner supply & installation, fish fingerlings, feed, equipment, consultancy, and training across Uganda, Kenya, Tanzania, and beyond.",
+    "East Africa's premier one-stop aquaculture solutions centre. Offering fish pond construction, dam liner supply & installation, fish fingerlings, feed, equipment, consultancy, and training across Uganda, Kenya, Tanzania, and beyond.",
   keywords: [
     "aquaculture Uganda",
     "fish farming East Africa",
@@ -35,18 +35,18 @@ export const metadata: Metadata = {
     "African catfish fingerlings",
     "fish feed Uganda",
   ],
-  authors: [{ name: "Kajjansi Aquaculture Service Center" }],
+  authors: [{ name: "Kajjansi Aquaculture Service Centre" }],
   openGraph: {
     type: "website",
     locale: "en_UG",
-    siteName: "Kajjansi Aquaculture Service Center",
-    title: "Kajjansi Aquaculture Service Center | Your Complete Fish Farming Partner",
+    siteName: "Kajjansi Aquaculture Service Centre",
+    title: "Kajjansi Aquaculture Service Centre | Your Complete Fish Farming Partner",
     description:
-      "From fingerlings to full farm setup — Kajjansi Aquaculture Service Center is your trusted partner for profitable fish farming in East Africa.",
+      "From fingerlings to full farm setup — Kajjansi Aquaculture Service Centre is your trusted partner for profitable fish farming in East Africa.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kajjansi Aquaculture Service Center",
+    title: "Kajjansi Aquaculture Service Centre",
     description: "East Africa's leading aquaculture solutions provider.",
   },
   robots: { index: true, follow: true },

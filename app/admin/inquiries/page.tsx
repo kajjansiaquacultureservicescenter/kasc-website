@@ -82,7 +82,7 @@ export default function AdminInquiries() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-[#071e2e] font-display">Inquiries</h1>
+          <h1 className="text-2xl font-bold text-[#0c4a6e] font-display">Inquiries</h1>
           <p className="text-gray-500 text-sm mt-1">{counts.new > 0 ? `${counts.new} new` : "All caught up"}</p>
         </div>
         <button onClick={load} className="flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 text-sm hover:bg-gray-50 transition-all">
@@ -98,7 +98,7 @@ export default function AdminInquiries() {
             onClick={() => setFilter(f)}
             className={cn(
               "flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium border transition-all capitalize",
-              filter === f ? "bg-[#0f5070] text-white border-[#0f5070]" : "bg-white text-gray-600 border-gray-200 hover:border-[#2d8ab8]"
+              filter === f ? "bg-[#0284c7] text-white border-[#0284c7]" : "bg-white text-gray-600 border-gray-200 hover:border-[#38bdf8]"
             )}
           >
             {f} <span className="text-xs opacity-70">({counts[f]})</span>
@@ -111,7 +111,7 @@ export default function AdminInquiries() {
 
       {loading ? (
         <div className="flex items-center justify-center py-20">
-          <Loader2 size={24} className="animate-spin text-[#0f5070]" />
+          <Loader2 size={24} className="animate-spin text-[#0284c7]" />
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-5">
@@ -128,20 +128,20 @@ export default function AdminInquiries() {
                 onClick={() => selectInquiry(inq)}
                 className={cn(
                   "w-full text-left p-4 rounded-2xl border transition-all hover:shadow-sm",
-                  selected?.id === inq.id ? "border-[#2d8ab8] bg-[#eef8fd]" : "bg-white border-gray-100",
-                  inq.status === "new" && "border-l-4 border-l-[#0f5070]"
+                  selected?.id === inq.id ? "border-[#38bdf8] bg-[#f0f9ff]" : "bg-white border-gray-100",
+                  inq.status === "new" && "border-l-4 border-l-[#0284c7]"
                 )}
               >
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0f5070] to-[#226640] flex items-center justify-center text-white font-bold text-xs shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0284c7] to-[#226640] flex items-center justify-center text-white font-bold text-xs shrink-0">
                     {inq.name.slice(0, 2).toUpperCase()}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="font-semibold text-sm text-[#071e2e] truncate">{inq.name}</span>
+                      <span className="font-semibold text-sm text-[#0c4a6e] truncate">{inq.name}</span>
                       <span className={cn(
                         "px-1.5 py-0.5 rounded text-xs font-medium shrink-0",
-                        inq.status === "new" ? "bg-[#eef8fd] text-[#0f5070]" :
+                        inq.status === "new" ? "bg-[#f0f9ff] text-[#0284c7]" :
                         inq.status === "replied" ? "bg-green-50 text-green-700" : "bg-gray-100 text-gray-500"
                       )}>
                         {inq.status}
@@ -164,13 +164,13 @@ export default function AdminInquiries() {
               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sticky top-8">
                 <div className="flex items-start justify-between mb-5">
                   <div>
-                    <h2 className="font-bold text-[#071e2e] font-display text-lg">{selected.name}</h2>
+                    <h2 className="font-bold text-[#0c4a6e] font-display text-lg">{selected.name}</h2>
                     <div className="flex flex-wrap gap-3 mt-1">
-                      <a href={`mailto:${selected.email}`} className="flex items-center gap-1 text-xs text-[#0f5070] hover:underline">
+                      <a href={`mailto:${selected.email}`} className="flex items-center gap-1 text-xs text-[#0284c7] hover:underline">
                         <Mail size={11} />{selected.email}
                       </a>
                       {selected.phone && (
-                        <a href={`tel:${selected.phone}`} className="flex items-center gap-1 text-xs text-[#0f5070] hover:underline">
+                        <a href={`tel:${selected.phone}`} className="flex items-center gap-1 text-xs text-[#0284c7] hover:underline">
                           <Phone size={11} />{selected.phone}
                         </a>
                       )}
@@ -194,13 +194,13 @@ export default function AdminInquiries() {
                 {selected.subject && (
                   <div className="mb-3">
                     <span className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Subject</span>
-                    <div className="text-sm text-[#071e2e] font-medium mt-0.5">{selected.subject}</div>
+                    <div className="text-sm text-[#0c4a6e] font-medium mt-0.5">{selected.subject}</div>
                   </div>
                 )}
                 {selected.service && (
                   <div className="mb-3">
                     <span className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Service</span>
-                    <div className="text-sm text-[#071e2e] mt-0.5">{selected.service}</div>
+                    <div className="text-sm text-[#0c4a6e] mt-0.5">{selected.service}</div>
                   </div>
                 )}
 
@@ -219,7 +219,7 @@ export default function AdminInquiries() {
                     onChange={(e) => setReplyText(e.target.value)}
                     rows={3}
                     placeholder="Record your reply here for reference..."
-                    className="mt-2 w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8] resize-none"
+                    className="mt-2 w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8] resize-none"
                   />
                   <button
                     onClick={() => saveReply(selected.id)}
@@ -235,7 +235,7 @@ export default function AdminInquiries() {
                   <a
                     href={`mailto:${selected.email}?subject=Re: ${selected.subject || "Your Inquiry"}`}
                     onClick={() => markStatus(selected.id, "replied")}
-                    className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#0f5070] text-white text-sm font-semibold hover:bg-[#0d3f5a] transition-all"
+                    className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#0284c7] text-white text-sm font-semibold hover:bg-[#0369a1] transition-all"
                   >
                     <Mail size={14} /> Reply via Email
                   </a>

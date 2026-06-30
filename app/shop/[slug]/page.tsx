@@ -37,9 +37,9 @@ const FALLBACK_IMAGES: Record<string, string> = {
 
 const BADGE_STYLE: Record<string, string> = {
   "Best Seller":  "bg-[#f4a020] text-white",
-  "Premium":      "bg-[#0f5070] text-white",
+  "Premium":      "bg-[#0284c7] text-white",
   "New":          "bg-[#226640] text-white",
-  "Most Popular": "bg-[#2d8ab8] text-white",
+  "Most Popular": "bg-[#38bdf8] text-white",
   "Heavy Duty":   "bg-gray-800 text-white",
   "Essential":    "bg-purple-700 text-white",
 };
@@ -66,18 +66,18 @@ export default async function ProductPage({ params }: Props) {
       {/* Breadcrumb */}
       <div className="bg-white border-b border-gray-100 py-3">
         <div className="container-wide flex items-center gap-2 text-sm text-gray-500">
-          <Link href="/" className="hover:text-[#0f5070] transition-colors">Home</Link>
+          <Link href="/" className="hover:text-[#0284c7] transition-colors">Home</Link>
           <span className="text-gray-300">/</span>
-          <Link href="/shop" className="hover:text-[#0f5070] transition-colors">Shop</Link>
+          <Link href="/shop" className="hover:text-[#0284c7] transition-colors">Shop</Link>
           <span className="text-gray-300">/</span>
-          <span className="text-[#0f5070] font-medium capitalize">{product.category}</span>
+          <span className="text-[#0284c7] font-medium capitalize">{product.category}</span>
           <span className="text-gray-300">/</span>
           <span className="text-gray-700 truncate max-w-[200px]">{product.name}</span>
         </div>
       </div>
 
       <div className="container-wide py-8">
-        <Link href="/shop" className="inline-flex items-center gap-2 text-gray-500 hover:text-[#0f5070] text-sm mb-6 transition-colors group">
+        <Link href="/shop" className="inline-flex items-center gap-2 text-gray-500 hover:text-[#0284c7] text-sm mb-6 transition-colors group">
           <ArrowLeft size={14} className="group-hover:-translate-x-0.5 transition-transform" /> Back to Shop
         </Link>
 
@@ -96,7 +96,7 @@ export default async function ProductPage({ params }: Props) {
             {/* Details panel */}
             <div className="p-7 lg:p-10 flex flex-col">
               <div className="flex items-center gap-2 mb-3">
-                <span className="text-xs font-bold text-[#2d8ab8] uppercase tracking-widest capitalize">{product.category}</span>
+                <span className="text-xs font-bold text-[#38bdf8] uppercase tracking-widest capitalize">{product.category}</span>
                 {product.in_stock && (
                   <span className="flex items-center gap-1 text-xs text-[#226640] font-medium">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#3aaf6c]" /> In Stock
@@ -104,7 +104,7 @@ export default async function ProductPage({ params }: Props) {
                 )}
               </div>
 
-              <h1 className="text-2xl lg:text-3xl font-bold text-[#071e2e] mb-3 font-display leading-tight">{product.name}</h1>
+              <h1 className="text-2xl lg:text-3xl font-bold text-[#0c4a6e] mb-3 font-display leading-tight">{product.name}</h1>
 
               {/* Stars */}
               <div className="flex items-center gap-2 mb-4">
@@ -116,7 +116,7 @@ export default async function ProductPage({ params }: Props) {
 
               {/* Price */}
               <div className="flex items-baseline gap-3 mb-5 pb-5 border-b border-gray-100">
-                <span className="text-3xl lg:text-4xl font-bold text-[#0f5070]">{formatPrice(product.price)}</span>
+                <span className="text-3xl lg:text-4xl font-bold text-[#0284c7]">{formatPrice(product.price)}</span>
                 <span className="text-gray-400 text-sm">{product.unit}</span>
               </div>
 
@@ -125,11 +125,11 @@ export default async function ProductPage({ params }: Props) {
               {/* Specs */}
               {specs.length > 0 && (
                 <div className="mb-6">
-                  <h3 className="font-semibold text-[#071e2e] text-sm mb-3">Product Specifications</h3>
+                  <h3 className="font-semibold text-[#0c4a6e] text-sm mb-3">Product Specifications</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {specs.map((spec) => (
                       <div key={spec} className="flex items-center gap-2.5 p-3 rounded-xl bg-[#f8fafc] border border-gray-100 text-sm text-gray-700">
-                        <CheckCircle2 size={14} className="text-[#2d8ab8] shrink-0" />
+                        <CheckCircle2 size={14} className="text-[#38bdf8] shrink-0" />
                         {spec}
                       </div>
                     ))}
@@ -157,11 +157,11 @@ export default async function ProductPage({ params }: Props) {
                   { icon: RefreshCcw, label: "After-Sales Service", desc: "We follow up" },
                 ].map(({ icon: Icon, label, desc }) => (
                   <div key={label} className="flex items-start gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-[#eef8fd] flex items-center justify-center shrink-0">
-                      <Icon size={14} className="text-[#0f5070]" />
+                    <div className="w-8 h-8 rounded-lg bg-[#f0f9ff] flex items-center justify-center shrink-0">
+                      <Icon size={14} className="text-[#0284c7]" />
                     </div>
                     <div>
-                      <div className="text-xs font-semibold text-[#071e2e]">{label}</div>
+                      <div className="text-xs font-semibold text-[#0c4a6e]">{label}</div>
                       <div className="text-xs text-gray-400">{desc}</div>
                     </div>
                   </div>
@@ -172,12 +172,12 @@ export default async function ProductPage({ params }: Props) {
         </div>
 
         {/* How to order info */}
-        <div className="bg-white rounded-2xl border border-[#a0d4ea] p-6 mb-8 flex items-start gap-4">
-          <div className="w-10 h-10 rounded-xl bg-[#eef8fd] flex items-center justify-center shrink-0">
-            <Package size={18} className="text-[#0f5070]" />
+        <div className="bg-white rounded-2xl border border-[#bae6fd] p-6 mb-8 flex items-start gap-4">
+          <div className="w-10 h-10 rounded-xl bg-[#f0f9ff] flex items-center justify-center shrink-0">
+            <Package size={18} className="text-[#0284c7]" />
           </div>
           <div>
-            <h3 className="font-semibold text-[#071e2e] mb-1">How Ordering Works</h3>
+            <h3 className="font-semibold text-[#0c4a6e] mb-1">How Ordering Works</h3>
             <p className="text-gray-600 text-sm leading-relaxed">
               Add products to your cart, then proceed to the order form where you fill in your delivery location and contact details. Our team will confirm availability, delivery cost, and timeline within 24 hours before any payment is processed.
             </p>
@@ -188,8 +188,8 @@ export default async function ProductPage({ params }: Props) {
         {relatedProducts.length > 0 && (
           <div>
             <div className="flex items-center justify-between mb-5">
-              <h2 className="text-xl font-bold text-[#071e2e] font-display">More {product.category.charAt(0).toUpperCase() + product.category.slice(1)}</h2>
-              <Link href="/shop" className="text-sm text-[#0f5070] hover:underline flex items-center gap-1">
+              <h2 className="text-xl font-bold text-[#0c4a6e] font-display">More {product.category.charAt(0).toUpperCase() + product.category.slice(1)}</h2>
+              <Link href="/shop" className="text-sm text-[#0284c7] hover:underline flex items-center gap-1">
                 View All <ArrowRight size={13} />
               </Link>
             </div>
@@ -198,7 +198,7 @@ export default async function ProductPage({ params }: Props) {
                 const img = p.image_url || FALLBACK_IMAGES[p.category] || FALLBACK_IMAGES.equipment;
                 return (
                   <div key={p.id} className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-1 transition-all duration-300 group flex flex-col">
-                    <div className="relative h-40 bg-gradient-to-br from-[#eef8fd] to-[#f0fcf4] overflow-hidden">
+                    <div className="relative h-40 bg-gradient-to-br from-[#f0f9ff] to-[#f0fcf4] overflow-hidden">
                       <Link href={`/shop/${p.slug}`}>
                         <Image src={img} alt={p.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                       </Link>
@@ -208,11 +208,11 @@ export default async function ProductPage({ params }: Props) {
                     </div>
                     <div className="p-4 flex flex-col flex-1">
                       <Link href={`/shop/${p.slug}`}>
-                        <h3 className="font-semibold text-[#071e2e] text-sm mb-1 hover:text-[#0f5070] transition-colors line-clamp-2 font-display">{p.name}</h3>
+                        <h3 className="font-semibold text-[#0c4a6e] text-sm mb-1 hover:text-[#0284c7] transition-colors line-clamp-2 font-display">{p.name}</h3>
                       </Link>
                       <div className="mt-auto pt-3 flex items-center justify-between gap-2">
                         <div>
-                          <div className="text-[#0f5070] font-bold">{formatPrice(p.price)}</div>
+                          <div className="text-[#0284c7] font-bold">{formatPrice(p.price)}</div>
                           <div className="text-gray-400 text-xs">{p.unit}</div>
                         </div>
                         <AddToCartButton product={p} variant="icon" />

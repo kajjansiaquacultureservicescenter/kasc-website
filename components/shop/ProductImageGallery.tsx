@@ -22,7 +22,7 @@ export default function ProductImageGallery({ images, name, badge, badgeStyle, i
   return (
     <div className="flex flex-col h-full">
       {/* Main image */}
-      <div className="relative flex-1 min-h-[340px] lg:min-h-[480px] bg-gradient-to-br from-[#eef8fd] to-[#f0fcf4]">
+      <div className="relative flex-1 min-h-[340px] lg:min-h-[480px] bg-gradient-to-br from-[#f0f9ff] to-[#f0fcf4]">
         <Image
           src={images[active]}
           alt={name}
@@ -47,14 +47,14 @@ export default function ProductImageGallery({ images, name, badge, badgeStyle, i
               aria-label="Previous image"
               className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 shadow flex items-center justify-center hover:bg-white transition-colors z-10"
             >
-              <ChevronLeft size={18} className="text-[#071e2e]" />
+              <ChevronLeft size={18} className="text-[#0c4a6e]" />
             </button>
             <button
               onClick={next}
               aria-label="Next image"
               className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 shadow flex items-center justify-center hover:bg-white transition-colors z-10"
             >
-              <ChevronRight size={18} className="text-[#071e2e]" />
+              <ChevronRight size={18} className="text-[#0c4a6e]" />
             </button>
             <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
               {images.map((_, i) => (
@@ -83,7 +83,7 @@ export default function ProductImageGallery({ images, name, badge, badgeStyle, i
               aria-label={`View image ${i + 1}`}
               className={cn(
                 "relative w-16 h-16 rounded-lg overflow-hidden shrink-0 border-2 transition-all",
-                i === active ? "border-[#0f5070]" : "border-transparent opacity-55 hover:opacity-100"
+                i === active ? "border-[#0284c7]" : "border-transparent opacity-55 hover:opacity-100"
               )}
             >
               <Image src={src} alt="" fill className="object-cover" sizes="64px" />

@@ -42,11 +42,11 @@ export default async function ServiceDetailPage({ params }: Props) {
   const imgSrc = SERVICE_IMAGES[slug] || SERVICE_IMAGES.consultancy;
 
   const colorClasses = {
-    brand: { bg: "bg-[#0f5070]", light: "bg-[#eef8fd]", text: "text-[#0f5070]", check: "text-[#2d8ab8]", badge: "bg-[#eef8fd] text-[#0f5070] border-[#a0d4ea]", btn: "bg-[#0f5070] hover:bg-[#0a2d43]" },
+    brand: { bg: "bg-[#0284c7]", light: "bg-[#f0f9ff]", text: "text-[#0284c7]", check: "text-[#38bdf8]", badge: "bg-[#f0f9ff] text-[#0284c7] border-[#bae6fd]", btn: "bg-[#0284c7] hover:bg-[#075985]" },
     green: { bg: "bg-[#226640]", light: "bg-[#f0fcf4]", text: "text-[#226640]", check: "text-[#3aaf6c]", badge: "bg-[#f0fcf4] text-[#226640] border-[#beeecf]", btn: "bg-[#226640] hover:bg-[#184a2e]" },
     amber: { bg: "bg-[#a05200]", light: "bg-[#fffbf0]", text: "text-[#a05200]", check: "text-[#f4a020]", badge: "bg-[#fffbf0] text-[#a05200] border-[#fde5b0]", btn: "bg-[#a05200] hover:bg-[#6b3700]" },
   }[service.color] ?? {
-    bg: "bg-[#0f5070]", light: "bg-[#eef8fd]", text: "text-[#0f5070]", check: "text-[#2d8ab8]", badge: "bg-[#eef8fd] text-[#0f5070] border-[#a0d4ea]", btn: "bg-[#0f5070] hover:bg-[#0a2d43]"
+    bg: "bg-[#0284c7]", light: "bg-[#f0f9ff]", text: "text-[#0284c7]", check: "text-[#38bdf8]", badge: "bg-[#f0f9ff] text-[#0284c7] border-[#bae6fd]", btn: "bg-[#0284c7] hover:bg-[#075985]"
   };
 
   return (
@@ -54,18 +54,18 @@ export default async function ServiceDetailPage({ params }: Props) {
       {/* Breadcrumb */}
       <div className="bg-[#f8fafc] border-b border-gray-100 py-4">
         <div className="container-wide flex items-center gap-2 text-sm text-gray-500">
-          <Link href="/" className="hover:text-[#0f5070] transition-colors">Home</Link>
+          <Link href="/" className="hover:text-[#0284c7] transition-colors">Home</Link>
           <span>/</span>
-          <Link href="/services" className="hover:text-[#0f5070] transition-colors">Services</Link>
+          <Link href="/services" className="hover:text-[#0284c7] transition-colors">Services</Link>
           <span>/</span>
-          <span className="text-[#0f5070] font-medium">{service.title}</span>
+          <span className="text-[#0284c7] font-medium">{service.title}</span>
         </div>
       </div>
 
       {/* Hero */}
       <section className="relative py-20 lg:py-28 gradient-hero overflow-hidden">
         <div className="absolute inset-0 noise-overlay" />
-        <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-[#1a6b94]/20 blur-3xl" />
+        <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-[#0ea5e9]/20 blur-3xl" />
         <div className="container-wide relative z-10">
           <Link href="/services" className="inline-flex items-center gap-2 text-blue-200 hover:text-white text-sm mb-8 transition-colors">
             <ArrowLeft size={14} /> Back to Services
@@ -84,7 +84,7 @@ export default async function ServiceDetailPage({ params }: Props) {
             </div>
             <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-video">
               <Image src={imgSrc} alt={service.title} fill className="object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#071e2e]/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0c4a6e]/30 to-transparent" />
             </div>
           </div>
         </div>
@@ -100,7 +100,7 @@ export default async function ServiceDetailPage({ params }: Props) {
         <div className="container-wide">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
-              <h2 className="text-2xl font-bold text-[#071e2e] mb-6 font-display">What&apos;s Included</h2>
+              <h2 className="text-2xl font-bold text-[#0c4a6e] mb-6 font-display">What&apos;s Included</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {service.features.map((f) => (
                   <div key={f} className="flex items-start gap-3 p-4 rounded-xl bg-[#f8fafc] border border-gray-100">
@@ -116,22 +116,22 @@ export default async function ServiceDetailPage({ params }: Props) {
               <div className="p-6 rounded-2xl gradient-brand text-white">
                 <h3 className="font-bold text-xl mb-3 font-display">Get a Free Quote</h3>
                 <p className="text-blue-100 text-sm mb-5">Tell us about your project and we&apos;ll send you a detailed proposal within 24 hours.</p>
-                <Link href="/contact#quote" className="block text-center py-3 rounded-xl bg-white text-[#0f5070] font-semibold text-sm hover:bg-gray-100 transition-colors">
+                <Link href="/contact#quote" className="block text-center py-3 rounded-xl bg-white text-[#0284c7] font-semibold text-sm hover:bg-gray-100 transition-colors">
                   Request Quote
                 </Link>
               </div>
 
               <div className="p-6 rounded-2xl bg-[#f8fafc] border border-gray-100">
-                <h3 className="font-bold text-[#071e2e] mb-3">Other Services</h3>
+                <h3 className="font-bold text-[#0c4a6e] mb-3">Other Services</h3>
                 <div className="space-y-2">
                   {otherServices.map((s) => {
                     const OtherIcon = ICONS[s.icon];
                     return (
                       <Link key={s.id} href={`/services/${s.slug}`} className="flex items-center gap-3 p-3 rounded-xl hover:bg-white border border-transparent hover:border-gray-100 transition-all group">
-                        <div className={cn("w-8 h-8 rounded-lg flex items-center justify-center shrink-0", s.color === "brand" ? "bg-[#eef8fd]" : s.color === "green" ? "bg-[#f0fcf4]" : "bg-[#fffbf0]")}>
-                          <OtherIcon size={14} className={s.color === "brand" ? "text-[#0f5070]" : s.color === "green" ? "text-[#226640]" : "text-[#a05200]"} />
+                        <div className={cn("w-8 h-8 rounded-lg flex items-center justify-center shrink-0", s.color === "brand" ? "bg-[#f0f9ff]" : s.color === "green" ? "bg-[#f0fcf4]" : "bg-[#fffbf0]")}>
+                          <OtherIcon size={14} className={s.color === "brand" ? "text-[#0284c7]" : s.color === "green" ? "text-[#226640]" : "text-[#a05200]"} />
                         </div>
-                        <span className="text-sm font-medium text-gray-700 group-hover:text-[#0f5070] transition-colors">{s.title}</span>
+                        <span className="text-sm font-medium text-gray-700 group-hover:text-[#0284c7] transition-colors">{s.title}</span>
                         <ArrowRight size={12} className="text-gray-400 ml-auto" />
                       </Link>
                     );
@@ -150,7 +150,7 @@ export default async function ServiceDetailPage({ params }: Props) {
       </section>
 
       {/* CTA Banner */}
-      <section className="py-16 bg-gradient-to-r from-[#0a2d43] to-[#226640]">
+      <section className="py-16 bg-gradient-to-r from-[#075985] to-[#226640]">
         <div className="container-wide text-center">
           <h2 className="text-2xl font-bold text-white mb-3">Ready to get started with {service.title}?</h2>
           <p className="text-blue-100 mb-6">Contact our team for a free consultation — no commitment required.</p>

@@ -29,9 +29,9 @@ export default function Footer() {
   const contact = useSiteContact();
 
   return (
-    <footer className="bg-[#071e2e] text-gray-300">
+    <footer className="bg-[#0c4a6e] text-gray-300">
       {/* CTA Band */}
-      <div className="bg-gradient-to-r from-[#0f5070] via-[#1a6b94] to-[#226640] py-14">
+      <div className="bg-gradient-to-r from-[#0284c7] via-[#0ea5e9] to-[#226640] py-14">
         <div className="container-wide flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <h2 className="text-white text-2xl lg:text-3xl font-bold font-display mb-2">
@@ -66,7 +66,7 @@ export default function Footer() {
               </div>
               <div>
                 <div className="text-white font-bold text-base leading-tight font-display">Kajjansi</div>
-                <div className="text-[#5aafd4] text-xs font-medium leading-tight">Aquaculture Service Center</div>
+                <div className="text-[#7dd3fc] text-xs font-medium leading-tight">Aquaculture Service Centre</div>
               </div>
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed mb-5">
@@ -85,7 +85,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-9 h-9 rounded-lg bg-white/5 hover:bg-[#2d8ab8] flex items-center justify-center text-gray-400 hover:text-white transition-all duration-200"
+                  className="w-9 h-9 rounded-lg bg-white/5 hover:bg-[#38bdf8] flex items-center justify-center text-gray-400 hover:text-white transition-all duration-200"
                 >
                   <Icon size={16} />
                 </a>
@@ -103,9 +103,9 @@ export default function Footer() {
                 <li key={s.id}>
                   <Link
                     href={`/services/${s.slug}`}
-                    className="flex items-center gap-2 text-sm text-gray-400 hover:text-[#5aafd4] transition-colors group"
+                    className="flex items-center gap-2 text-sm text-gray-400 hover:text-[#7dd3fc] transition-colors group"
                   >
-                    <ArrowRight size={13} className="text-[#2d8ab8] group-hover:translate-x-0.5 transition-transform" />
+                    <ArrowRight size={13} className="text-[#38bdf8] group-hover:translate-x-0.5 transition-transform" />
                     {s.title}
                   </Link>
                 </li>
@@ -130,9 +130,9 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="flex items-center gap-2 text-sm text-gray-400 hover:text-[#5aafd4] transition-colors group"
+                    className="flex items-center gap-2 text-sm text-gray-400 hover:text-[#7dd3fc] transition-colors group"
                   >
-                    <ArrowRight size={13} className="text-[#2d8ab8] group-hover:translate-x-0.5 transition-transform" />
+                    <ArrowRight size={13} className="text-[#38bdf8] group-hover:translate-x-0.5 transition-transform" />
                     {link.label}
                   </Link>
                 </li>
@@ -148,33 +148,33 @@ export default function Footer() {
             <ul className="space-y-4">
               <li>
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#2d8ab8]/20 flex items-center justify-center shrink-0 mt-0.5">
-                    <Phone size={14} className="text-[#5aafd4]" />
+                  <div className="w-8 h-8 rounded-lg bg-[#38bdf8]/20 flex items-center justify-center shrink-0 mt-0.5">
+                    <Phone size={14} className="text-[#7dd3fc]" />
                   </div>
                   <div>
                     <div className="text-xs text-gray-500 mb-0.5">Phone / WhatsApp</div>
-                    <a href={`tel:${contact.phone}`} className="block text-sm text-gray-300 hover:text-[#5aafd4] transition-colors">{contact.phone}</a>
+                    <a href={`tel:${contact.phone}`} className="block text-sm text-gray-300 hover:text-[#7dd3fc] transition-colors">{contact.phone}</a>
                     {contact.phone2 && (
-                      <a href={`tel:${contact.phone2}`} className="block text-sm text-gray-300 hover:text-[#5aafd4] transition-colors">{contact.phone2}</a>
+                      <a href={`tel:${contact.phone2}`} className="block text-sm text-gray-300 hover:text-[#7dd3fc] transition-colors">{contact.phone2}</a>
                     )}
                   </div>
                 </div>
               </li>
               <li>
                 <a href={`mailto:${contact.email}`} className="flex items-start gap-3 group">
-                  <div className="w-8 h-8 rounded-lg bg-[#2d8ab8]/20 flex items-center justify-center shrink-0 mt-0.5">
-                    <Mail size={14} className="text-[#5aafd4]" />
+                  <div className="w-8 h-8 rounded-lg bg-[#38bdf8]/20 flex items-center justify-center shrink-0 mt-0.5">
+                    <Mail size={14} className="text-[#7dd3fc]" />
                   </div>
                   <div>
                     <div className="text-xs text-gray-500 mb-0.5">Email</div>
-                    <div className="text-sm text-gray-300 group-hover:text-[#5aafd4] transition-colors">{contact.email}</div>
+                    <div className="text-sm text-gray-300 group-hover:text-[#7dd3fc] transition-colors">{contact.email}</div>
                   </div>
                 </a>
               </li>
               <li>
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#2d8ab8]/20 flex items-center justify-center shrink-0 mt-0.5">
-                    <MapPin size={14} className="text-[#5aafd4]" />
+                  <div className="w-8 h-8 rounded-lg bg-[#38bdf8]/20 flex items-center justify-center shrink-0 mt-0.5">
+                    <MapPin size={14} className="text-[#7dd3fc]" />
                   </div>
                   <div>
                     <div className="text-xs text-gray-500 mb-0.5">Office & Farm</div>
@@ -191,7 +191,7 @@ export default function Footer() {
       <div className="border-t border-white/5 py-6">
         <div className="container-wide flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-500">
           <div className="flex items-center gap-1.5">
-            © {new Date().getFullYear()} Kajjansi Aquaculture Service Center. All rights reserved.
+            © {new Date().getFullYear()} Kajjansi Aquaculture Service Centre. All rights reserved.
           </div>
           <div className="flex items-center gap-1.5">
             Serving Uganda, Kenya, Tanzania, Rwanda & South Africa

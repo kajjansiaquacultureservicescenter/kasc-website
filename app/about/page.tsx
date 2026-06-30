@@ -6,7 +6,7 @@ import { COMPANY, STATS } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "About Us",
-  description: "Learn about Kajjansi Aquaculture Service Center — our story, mission, team, and commitment to transforming fish farming across East Africa.",
+  description: "Learn about Kajjansi Aquaculture Service Centre — our story, mission, team, and commitment to transforming fish farming across East Africa.",
 };
 
 const TEAM = [
@@ -29,12 +29,12 @@ export default function AboutPage() {
       {/* Hero */}
       <section className="relative py-24 lg:py-32 gradient-hero overflow-hidden">
         <div className="absolute inset-0 noise-overlay" />
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-[#1a6b94]/20 blur-3xl" />
+        <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-[#0ea5e9]/20 blur-3xl" />
         <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-[#226640]/15 blur-3xl" />
         <div className="container-wide relative z-10">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-blue-100 text-sm mb-6">
-              <Fish size={14} className="text-[#5aafd4]" /> About KASC
+              <Fish size={14} className="text-[#7dd3fc]" /> About KASC
             </div>
             <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 leading-tight">
               Based in Kajjansi.{" "}
@@ -57,10 +57,10 @@ export default function AboutPage() {
         <div className="container-wide">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
             <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#eef8fd] text-[#0f5070] text-sm font-medium mb-5 border border-[#a0d4ea]">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#f0f9ff] text-[#0284c7] text-sm font-medium mb-5 border border-[#bae6fd]">
                 Our Story
               </div>
-              <h2 className="text-3xl lg:text-4xl font-bold text-[#071e2e] mb-5 leading-tight">
+              <h2 className="text-3xl lg:text-4xl font-bold text-[#0c4a6e] mb-5 leading-tight">
                 From a Small Farm to East Africa&apos;s{" "}
                 <span className="text-gradient">Leading Aquaculture Hub</span>
               </h2>
@@ -76,7 +76,7 @@ export default function AboutPage() {
               <div className="grid grid-cols-2 gap-4">
                 {STATS.map((stat) => (
                   <div key={stat.value} className="p-4 rounded-xl bg-[#f8fafc] border border-gray-100">
-                    <div className="text-2xl font-bold text-[#0f5070] mb-1">{stat.value}</div>
+                    <div className="text-2xl font-bold text-[#0284c7] mb-1">{stat.value}</div>
                     <div className="text-sm text-gray-500">{stat.label}</div>
                   </div>
                 ))}
@@ -88,7 +88,7 @@ export default function AboutPage() {
                 <Image src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=800&q=80" alt="Kajjansi farm" fill className="object-cover" />
               </div>
               <div className="absolute -bottom-5 -right-5 card-glass rounded-2xl p-5 shadow-xl border border-white/60 max-w-[200px]">
-                <div className="text-2xl font-bold text-[#0f5070] mb-1">2014</div>
+                <div className="text-2xl font-bold text-[#0284c7] mb-1">2014</div>
                 <div className="text-sm text-gray-500">Year Founded at Kajjansi, Wakiso</div>
               </div>
             </div>
@@ -105,27 +105,27 @@ export default function AboutPage() {
               { icon: Eye, label: "Our Vision", color: "green", text: "To become the most trusted and reliable partner for sustainable aquaculture development throughout the East African region." },
               { icon: Leaf, label: "Our Commitment", color: "amber", text: "We adhere to internationally recognised standards — ISO 9001:2015 (Quality), ISO 14001:2015 (Environment), and ISO 45001:2018 (Health & Safety) — ensuring consistent excellence across every service." },
             ].map(({ icon: Icon, label, color, text }) => (
-              <div key={label} className={`p-8 rounded-2xl border ${color === "brand" ? "bg-[#eef8fd] border-[#a0d4ea]" : color === "green" ? "bg-[#f0fcf4] border-[#beeecf]" : "bg-[#fffbf0] border-[#fde5b0]"}`}>
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 ${color === "brand" ? "bg-[#0f5070]" : color === "green" ? "bg-[#226640]" : "bg-[#a05200]"}`}>
+              <div key={label} className={`p-8 rounded-2xl border ${color === "brand" ? "bg-[#f0f9ff] border-[#bae6fd]" : color === "green" ? "bg-[#f0fcf4] border-[#beeecf]" : "bg-[#fffbf0] border-[#fde5b0]"}`}>
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 ${color === "brand" ? "bg-[#0284c7]" : color === "green" ? "bg-[#226640]" : "bg-[#a05200]"}`}>
                   <Icon size={22} className="text-white" />
                 </div>
-                <h3 className="font-bold text-[#071e2e] text-xl mb-3 font-display">{label}</h3>
+                <h3 className="font-bold text-[#0c4a6e] text-xl mb-3 font-display">{label}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{text}</p>
               </div>
             ))}
           </div>
 
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-[#071e2e] mb-3">Our Core Values</h2>
+            <h2 className="text-3xl font-bold text-[#0c4a6e] mb-3">Our Core Values</h2>
             <p className="text-gray-500 max-w-xl mx-auto">Everything we do is guided by four non-negotiable principles.</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {VALUES.map(({ icon: Icon, title, desc }) => (
               <div key={title} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-shadow text-center">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#0f5070] to-[#226640] flex items-center justify-center mx-auto mb-4">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#0284c7] to-[#226640] flex items-center justify-center mx-auto mb-4">
                   <Icon size={22} className="text-white" />
                 </div>
-                <h3 className="font-bold text-[#071e2e] mb-2">{title}</h3>
+                <h3 className="font-bold text-[#0c4a6e] mb-2">{title}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
               </div>
             ))}
@@ -137,21 +137,21 @@ export default function AboutPage() {
       <section className="section-padding bg-white">
         <div className="container-wide">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#eef8fd] text-[#0f5070] text-sm font-medium mb-4 border border-[#a0d4ea]">
-              <ShieldCheck size={14} className="text-[#2d8ab8]" /> Quality & Safety Standards
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#f0f9ff] text-[#0284c7] text-sm font-medium mb-4 border border-[#bae6fd]">
+              <ShieldCheck size={14} className="text-[#38bdf8]" /> Quality & Safety Standards
             </div>
-            <h2 className="text-3xl font-bold text-[#071e2e] mb-3">Committed to International Standards</h2>
+            <h2 className="text-3xl font-bold text-[#0c4a6e] mb-3">Committed to International Standards</h2>
             <p className="text-gray-500 leading-relaxed">
               KASC adheres to internationally recognised management standards — giving our clients confidence that every product, service, and interaction meets global benchmarks for quality, environmental responsibility, and worker safety.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {COMPANY.iso.map((std) => (
-              <div key={std.code} className="flex flex-col items-center text-center p-8 rounded-2xl border-2 border-[#a0d4ea] bg-[#eef8fd]">
-                <div className="w-14 h-14 rounded-2xl bg-[#0f5070] flex items-center justify-center mb-4">
+              <div key={std.code} className="flex flex-col items-center text-center p-8 rounded-2xl border-2 border-[#bae6fd] bg-[#f0f9ff]">
+                <div className="w-14 h-14 rounded-2xl bg-[#0284c7] flex items-center justify-center mb-4">
                   <ShieldCheck size={26} className="text-white" />
                 </div>
-                <div className="text-[#0f5070] font-bold text-lg font-display mb-1">{std.code}</div>
+                <div className="text-[#0284c7] font-bold text-lg font-display mb-1">{std.code}</div>
                 <div className="text-gray-600 text-sm leading-relaxed">{std.label}</div>
               </div>
             ))}
@@ -163,24 +163,24 @@ export default function AboutPage() {
       <section className="section-padding bg-white">
         <div className="container-wide">
           <div className="text-center max-w-xl mx-auto mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#eef8fd] text-[#0f5070] text-sm font-medium mb-4 border border-[#a0d4ea]">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#f0f9ff] text-[#0284c7] text-sm font-medium mb-4 border border-[#bae6fd]">
               <Users size={14} /> Meet Our Team
             </div>
-            <h2 className="text-3xl font-bold text-[#071e2e] mb-3">The Experts Behind KASC</h2>
+            <h2 className="text-3xl font-bold text-[#0c4a6e] mb-3">The Experts Behind KASC</h2>
             <p className="text-gray-500">Dedicated aquaculture professionals committed to your farm&apos;s success.</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {TEAM.map((member) => (
               <div key={member.name} className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-shadow group">
-                <div className="h-44 bg-gradient-to-br from-[#0a2d43] to-[#226640] flex items-center justify-center">
+                <div className="h-44 bg-gradient-to-br from-[#075985] to-[#226640] flex items-center justify-center">
                   <div className="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center text-white text-2xl font-bold">
                     {member.initials}
                   </div>
                 </div>
                 <div className="p-5">
-                  <h3 className="font-bold text-[#071e2e] mb-0.5 font-display">{member.name}</h3>
-                  <div className="text-[#2d8ab8] text-xs font-semibold uppercase tracking-wide mb-3">{member.role}</div>
+                  <h3 className="font-bold text-[#0c4a6e] mb-0.5 font-display">{member.name}</h3>
+                  <div className="text-[#38bdf8] text-xs font-semibold uppercase tracking-wide mb-3">{member.role}</div>
                   <p className="text-gray-500 text-sm leading-relaxed">{member.bio}</p>
                 </div>
               </div>
@@ -190,7 +190,7 @@ export default function AboutPage() {
       </section>
 
       {/* Regions */}
-      <section className="section-padding bg-gradient-to-r from-[#0a2d43] via-[#0f5070] to-[#226640]">
+      <section className="section-padding bg-gradient-to-r from-[#075985] via-[#0284c7] to-[#226640]">
         <div className="container-wide text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-blue-100 text-sm mb-6">
             <Globe size={14} /> Our Reach
@@ -210,7 +210,7 @@ export default function AboutPage() {
       {/* CTA */}
       <section className="section-padding bg-white">
         <div className="container-wide text-center">
-          <h2 className="text-3xl font-bold text-[#071e2e] mb-4">Ready to Work With Us?</h2>
+          <h2 className="text-3xl font-bold text-[#0c4a6e] mb-4">Ready to Work With Us?</h2>
           <p className="text-gray-500 max-w-lg mx-auto mb-8">Contact our team today for a free consultation or visit our farm at Kajjansi to see our operations firsthand.</p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link href="/contact" className="btn-primary">Get In Touch <ArrowRight size={16} /></Link>

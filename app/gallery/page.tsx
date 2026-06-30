@@ -68,11 +68,11 @@ export default function GalleryPage() {
       {/* Hero */}
       <section className="relative py-20 lg:py-28 gradient-hero overflow-hidden">
         <div className="absolute inset-0 noise-overlay" />
-        <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-[#1a6b94]/20 blur-3xl" />
+        <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-[#0ea5e9]/20 blur-3xl" />
         <div className="container-wide relative z-10">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-blue-100 text-sm mb-6">
-              <ImageIcon size={14} className="text-[#5aafd4]" /> Media Gallery
+              <ImageIcon size={14} className="text-[#7dd3fc]" /> Media Gallery
             </div>
             <h1 className="text-4xl lg:text-5xl font-bold text-white mb-5">
               Our Work in <span className="text-gradient">Pictures & Videos</span>
@@ -95,14 +95,14 @@ export default function GalleryPage() {
           <button
             onClick={() => setTab("photos")}
             className={cn("flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm transition-all",
-              tab === "photos" ? "bg-[#0f5070] text-white" : "text-gray-600 hover:bg-gray-50")}
+              tab === "photos" ? "bg-[#0284c7] text-white" : "text-gray-600 hover:bg-gray-50")}
           >
             <ImageIcon size={16} /> Photos{!loadingPhotos && ` (${photos.length})`}
           </button>
           <button
             onClick={() => setTab("videos")}
             className={cn("flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm transition-all",
-              tab === "videos" ? "bg-[#0f5070] text-white" : "text-gray-600 hover:bg-gray-50")}
+              tab === "videos" ? "bg-[#0284c7] text-white" : "text-gray-600 hover:bg-gray-50")}
           >
             <Film size={16} /> Videos{!loadingVideos && ` (${videos.length})`}
           </button>
@@ -115,7 +115,7 @@ export default function GalleryPage() {
           <div className="container-wide">
             {loadingPhotos ? (
               <div className="flex justify-center py-24">
-                <div className="w-8 h-8 border-2 border-[#0f5070] border-t-transparent rounded-full animate-spin" />
+                <div className="w-8 h-8 border-2 border-[#0284c7] border-t-transparent rounded-full animate-spin" />
               </div>
             ) : (
               <>
@@ -127,8 +127,8 @@ export default function GalleryPage() {
                       className={cn(
                         "px-4 py-2 rounded-full text-sm font-medium border transition-all capitalize",
                         filter === cat
-                          ? "bg-[#0f5070] text-white border-[#0f5070]"
-                          : "bg-white text-gray-600 border-gray-200 hover:border-[#2d8ab8] hover:text-[#0f5070]"
+                          ? "bg-[#0284c7] text-white border-[#0284c7]"
+                          : "bg-white text-gray-600 border-gray-200 hover:border-[#38bdf8] hover:text-[#0284c7]"
                       )}
                     >
                       {cat === "all" ? "All Photos" : cat}
@@ -156,9 +156,9 @@ export default function GalleryPage() {
                           className="object-cover group-hover:scale-110 transition-transform duration-500"
                           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                         />
-                        <div className="absolute inset-0 bg-[#071e2e]/0 group-hover:bg-[#071e2e]/40 transition-colors flex items-center justify-center">
+                        <div className="absolute inset-0 bg-[#0c4a6e]/0 group-hover:bg-[#0c4a6e]/40 transition-colors flex items-center justify-center">
                           <div className="w-10 h-10 rounded-full bg-white/0 group-hover:bg-white/90 flex items-center justify-center transition-all scale-0 group-hover:scale-100">
-                            <Plus size={18} className="text-[#0f5070]" />
+                            <Plus size={18} className="text-[#0284c7]" />
                           </div>
                         </div>
                         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3 translate-y-full group-hover:translate-y-0 transition-transform">
@@ -180,7 +180,7 @@ export default function GalleryPage() {
           <div className="container-wide">
             {loadingVideos ? (
               <div className="flex justify-center py-24">
-                <div className="w-8 h-8 border-2 border-[#0f5070] border-t-transparent rounded-full animate-spin" />
+                <div className="w-8 h-8 border-2 border-[#0284c7] border-t-transparent rounded-full animate-spin" />
               </div>
             ) : videos.length === 0 ? (
               <div className="text-center py-24">
@@ -195,7 +195,7 @@ export default function GalleryPage() {
                     key={video.id}
                     className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-shadow"
                   >
-                    <div className="aspect-video relative bg-[#071e2e]">
+                    <div className="aspect-video relative bg-[#0c4a6e]">
                       {video.platform === "youtube" ? (
                         <iframe
                           src={`${video.embed_url}?rel=0&modestbranding=1`}
@@ -229,7 +229,7 @@ export default function GalleryPage() {
                           {new Date(video.created_at).toLocaleDateString("en-UG", { year: "numeric", month: "long" })}
                         </span>
                       </div>
-                      <h3 className="font-bold text-[#071e2e] mb-2 font-display line-clamp-2">{video.title}</h3>
+                      <h3 className="font-bold text-[#0c4a6e] mb-2 font-display line-clamp-2">{video.title}</h3>
                       {video.description && (
                         <p className="text-gray-500 text-sm leading-relaxed line-clamp-2">{video.description}</p>
                       )}
@@ -264,7 +264,7 @@ export default function GalleryPage() {
       {/* CTA */}
       <section className="py-16 bg-white text-center">
         <div className="container-wide">
-          <h2 className="text-2xl font-bold text-[#071e2e] mb-3">Want to See Our Farm in Person?</h2>
+          <h2 className="text-2xl font-bold text-[#0c4a6e] mb-3">Want to See Our Farm in Person?</h2>
           <p className="text-gray-500 max-w-md mx-auto mb-6">
             We welcome farm visits to Kajjansi. Come see our operations firsthand and meet our aquaculture team.
           </p>

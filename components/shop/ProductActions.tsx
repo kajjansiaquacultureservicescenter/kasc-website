@@ -41,14 +41,14 @@ export default function ProductActions({ product }: Props) {
         <div className="flex items-center gap-0 bg-[#f8fafc] border border-gray-200 rounded-xl overflow-hidden">
           <button
             onClick={() => setQty(q => Math.max(1, q - 1))}
-            className="w-10 h-10 flex items-center justify-center text-gray-500 hover:bg-gray-100 hover:text-[#0f5070] transition-colors"
+            className="w-10 h-10 flex items-center justify-center text-gray-500 hover:bg-gray-100 hover:text-[#0284c7] transition-colors"
           >
             <Minus size={14} />
           </button>
-          <span className="w-12 text-center font-bold text-[#071e2e] text-sm">{qty}</span>
+          <span className="w-12 text-center font-bold text-[#0c4a6e] text-sm">{qty}</span>
           <button
             onClick={() => setQty(q => q + 1)}
-            className="w-10 h-10 flex items-center justify-center text-gray-500 hover:bg-gray-100 hover:text-[#0f5070] transition-colors"
+            className="w-10 h-10 flex items-center justify-center text-gray-500 hover:bg-gray-100 hover:text-[#0284c7] transition-colors"
           >
             <Plus size={14} />
           </button>
@@ -63,7 +63,7 @@ export default function ProductActions({ product }: Props) {
           className={`flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl font-semibold text-sm transition-all duration-200 ${
             added
               ? "bg-[#226640] text-white"
-              : "bg-[#0f5070] text-white hover:bg-[#0a2d43] active:scale-95"
+              : "bg-[#0284c7] text-white hover:bg-[#075985] active:scale-95"
           }`}
         >
           {added ? (
@@ -84,7 +84,7 @@ export default function ProductActions({ product }: Props) {
 
       <Link
         href="/cart"
-        className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl border-2 border-[#0f5070] text-[#0f5070] font-semibold text-sm hover:bg-[#eef8fd] transition-colors"
+        className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl border-2 border-[#0284c7] text-[#0284c7] font-semibold text-sm hover:bg-[#f0f9ff] transition-colors"
         onClick={handleAdd}
       >
         Buy Now

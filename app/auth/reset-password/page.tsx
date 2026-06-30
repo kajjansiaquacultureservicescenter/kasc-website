@@ -16,11 +16,11 @@ export default function ResetPasswordPage() {
           <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
             <MailCheck size={32} className="text-blue-600" />
           </div>
-          <h2 className="text-xl font-bold text-[#071e2e] font-display mb-2">Check your email</h2>
+          <h2 className="text-xl font-bold text-[#0c4a6e] font-display mb-2">Check your email</h2>
           <p className="text-gray-500 text-sm mb-6">{state.success}</p>
           <Link
             href="/auth/login"
-            className="inline-flex items-center gap-2 text-[#0f5070] text-sm font-semibold hover:underline"
+            className="inline-flex items-center gap-2 text-[#0284c7] text-sm font-semibold hover:underline"
           >
             <ArrowLeft size={14} /> Back to login
           </Link>
@@ -33,7 +33,7 @@ export default function ResetPasswordPage() {
     <div className="w-full max-w-md">
       <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-10">
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-[#071e2e] font-display mb-1">Reset password</h1>
+          <h1 className="text-2xl font-bold text-[#0c4a6e] font-display mb-1">Reset password</h1>
           <p className="text-gray-500 text-sm">Enter your email and we&apos;ll send a reset link</p>
         </div>
 
@@ -52,14 +52,14 @@ export default function ResetPasswordPage() {
               autoComplete="email"
               required
               placeholder="you@example.com"
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8] focus:border-transparent transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8] focus:border-transparent transition-all"
             />
           </div>
           <SubmitButton />
         </form>
 
         <div className="mt-6 text-center">
-          <Link href="/auth/login" className="inline-flex items-center gap-1 text-sm text-[#0f5070] hover:underline">
+          <Link href="/auth/login" className="inline-flex items-center gap-1 text-sm text-[#0284c7] hover:underline">
             <ArrowLeft size={13} /> Back to login
           </Link>
         </div>
@@ -74,7 +74,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-[#0f5070] to-[#226640] text-white font-semibold text-sm hover:opacity-90 transition-all disabled:opacity-60 flex items-center justify-center gap-2"
+      className="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-[#0284c7] to-[#226640] text-white font-semibold text-sm hover:opacity-90 transition-all disabled:opacity-60 flex items-center justify-center gap-2"
     >
       {pending && <Loader2 size={15} className="animate-spin" />}
       Send reset link

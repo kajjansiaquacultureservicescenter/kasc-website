@@ -48,11 +48,11 @@ export default function ContactPage() {
       {/* Hero */}
       <section className="relative py-20 lg:py-28 gradient-hero overflow-hidden">
         <div className="absolute inset-0 noise-overlay" />
-        <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-[#1a6b94]/20 blur-3xl" />
+        <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-[#0ea5e9]/20 blur-3xl" />
         <div className="container-wide relative z-10">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-blue-100 text-sm mb-6">
-              <MessageCircle size={14} className="text-[#5aafd4]" /> Get In Touch
+              <MessageCircle size={14} className="text-[#7dd3fc]" /> Get In Touch
             </div>
             <h1 className="text-4xl lg:text-5xl font-bold text-white mb-5">
               Talk to Our{" "}
@@ -80,14 +80,14 @@ export default function ContactPage() {
               { icon: MapPin, label: "Visit Our Farm", values: [{ text: COMPANY.farmAddress, href: "#map" }], color: "brand" },
               { icon: Clock, label: "Working Hours", values: [{ text: "Mon – Sat, 8am – 6pm EAT", href: null }], color: "green" },
             ].map(({ icon: Icon, label, values, color }) => (
-              <div key={label} className={`p-6 rounded-2xl border ${color === "brand" ? "bg-[#eef8fd] border-[#a0d4ea]" : "bg-[#f0fcf4] border-[#beeecf]"}`}>
-                <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 ${color === "brand" ? "bg-[#0f5070]" : "bg-[#226640]"}`}>
+              <div key={label} className={`p-6 rounded-2xl border ${color === "brand" ? "bg-[#f0f9ff] border-[#bae6fd]" : "bg-[#f0fcf4] border-[#beeecf]"}`}>
+                <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 ${color === "brand" ? "bg-[#0284c7]" : "bg-[#226640]"}`}>
                   <Icon size={20} className="text-white" />
                 </div>
                 <div className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">{label}</div>
                 {values.map(({ text, href }) =>
                   href ? (
-                    <a key={text} href={href} className={`block font-semibold text-sm hover:underline ${color === "brand" ? "text-[#0f5070]" : "text-[#226640]"}`}>{text}</a>
+                    <a key={text} href={href} className={`block font-semibold text-sm hover:underline ${color === "brand" ? "text-[#0284c7]" : "text-[#226640]"}`}>{text}</a>
                   ) : (
                     <div key={text} className="font-semibold text-sm text-gray-700">{text}</div>
                   )
@@ -104,7 +104,7 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
             {/* Form */}
             <div className="lg:col-span-3 bg-white rounded-3xl p-8 lg:p-10 shadow-[var(--shadow-card)] border border-gray-100">
-              <h2 className="text-2xl font-bold text-[#071e2e] mb-2 font-display">Send Us a Message</h2>
+              <h2 className="text-2xl font-bold text-[#0c4a6e] mb-2 font-display">Send Us a Message</h2>
               <p className="text-gray-500 text-sm mb-8">Fill in the form and one of our specialists will respond within 24 hours.</p>
 
               {sent ? (
@@ -112,7 +112,7 @@ export default function ContactPage() {
                   <div className="w-16 h-16 rounded-full bg-[#f0fcf4] flex items-center justify-center mb-4">
                     <CheckCircle2 size={32} className="text-[#226640]" />
                   </div>
-                  <h3 className="text-xl font-bold text-[#071e2e] mb-2">Message Sent!</h3>
+                  <h3 className="text-xl font-bold text-[#0c4a6e] mb-2">Message Sent!</h3>
                   <p className="text-gray-500 mb-6 max-w-xs">Thank you for reaching out. We&apos;ll get back to you within 24 hours.</p>
                   <button onClick={() => { setSent(false); setForm({ name: "", email: "", phone: "", subject: "", service: "", message: "" }); }}
                     className="btn-outline text-sm">Send Another Message</button>
@@ -123,12 +123,12 @@ export default function ContactPage() {
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1.5">Full Name <span className="text-red-400">*</span></label>
                       <input value={form.name} onChange={(e) => update("name", e.target.value)} placeholder="John Mugisha"
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#2d8ab8] focus:ring-2 focus:ring-[#2d8ab8]/10 transition-all" required />
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#38bdf8] focus:ring-2 focus:ring-[#38bdf8]/10 transition-all" required />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1.5">Email Address <span className="text-red-400">*</span></label>
                       <input type="email" value={form.email} onChange={(e) => update("email", e.target.value)} placeholder="john@example.com"
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#2d8ab8] focus:ring-2 focus:ring-[#2d8ab8]/10 transition-all" required />
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#38bdf8] focus:ring-2 focus:ring-[#38bdf8]/10 transition-all" required />
                     </div>
                   </div>
 
@@ -136,12 +136,12 @@ export default function ContactPage() {
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1.5">Phone / WhatsApp</label>
                       <input value={form.phone} onChange={(e) => update("phone", e.target.value)} placeholder="+256 700 000000"
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#2d8ab8] focus:ring-2 focus:ring-[#2d8ab8]/10 transition-all" />
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#38bdf8] focus:ring-2 focus:ring-[#38bdf8]/10 transition-all" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1.5">Service of Interest</label>
                       <select value={form.service} onChange={(e) => update("service", e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#2d8ab8] focus:ring-2 focus:ring-[#2d8ab8]/10 transition-all bg-white">
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#38bdf8] focus:ring-2 focus:ring-[#38bdf8]/10 transition-all bg-white">
                         <option value="">Select a service…</option>
                         {SERVICES.map((s) => <option key={s} value={s}>{s}</option>)}
                       </select>
@@ -151,13 +151,13 @@ export default function ContactPage() {
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1.5">Subject</label>
                     <input value={form.subject} onChange={(e) => update("subject", e.target.value)} placeholder="e.g. Enquiry about fingerling prices"
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#2d8ab8] focus:ring-2 focus:ring-[#2d8ab8]/10 transition-all" />
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#38bdf8] focus:ring-2 focus:ring-[#38bdf8]/10 transition-all" />
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1.5">Message <span className="text-red-400">*</span></label>
                     <textarea value={form.message} onChange={(e) => update("message", e.target.value)} placeholder="Tell us about your project, location, farm size, and any specific questions…"
-                      rows={5} className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#2d8ab8] focus:ring-2 focus:ring-[#2d8ab8]/10 transition-all resize-none" required />
+                      rows={5} className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#38bdf8] focus:ring-2 focus:ring-[#38bdf8]/10 transition-all resize-none" required />
                   </div>
 
                   <button type="submit" disabled={loading}
@@ -177,12 +177,12 @@ export default function ContactPage() {
             {/* Right sidebar */}
             <div className="lg:col-span-2 space-y-6">
               {/* Quick contact */}
-              <div className="bg-gradient-to-br from-[#0f5070] to-[#226640] rounded-2xl p-6 text-white">
+              <div className="bg-gradient-to-br from-[#0284c7] to-[#226640] rounded-2xl p-6 text-white">
                 <h3 className="font-bold text-lg mb-4 font-display">Prefer to Talk?</h3>
                 <p className="text-blue-100 text-sm mb-5">Our team is available Monday to Saturday, 8am–6pm East Africa Time.</p>
                 <div className="space-y-3">
                   <a href={`tel:${COMPANY.phone}`} className="flex items-center gap-3 p-3 rounded-xl bg-white/10 hover:bg-white/20 transition-colors">
-                    <Phone size={16} className="text-[#5aafd4]" />
+                    <Phone size={16} className="text-[#7dd3fc]" />
                     <span className="text-sm font-medium">{COMPANY.phone}</span>
                   </a>
                   <a href={`https://wa.me/${COMPANY.social.whatsapp}`} target="_blank" rel="noopener noreferrer"
@@ -193,7 +193,7 @@ export default function ContactPage() {
                     <span className="text-sm font-medium">WhatsApp Us</span>
                   </a>
                   <a href={`mailto:${COMPANY.email}`} className="flex items-center gap-3 p-3 rounded-xl bg-white/10 hover:bg-white/20 transition-colors">
-                    <Mail size={16} className="text-[#5aafd4]" />
+                    <Mail size={16} className="text-[#7dd3fc]" />
                     <span className="text-sm font-medium">{COMPANY.email}</span>
                   </a>
                 </div>
@@ -201,7 +201,7 @@ export default function ContactPage() {
 
               {/* FAQ teaser */}
               <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-[var(--shadow-card)]">
-                <h3 className="font-bold text-[#071e2e] mb-4 font-display">Common Questions</h3>
+                <h3 className="font-bold text-[#0c4a6e] mb-4 font-display">Common Questions</h3>
                 <div className="space-y-3">
                   {[
                     "What is the minimum order for fingerlings?",
@@ -209,8 +209,8 @@ export default function ContactPage() {
                     "How long does pond construction take?",
                     "What dam liner thickness do I need?",
                   ].map((q) => (
-                    <div key={q} className="flex items-center gap-2 text-sm text-gray-600 p-3 rounded-xl bg-[#f8fafc] border border-gray-100 hover:border-[#a0d4ea] hover:text-[#0f5070] transition-all cursor-pointer">
-                      <CheckCircle2 size={13} className="text-[#2d8ab8] shrink-0" />
+                    <div key={q} className="flex items-center gap-2 text-sm text-gray-600 p-3 rounded-xl bg-[#f8fafc] border border-gray-100 hover:border-[#bae6fd] hover:text-[#0284c7] transition-all cursor-pointer">
+                      <CheckCircle2 size={13} className="text-[#38bdf8] shrink-0" />
                       {q}
                     </div>
                   ))}

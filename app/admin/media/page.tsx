@@ -122,13 +122,13 @@ export default function AdminMediaPage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-[#071e2e] font-display">Videos</h1>
+        <h1 className="text-2xl font-bold text-[#0c4a6e] font-display">Videos</h1>
         <p className="text-gray-500 text-sm mt-1">Add YouTube and TikTok videos to the gallery</p>
       </div>
 
       {/* Add form */}
       <form onSubmit={handleAdd} className="bg-white rounded-2xl border border-gray-100 p-6 mb-6 shadow-sm">
-        <h2 className="font-bold text-[#071e2e] mb-4 font-display">Add New Video</h2>
+        <h2 className="font-bold text-[#0c4a6e] mb-4 font-display">Add New Video</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="md:col-span-2">
             <label className="block text-xs font-medium text-gray-600 mb-1">Video URL *</label>
@@ -137,7 +137,7 @@ export default function AdminMediaPage() {
                 value={form.url}
                 onChange={(e) => onUrlChange(e.target.value)}
                 placeholder="Paste a YouTube or TikTok video link"
-                className="w-full px-3 py-2.5 pr-28 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]"
+                className="w-full px-3 py-2.5 pr-28 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]"
               />
               {platformDetected && (
                 <div className={`absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold ${
@@ -155,7 +155,7 @@ export default function AdminMediaPage() {
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
               placeholder="e.g. How to build a fish pond"
-              className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]"
+              className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]"
             />
           </div>
           <div>
@@ -164,14 +164,14 @@ export default function AdminMediaPage() {
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
               placeholder="Short description"
-              className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]"
+              className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]"
             />
           </div>
         </div>
         <button
           type="submit"
           disabled={saving}
-          className="mt-4 flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#071e2e] text-white text-sm font-semibold hover:bg-[#0f3a52] transition-all disabled:opacity-60"
+          className="mt-4 flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#0c4a6e] text-white text-sm font-semibold hover:bg-[#075985] transition-all disabled:opacity-60"
         >
           {saving ? <Loader2 size={15} className="animate-spin" /> : <Plus size={15} />}
           Add Video
@@ -204,7 +204,7 @@ export default function AdminMediaPage() {
                   className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/40 transition-all"
                 >
                   <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all shadow-lg">
-                    <Play size={20} className="text-[#071e2e] ml-1" />
+                    <Play size={20} className="text-[#0c4a6e] ml-1" />
                   </div>
                 </button>
                 <div className={`absolute top-2 left-2 flex items-center gap-1 px-2 py-0.5 rounded-lg text-xs font-bold ${
@@ -216,7 +216,7 @@ export default function AdminMediaPage() {
               </div>
               <div className="p-4 flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
-                  <div className="font-semibold text-sm text-[#071e2e] truncate">{embed.title}</div>
+                  <div className="font-semibold text-sm text-[#0c4a6e] truncate">{embed.title}</div>
                   {embed.description && <div className="text-xs text-gray-400 mt-0.5 truncate">{embed.description}</div>}
                 </div>
                 <button

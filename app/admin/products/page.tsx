@@ -171,12 +171,12 @@ export default function AdminProductsPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-[#071e2e] font-display">Products</h1>
+          <h1 className="text-2xl font-bold text-[#0c4a6e] font-display">Products</h1>
           <p className="text-gray-500 text-sm mt-1">{products.length} products across {CATEGORIES.length} categories</p>
         </div>
         <button
           onClick={openNew}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0f5070] text-white font-semibold text-sm hover:bg-[#0a3d57] transition-all"
+          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0284c7] text-white font-semibold text-sm hover:bg-[#0369a1] transition-all"
         >
           <Plus size={16} /> Add Product
         </button>
@@ -190,7 +190,7 @@ export default function AdminProductsPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search products..."
-            className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]"
+            className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]"
           />
         </div>
         <div className="flex items-center gap-2 flex-wrap">
@@ -200,8 +200,8 @@ export default function AdminProductsPage() {
               onClick={() => setCatFilter(cat)}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all capitalize ${
                 catFilter === cat
-                  ? "bg-[#0f5070] text-white border-[#0f5070]"
-                  : "bg-white text-gray-600 border-gray-200 hover:border-[#2d8ab8]"
+                  ? "bg-[#0284c7] text-white border-[#0284c7]"
+                  : "bg-white text-gray-600 border-gray-200 hover:border-[#38bdf8]"
               }`}
             >
               {cat === "all" ? "All" : cat} {cat !== "all" && catCounts[cat] ? `(${catCounts[cat]})` : ""}
@@ -241,21 +241,21 @@ export default function AdminProductsPage() {
                           <Image src={p.image_url} alt={p.name} fill className="object-cover" sizes="40px" />
                         </div>
                       ) : (
-                        <div className="w-10 h-10 rounded-lg bg-[#eef8fd] flex items-center justify-center shrink-0 text-[#0f5070] text-xs font-bold">
+                        <div className="w-10 h-10 rounded-lg bg-[#f0f9ff] flex items-center justify-center shrink-0 text-[#0284c7] text-xs font-bold">
                           {p.name.slice(0, 2).toUpperCase()}
                         </div>
                       )}
                       <div>
-                        <div className="font-semibold text-[#071e2e] line-clamp-1">{p.name}</div>
+                        <div className="font-semibold text-[#0c4a6e] line-clamp-1">{p.name}</div>
                         <div className="text-xs text-gray-400">{p.slug}</div>
                       </div>
                     </div>
                   </td>
                   <td className="px-4 py-3 hidden md:table-cell">
-                    <span className="px-2 py-0.5 rounded-full bg-[#eef8fd] text-[#0f5070] text-xs font-medium capitalize">{p.category}</span>
+                    <span className="px-2 py-0.5 rounded-full bg-[#f0f9ff] text-[#0284c7] text-xs font-medium capitalize">{p.category}</span>
                     {p.badge && <span className="ml-1.5 px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 text-xs font-medium">{p.badge}</span>}
                   </td>
-                  <td className="px-4 py-3 text-right font-semibold text-[#071e2e]">
+                  <td className="px-4 py-3 text-right font-semibold text-[#0c4a6e]">
                     UGX {p.price.toLocaleString()}
                     <div className="text-xs text-gray-400 font-normal">{p.unit}</div>
                   </td>
@@ -270,7 +270,7 @@ export default function AdminProductsPage() {
                     <div className="flex items-center justify-end gap-1">
                       <button
                         onClick={() => openEdit(p)}
-                        className="p-1.5 rounded-lg hover:bg-[#eef8fd] text-gray-400 hover:text-[#0f5070] transition-all"
+                        className="p-1.5 rounded-lg hover:bg-[#f0f9ff] text-gray-400 hover:text-[#0284c7] transition-all"
                       >
                         <Pencil size={14} />
                       </button>
@@ -296,7 +296,7 @@ export default function AdminProductsPage() {
           <div className="w-full max-w-lg bg-white shadow-2xl overflow-y-auto flex flex-col">
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100 shrink-0">
-              <h2 className="font-bold text-[#071e2e] font-display text-lg">
+              <h2 className="font-bold text-[#0c4a6e] font-display text-lg">
                 {editId === "new" ? "Add New Product" : "Edit Product"}
               </h2>
               <button onClick={closeForm} className="p-2 rounded-xl hover:bg-gray-100 text-gray-400 transition-all">
@@ -311,7 +311,7 @@ export default function AdminProductsPage() {
               <div>
                 <label className="block text-xs font-medium text-gray-600 mb-2">Main Image</label>
                 {form.image_url && (
-                  <div className="relative h-40 rounded-xl overflow-hidden mb-2 bg-[#eef8fd] group">
+                  <div className="relative h-40 rounded-xl overflow-hidden mb-2 bg-[#f0f9ff] group">
                     <Image src={form.image_url} alt="preview" fill className="object-cover" sizes="480px" />
                     <button
                       type="button"
@@ -325,7 +325,7 @@ export default function AdminProductsPage() {
                 <label className={`flex items-center justify-center gap-2 p-3 border-2 border-dashed rounded-xl cursor-pointer transition-all text-sm font-medium ${
                   imgUploading
                     ? "border-gray-200 bg-gray-50 cursor-not-allowed text-gray-400"
-                    : "border-[#2d8ab8]/40 hover:border-[#2d8ab8] hover:bg-[#eef8fd]/50 text-[#0f5070]"
+                    : "border-[#38bdf8]/40 hover:border-[#38bdf8] hover:bg-[#f0f9ff]/50 text-[#0284c7]"
                 }`}>
                   {imgUploading
                     ? <><Loader2 size={16} className="animate-spin" /> Uploading…</>
@@ -364,7 +364,7 @@ export default function AdminProductsPage() {
                     </div>
                   ))}
                   <label className={`w-20 h-20 flex flex-col items-center justify-center border-2 border-dashed rounded-lg cursor-pointer transition-all ${
-                    imgUploading ? "border-gray-200 cursor-not-allowed" : "border-gray-300 hover:border-[#2d8ab8] hover:bg-[#eef8fd]/30"
+                    imgUploading ? "border-gray-200 cursor-not-allowed" : "border-gray-300 hover:border-[#38bdf8] hover:bg-[#f0f9ff]/30"
                   }`}>
                     {imgUploading
                       ? <Loader2 size={18} className="text-gray-300 animate-spin" />
@@ -388,7 +388,7 @@ export default function AdminProductsPage() {
                   onChange={(e) => handleChange("name", e.target.value)}
                   required
                   placeholder="e.g. Nile Tilapia Fingerlings"
-                  className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]"
+                  className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]"
                 />
               </div>
 
@@ -399,7 +399,7 @@ export default function AdminProductsPage() {
                   onChange={(e) => handleChange("slug", e.target.value)}
                   required
                   placeholder="nile-tilapia-fingerlings"
-                  className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]"
+                  className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[#38bdf8]"
                 />
               </div>
 
@@ -410,7 +410,7 @@ export default function AdminProductsPage() {
                     <select
                       value={form.category}
                       onChange={(e) => handleChange("category", e.target.value)}
-                      className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]"
+                      className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#38bdf8]"
                     >
                       {CATEGORIES.map((c) => <option key={c} value={c} className="capitalize">{c}</option>)}
                     </select>
@@ -423,7 +423,7 @@ export default function AdminProductsPage() {
                     <select
                       value={form.badge ?? ""}
                       onChange={(e) => handleChange("badge", e.target.value || null)}
-                      className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]"
+                      className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#38bdf8]"
                     >
                       {BADGES.map((b) => <option key={b} value={b}>{b || "— none —"}</option>)}
                     </select>
@@ -441,7 +441,7 @@ export default function AdminProductsPage() {
                     value={form.price}
                     onChange={(e) => handleChange("price", Number(e.target.value))}
                     required
-                    className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]"
+                    className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]"
                   />
                 </div>
                 <div>
@@ -450,7 +450,7 @@ export default function AdminProductsPage() {
                     value={form.unit}
                     onChange={(e) => handleChange("unit", e.target.value)}
                     placeholder="per fingerling"
-                    className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]"
+                    className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]"
                   />
                 </div>
               </div>
@@ -462,7 +462,7 @@ export default function AdminProductsPage() {
                   onChange={(e) => handleChange("description", e.target.value)}
                   rows={3}
                   placeholder="Brief product description..."
-                  className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8] resize-none"
+                  className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8] resize-none"
                 />
               </div>
 
@@ -475,7 +475,7 @@ export default function AdminProductsPage() {
                   onChange={(e) => setSpecsInput(e.target.value)}
                   rows={4}
                   placeholder={"45% crude protein\n3mm pellet size\n25kg packaging"}
-                  className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8] resize-none font-mono"
+                  className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8] resize-none font-mono"
                 />
               </div>
 
@@ -486,7 +486,7 @@ export default function AdminProductsPage() {
                     type="number"
                     value={form.sort_order}
                     onChange={(e) => handleChange("sort_order", Number(e.target.value))}
-                    className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d8ab8]"
+                    className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#38bdf8]"
                   />
                 </div>
                 <div className="flex items-end pb-0.5">
@@ -514,7 +514,7 @@ export default function AdminProductsPage() {
               <button
                 onClick={handleSave as unknown as React.MouseEventHandler}
                 disabled={saving || imgUploading}
-                className="flex-1 py-2.5 rounded-xl bg-[#0f5070] text-white text-sm font-semibold hover:bg-[#0a3d57] transition-all disabled:opacity-60 flex items-center justify-center gap-2"
+                className="flex-1 py-2.5 rounded-xl bg-[#0284c7] text-white text-sm font-semibold hover:bg-[#0369a1] transition-all disabled:opacity-60 flex items-center justify-center gap-2"
               >
                 {saving && <Loader2 size={14} className="animate-spin" />}
                 {editId === "new" ? "Add Product" : "Save Changes"}

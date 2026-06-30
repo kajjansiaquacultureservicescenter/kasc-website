@@ -38,15 +38,15 @@ export default function AdminSidebar({
     href === "/admin" ? pathname === "/admin" : pathname.startsWith(href);
 
   return (
-    <aside className="w-64 bg-[#071e2e] flex flex-col shrink-0 fixed top-0 left-0 bottom-0 z-40">
+    <aside className="w-64 bg-[#0c4a6e] flex flex-col shrink-0 fixed top-0 left-0 bottom-0 z-40">
       <div className="p-6 border-b border-white/10">
         <Link href="/admin" className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#2d8ab8] to-[#2d8c56] flex items-center justify-center">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#38bdf8] to-[#2d8c56] flex items-center justify-center">
             <Fish size={18} className="text-white" />
           </div>
           <div>
             <div className="text-white font-bold text-sm">KASC Admin</div>
-            <div className="text-[#5aafd4] text-xs">Management Panel</div>
+            <div className="text-[#7dd3fc] text-xs">Management Panel</div>
           </div>
         </Link>
       </div>
@@ -65,7 +65,7 @@ export default function AdminSidebar({
             <Icon
               size={16}
               className={`shrink-0 transition-colors ${
-                isActive(href) ? "text-[#5aafd4]" : "group-hover:text-[#5aafd4]"
+                isActive(href) ? "text-[#7dd3fc]" : "group-hover:text-[#7dd3fc]"
               }`}
             />
             {label}
@@ -75,7 +75,7 @@ export default function AdminSidebar({
 
       <div className="p-4 border-t border-white/10">
         <div className="flex items-center gap-3 px-3 py-2 mb-2">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#2d8ab8] to-[#226640] flex items-center justify-center text-white font-bold text-xs shrink-0">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#38bdf8] to-[#226640] flex items-center justify-center text-white font-bold text-xs shrink-0">
             {adminName.slice(0, 2).toUpperCase()}
           </div>
           <div className="flex-1 min-w-0">

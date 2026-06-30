@@ -117,16 +117,16 @@ export default function HomePage() {
       {/* HERO */}
       <section className="relative min-h-[100svh] flex items-center gradient-hero overflow-hidden">
         <div className="absolute inset-0 noise-overlay" />
-        <div className="absolute top-20 right-[10%] w-72 h-72 rounded-full bg-[#1a6b94]/20 blur-3xl animate-float" />
+        <div className="absolute top-20 right-[10%] w-72 h-72 rounded-full bg-[#0ea5e9]/20 blur-3xl animate-float" />
         <div className="absolute bottom-20 left-[5%] w-96 h-96 rounded-full bg-[#226640]/15 blur-3xl animate-float [animation-delay:2s]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#0f5070]/10 blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#0284c7]/10 blur-3xl" />
 
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {[{ top: "20%", left: "8%", size: 40, delay: "0s", dur: "12s" }, { top: "60%", left: "15%", size: 28, delay: "3s", dur: "16s" },
             { top: "35%", right: "12%", size: 35, delay: "1.5s", dur: "14s" }, { top: "75%", right: "20%", size: 22, delay: "4s", dur: "18s" }
           ].map((f, i) => (
             <div key={i} className="absolute opacity-10" style={{ top: f.top, left: (f as any).left, right: (f as any).right, animation: `float ${f.dur} ease-in-out ${f.delay} infinite` }}>
-              <Fish size={f.size} className="text-[#5aafd4]" />
+              <Fish size={f.size} className="text-[#7dd3fc]" />
             </div>
           ))}
         </div>
@@ -174,7 +174,7 @@ export default function HomePage() {
                 return (
                   <div key={stat.value} className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
-                      <Icon size={18} className="text-[#5aafd4]" />
+                      <Icon size={18} className="text-[#7dd3fc]" />
                     </div>
                     <div>
                       <div className="text-white text-xl font-bold leading-none">{stat.value}</div>
@@ -198,10 +198,10 @@ export default function HomePage() {
       <section className="section-padding bg-white">
         <div className="container-wide">
           <FadeIn className="text-center max-w-2xl mx-auto mb-14">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#eef8fd] text-[#0f5070] text-sm font-medium mb-4 border border-[#a0d4ea]">
-              <Waves size={14} className="text-[#2d8ab8]" /> What We Do
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#f0f9ff] text-[#0284c7] text-sm font-medium mb-4 border border-[#bae6fd]">
+              <Waves size={14} className="text-[#38bdf8]" /> What We Do
             </div>
-            <h2 className="text-3xl lg:text-4xl font-bold text-[#071e2e] mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#0c4a6e] mb-4">
               Complete Aquaculture Services,{" "}
               <span className="text-gradient">All Under One Roof</span>
             </h2>
@@ -218,17 +218,17 @@ export default function HomePage() {
                   <Link href={`/services/${service.slug}`} className="group block h-full">
                     <div className="h-full p-7 rounded-2xl border border-gray-100 bg-white hover:shadow-[var(--shadow-card-hover)] transition-all duration-300 relative overflow-hidden hover:-translate-y-1">
                       <div className={cn("absolute top-0 left-0 right-0 h-1 rounded-t-2xl",
-                        service.color === "brand" ? "bg-gradient-to-r from-[#0f5070] to-[#2d8ab8]" :
+                        service.color === "brand" ? "bg-gradient-to-r from-[#0284c7] to-[#38bdf8]" :
                         service.color === "green" ? "bg-gradient-to-r from-[#226640] to-[#3aaf6c]" :
                         "bg-gradient-to-r from-[#a05200] to-[#f4a020]")} />
                       <div className={cn("w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-transform group-hover:scale-110",
-                        service.color === "brand" ? "bg-[#eef8fd]" : service.color === "green" ? "bg-[#f0fcf4]" : "bg-[#fffbf0]")}>
-                        <Icon size={26} className={cn(service.color === "brand" ? "text-[#0f5070]" : service.color === "green" ? "text-[#226640]" : "text-[#a05200]")} />
+                        service.color === "brand" ? "bg-[#f0f9ff]" : service.color === "green" ? "bg-[#f0fcf4]" : "bg-[#fffbf0]")}>
+                        <Icon size={26} className={cn(service.color === "brand" ? "text-[#0284c7]" : service.color === "green" ? "text-[#226640]" : "text-[#a05200]")} />
                       </div>
-                      <h3 className="text-[#071e2e] font-bold text-lg mb-2 font-display group-hover:text-[#0f5070] transition-colors">{service.title}</h3>
+                      <h3 className="text-[#0c4a6e] font-bold text-lg mb-2 font-display group-hover:text-[#0284c7] transition-colors">{service.title}</h3>
                       <p className="text-gray-400 text-xs font-medium uppercase tracking-wide mb-3">{service.subtitle}</p>
                       <p className="text-gray-600 text-sm leading-relaxed line-clamp-3 mb-5">{service.description}</p>
-                      <div className="flex items-center gap-1.5 text-sm font-semibold text-[#0f5070] group-hover:gap-2.5 transition-all">
+                      <div className="flex items-center gap-1.5 text-sm font-semibold text-[#0284c7] group-hover:gap-2.5 transition-all">
                         Learn More <ArrowRight size={14} />
                       </div>
                     </div>
@@ -267,7 +267,7 @@ export default function HomePage() {
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#f0fcf4] text-[#226640] text-sm font-medium mb-5 border border-[#beeecf]">
                 <Leaf size={14} className="text-[#3aaf6c]" /> Why Choose KASC
               </div>
-              <h2 className="text-3xl lg:text-4xl font-bold text-[#071e2e] mb-5 leading-tight">
+              <h2 className="text-3xl lg:text-4xl font-bold text-[#0c4a6e] mb-5 leading-tight">
                 We Don&apos;t Just Sell Products.{" "}
                 <span className="text-gradient">We Build Successful Farms.</span>
               </h2>
@@ -282,9 +282,9 @@ export default function HomePage() {
                   { title: "International Standards", desc: "We operate to ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018 — quality, environment, and safety built into everything we do." },
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4">
-                    <CheckCircle2 size={18} className="text-[#2d8ab8] shrink-0 mt-0.5" />
+                    <CheckCircle2 size={18} className="text-[#38bdf8] shrink-0 mt-0.5" />
                     <div>
-                      <div className="font-semibold text-[#071e2e] text-sm mb-0.5">{item.title}</div>
+                      <div className="font-semibold text-[#0c4a6e] text-sm mb-0.5">{item.title}</div>
                       <div className="text-gray-500 text-sm leading-relaxed">{item.desc}</div>
                     </div>
                   </div>
@@ -311,10 +311,10 @@ export default function HomePage() {
                 ) : (
                   <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/3]">
                     <Image src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80" alt="Fish farm" fill className="object-cover" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#071e2e]/40 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0c4a6e]/40 to-transparent" />
                     <Link href="/farm" className="absolute inset-0 flex items-center justify-center group">
                       <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
-                        <Play size={24} className="text-[#0f5070] ml-1" fill="currentColor" />
+                        <Play size={24} className="text-[#0284c7] ml-1" fill="currentColor" />
                       </div>
                     </Link>
                   </div>
@@ -325,18 +325,18 @@ export default function HomePage() {
                       <Fish size={20} className="text-[#226640]" />
                     </div>
                     <div>
-                      <div className="text-xl font-bold text-[#071e2e]">1M+</div>
+                      <div className="text-xl font-bold text-[#0c4a6e]">1M+</div>
                       <div className="text-xs text-gray-500">Fingerlings per year</div>
                     </div>
                   </div>
                 </div>
                 <div className="absolute -top-5 -right-5 card-glass rounded-2xl p-4 shadow-xl border border-white/60">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#eef8fd] flex items-center justify-center">
-                      <Globe size={20} className="text-[#0f5070]" />
+                    <div className="w-10 h-10 rounded-xl bg-[#f0f9ff] flex items-center justify-center">
+                      <Globe size={20} className="text-[#0284c7]" />
                     </div>
                     <div>
-                      <div className="text-xl font-bold text-[#071e2e]">5</div>
+                      <div className="text-xl font-bold text-[#0c4a6e]">5</div>
                       <div className="text-xs text-gray-500">Countries served</div>
                     </div>
                   </div>
@@ -355,7 +355,7 @@ export default function HomePage() {
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#fffbf0] text-[#a05200] text-sm font-medium mb-3 border border-[#fde5b0]">
                 <ShoppingBag size={14} className="text-[#f4a020]" /> Our Products
               </div>
-              <h2 className="text-3xl lg:text-4xl font-bold text-[#071e2e]">Premium Aquaculture Inputs</h2>
+              <h2 className="text-3xl lg:text-4xl font-bold text-[#0c4a6e]">Premium Aquaculture Inputs</h2>
               <p className="text-gray-500 mt-2 max-w-lg">Everything your farm needs — sourced, tested, and delivered across East Africa.</p>
             </div>
             <Link href="/shop" className="btn-outline shrink-0">View All Products <ArrowRight size={16} /></Link>
@@ -375,28 +375,28 @@ export default function HomePage() {
                   <FadeIn key={product.id} delay={i * 0.06}>
                     <Link href={`/shop/${product.slug}`} className="group block h-full">
                       <div className="h-full bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-1 transition-all duration-300">
-                        <div className="relative h-48 bg-gradient-to-br from-[#eef8fd] to-[#f0fcf4] overflow-hidden">
+                        <div className="relative h-48 bg-gradient-to-br from-[#f0f9ff] to-[#f0fcf4] overflow-hidden">
                           <Image src={img} alt={product.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                           {product.badge && (
                             <span className={cn("absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-semibold",
                               product.badge === "Best Seller" ? "bg-[#f4a020] text-white" :
-                              product.badge === "Premium" ? "bg-[#0f5070] text-white" :
+                              product.badge === "Premium" ? "bg-[#0284c7] text-white" :
                               product.badge === "New" ? "bg-[#226640] text-white" : "bg-gray-800 text-white")}>
                               {product.badge}
                             </span>
                           )}
                         </div>
                         <div className="p-4">
-                          <div className="text-xs font-medium text-[#2d8ab8] uppercase tracking-wide mb-1 capitalize">{product.category}</div>
-                          <h3 className="font-semibold text-[#071e2e] text-sm mb-2 line-clamp-2 group-hover:text-[#0f5070] transition-colors font-display">{product.name}</h3>
+                          <div className="text-xs font-medium text-[#38bdf8] uppercase tracking-wide mb-1 capitalize">{product.category}</div>
+                          <h3 className="font-semibold text-[#0c4a6e] text-sm mb-2 line-clamp-2 group-hover:text-[#0284c7] transition-colors font-display">{product.name}</h3>
                           <p className="text-gray-500 text-xs leading-relaxed line-clamp-2 mb-3">{product.description}</p>
                           <div className="flex items-center justify-between">
                             <div>
-                              <div className="text-[#0f5070] font-bold text-base">{formatPrice(product.price)}</div>
+                              <div className="text-[#0284c7] font-bold text-base">{formatPrice(product.price)}</div>
                               <div className="text-gray-400 text-xs">{product.unit}</div>
                             </div>
-                            <div className="w-8 h-8 rounded-lg bg-[#eef8fd] flex items-center justify-center group-hover:bg-[#0f5070] transition-colors">
-                              <ArrowRight size={14} className="text-[#0f5070] group-hover:text-white transition-colors" />
+                            <div className="w-8 h-8 rounded-lg bg-[#f0f9ff] flex items-center justify-center group-hover:bg-[#0284c7] transition-colors">
+                              <ArrowRight size={14} className="text-[#0284c7] group-hover:text-white transition-colors" />
                             </div>
                           </div>
                         </div>
@@ -415,7 +415,7 @@ export default function HomePage() {
       </section>
 
       {/* STATS BAND */}
-      <section className="py-16 bg-gradient-to-r from-[#0a2d43] via-[#0f5070] to-[#226640]">
+      <section className="py-16 bg-gradient-to-r from-[#075985] via-[#0284c7] to-[#226640]">
         <div className="container-wide">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {dbStats.map((stat, i) => {
@@ -441,7 +441,7 @@ export default function HomePage() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#fffbf0] text-[#a05200] text-sm font-medium mb-4 border border-[#fde5b0]">
               <Star size={14} className="text-[#f4a020]" fill="currentColor" /> Customer Stories
             </div>
-            <h2 className="text-3xl lg:text-4xl font-bold text-[#071e2e] mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#0c4a6e] mb-4">
               Farmers Who Trusted Us{" "}<span className="text-gradient">and Succeeded</span>
             </h2>
             <p className="text-gray-500">Real stories from fish farmers across East Africa who built profitable farms with our support.</p>
@@ -461,12 +461,12 @@ export default function HomePage() {
                     {t.avatar_url ? (
                       <Image src={t.avatar_url} alt={t.name} width={40} height={40} className="w-10 h-10 rounded-full object-cover shrink-0" />
                     ) : (
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0f5070] to-[#226640] flex items-center justify-center text-white font-bold text-sm shrink-0">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0284c7] to-[#226640] flex items-center justify-center text-white font-bold text-sm shrink-0">
                         {t.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
                       </div>
                     )}
                     <div>
-                      <div className="font-semibold text-[#071e2e] text-sm">{t.name}</div>
+                      <div className="font-semibold text-[#0c4a6e] text-sm">{t.name}</div>
                       <div className="text-gray-400 text-xs">{t.role}</div>
                     </div>
                   </div>
@@ -497,10 +497,10 @@ export default function HomePage() {
             </SlideIn>
 
             <SlideIn direction="right" delay={0.1}>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#eef8fd] text-[#0f5070] text-sm font-medium mb-5 border border-[#a0d4ea]">
-                <MapPin size={14} className="text-[#2d8ab8]" /> Our Demonstration Farm
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#f0f9ff] text-[#0284c7] text-sm font-medium mb-5 border border-[#bae6fd]">
+                <MapPin size={14} className="text-[#38bdf8]" /> Our Demonstration Farm
               </div>
-              <h2 className="text-3xl lg:text-4xl font-bold text-[#071e2e] mb-5">
+              <h2 className="text-3xl lg:text-4xl font-bold text-[#0c4a6e] mb-5">
                 {farmSettings.farm_heading ? (
                   <>{farmSettings.farm_heading.split("Kajjansi Farm").map((part, j, arr) => j < arr.length - 1 ? <>{part}<span className="text-gradient">Kajjansi Farm</span></> : part)}</>
                 ) : (
@@ -514,14 +514,14 @@ export default function HomePage() {
                 {farmSettings.farm_desc_2 || "Visit us, observe our operations, and see for yourself how we raise healthy Nile Tilapia, African Catfish, and Miracle Tilapia using best-practice methods."}
               </p>
               <div className="grid grid-cols-2 gap-4 mb-8">
-                {[{ label: "Fingerling Hatchery", icon: Fish }, { label: "Training Center", icon: GraduationCap },
+                {[{ label: "Fingerling Hatchery", icon: Fish }, { label: "Training Centre", icon: GraduationCap },
                   { label: "Water Testing Lab", icon: Microscope }, { label: "Demo Ponds", icon: Waves }
                 ].map(({ label, icon: Icon }) => (
                   <div key={label} className="flex items-center gap-3 p-3 rounded-xl bg-[#f8fafc] border border-gray-100">
-                    <div className="w-8 h-8 rounded-lg bg-[#eef8fd] flex items-center justify-center shrink-0">
-                      <Icon size={16} className="text-[#0f5070]" />
+                    <div className="w-8 h-8 rounded-lg bg-[#f0f9ff] flex items-center justify-center shrink-0">
+                      <Icon size={16} className="text-[#0284c7]" />
                     </div>
-                    <span className="text-sm font-medium text-[#071e2e]">{label}</span>
+                    <span className="text-sm font-medium text-[#0c4a6e]">{label}</span>
                   </div>
                 ))}
               </div>
@@ -535,13 +535,13 @@ export default function HomePage() {
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0 gradient-hero" />
         <div className="absolute inset-0 noise-overlay" />
-        <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-[#1a6b94]/20 blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-[#0ea5e9]/20 blur-3xl" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-[#226640]/20 blur-3xl" />
 
         <div className="container-wide relative z-10 text-center">
           <FadeIn>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-blue-100 text-sm mb-8">
-              <Fish size={14} className="text-[#5aafd4]" /> Start Your Aquaculture Journey Today
+              <Fish size={14} className="text-[#7dd3fc]" /> Start Your Aquaculture Journey Today
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 max-w-3xl mx-auto leading-tight">
               Ready to Build a Profitable Fish Farm?
