@@ -94,7 +94,7 @@
     font-family: var(--font-display);
     font-weight: 700;
     line-height: 1.2;
-    color: var(--color-dark-800);
+    color: var(--color-brand-900);
   }
 
   ::selection {
@@ -126,19 +126,19 @@
 
 @layer utilities {
   .gradient-brand {
-    background: linear-gradient(135deg, var(--color-brand-800) 0%, var(--color-brand-600) 50%, var(--color-green-700) 100%);
+    background: linear-gradient(135deg, var(--color-brand-700) 0%, var(--color-brand-500) 50%, var(--color-brand-400) 100%);
   }
 
   .gradient-hero {
-    background: linear-gradient(160deg, var(--color-dark-900) 0%, var(--color-brand-800) 40%, var(--color-brand-700) 70%, var(--color-green-800) 100%);
+    background: linear-gradient(160deg, var(--color-brand-700) 0%, var(--color-brand-600) 35%, var(--color-brand-500) 70%, var(--color-brand-400) 100%);
   }
 
   .gradient-section {
-    background: linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%);
+    background: linear-gradient(180deg, #e0f2fe 0%, #f0f9ff 60%, #ffffff 100%);
   }
 
   .gradient-card {
-    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(240,247,255,0.9) 100%);
+    background: linear-gradient(135deg, rgba(240,249,255,0.97) 0%, rgba(186,230,253,0.25) 100%);
   }
 
   .text-gradient {
@@ -163,10 +163,10 @@
   }
 
   .card-glass-dark {
-    background: rgba(13, 27, 42, 0.7);
+    background: rgba(2, 132, 199, 0.18);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(125, 211, 252, 0.25);
   }
 
   .noise-overlay::before {

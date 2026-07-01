@@ -43,7 +43,7 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       {/* Top bar */}
-      <div className="bg-[#0c4a6e] text-gray-300 text-sm hidden lg:block">
+      <div className="bg-[#0369a1] text-sky-100 text-sm hidden lg:block">
         <div className="container-wide flex items-center justify-between py-2">
           <div className="flex items-center gap-6">
             <a href={`tel:${contact.phone}`} className="flex items-center gap-1.5 hover:text-white transition-colors">
@@ -73,8 +73,8 @@ export default function Header() {
         className={cn(
           "transition-all duration-300",
           scrolled
-            ? "bg-[#075985]/95 backdrop-blur-xl shadow-2xl"
-            : "bg-[#075985]"
+            ? "bg-[#0284c7]/95 backdrop-blur-xl shadow-2xl"
+            : "bg-[#0284c7]"
         )}
       >
         <div className="container-wide flex items-center justify-between h-16 lg:h-20">

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0c4a6e] via-[#075985] to-[#1a5f3c] flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-[#0284c7] via-[#0ea5e9] to-[#38bdf8] flex flex-col">
       <div className="p-6">
         <Link href="/" className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors">
           <div className="w-8 h-8 rounded-full overflow-hidden bg-white shrink-0">

@@ -29,7 +29,7 @@ export default function Footer() {
   const contact = useSiteContact();
 
   return (
-    <footer className="bg-[#0c4a6e] text-gray-300">
+    <footer className="bg-[#0284c7] text-sky-50">
       {/* CTA Band */}
       <div className="bg-gradient-to-r from-[#0284c7] via-[#0ea5e9] to-[#226640] py-14">
         <div className="container-wide flex flex-col md:flex-row items-center justify-between gap-6">
