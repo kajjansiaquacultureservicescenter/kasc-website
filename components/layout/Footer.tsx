@@ -69,7 +69,7 @@ export default function Footer() {
                 <div className="text-[#7dd3fc] text-xs font-medium leading-tight">Aquaculture Service Centre</div>
               </div>
             </Link>
-            <p className="text-sm text-gray-400 leading-relaxed mb-5">
+            <p className="text-sm text-white/80 leading-relaxed mb-5">
               Your premier partner for complete aquaculture solutions — providing high-quality inputs, advanced farming technology, and expert technical consultancy across East Africa.
             </p>
             <div className="flex items-center gap-2">
@@ -85,7 +85,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-9 h-9 rounded-lg bg-white/5 hover:bg-[#38bdf8] flex items-center justify-center text-gray-400 hover:text-white transition-all duration-200"
+                  className="w-9 h-9 rounded-lg bg-white/20 hover:bg-white hover:text-[#0284c7] flex items-center justify-center text-white transition-all duration-200"
                 >
                   <Icon size={16} />
                 </a>
@@ -103,7 +103,7 @@ export default function Footer() {
                 <li key={s.id}>
                   <Link
                     href={`/services/${s.slug}`}
-                    className="flex items-center gap-2 text-sm text-gray-400 hover:text-[#7dd3fc] transition-colors group"
+                    className="flex items-center gap-2 text-sm text-white/80 hover:text-white transition-colors group"
                   >
                     <ArrowRight size={13} className="text-[#38bdf8] group-hover:translate-x-0.5 transition-transform" />
                     {s.title}
@@ -130,7 +130,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="flex items-center gap-2 text-sm text-gray-400 hover:text-[#7dd3fc] transition-colors group"
+                    className="flex items-center gap-2 text-sm text-white/80 hover:text-white transition-colors group"
                   >
                     <ArrowRight size={13} className="text-[#38bdf8] group-hover:translate-x-0.5 transition-transform" />
                     {link.label}
@@ -152,10 +152,10 @@ export default function Footer() {
                     <Phone size={14} className="text-[#7dd3fc]" />
                   </div>
                   <div>
-                    <div className="text-xs text-gray-500 mb-0.5">Phone / WhatsApp</div>
-                    <a href={`tel:${contact.phone}`} className="block text-sm text-gray-300 hover:text-[#7dd3fc] transition-colors">{contact.phone}</a>
+                    <div className="text-xs text-white/60 mb-0.5">Phone / WhatsApp</div>
+                    <a href={`tel:${contact.phone}`} className="block text-sm text-white/90 hover:text-white transition-colors">{contact.phone}</a>
                     {contact.phone2 && (
-                      <a href={`tel:${contact.phone2}`} className="block text-sm text-gray-300 hover:text-[#7dd3fc] transition-colors">{contact.phone2}</a>
+                      <a href={`tel:${contact.phone2}`} className="block text-sm text-white/90 hover:text-white transition-colors">{contact.phone2}</a>
                     )}
                   </div>
                 </div>
@@ -166,7 +166,7 @@ export default function Footer() {
                     <Mail size={14} className="text-[#7dd3fc]" />
                   </div>
                   <div>
-                    <div className="text-xs text-gray-500 mb-0.5">Email</div>
+                    <div className="text-xs text-white/60 mb-0.5">Email</div>
                     <div className="text-sm text-gray-300 group-hover:text-[#7dd3fc] transition-colors">{contact.email}</div>
                   </div>
                 </a>
@@ -177,8 +177,8 @@ export default function Footer() {
                     <MapPin size={14} className="text-[#7dd3fc]" />
                   </div>
                   <div>
-                    <div className="text-xs text-gray-500 mb-0.5">Office & Farm</div>
-                    <div className="text-sm text-gray-300">{contact.address}</div>
+                    <div className="text-xs text-white/60 mb-0.5">Office & Farm</div>
+                    <div className="text-sm text-white/90">{contact.address}</div>
                   </div>
                 </div>
               </li>
@@ -188,8 +188,8 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-white/5 py-6">
-        <div className="container-wide flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-500">
+      <div className="border-t border-white/25 py-6">
+        <div className="container-wide flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/70">
           <div className="flex items-center gap-1.5">
             © {new Date().getFullYear()} Kajjansi Aquaculture Service Centre. All rights reserved.
           </div>
@@ -197,8 +197,8 @@ export default function Footer() {
             Serving Uganda, Kenya, Tanzania, Rwanda & South Africa
           </div>
           <div className="flex items-center gap-4">
-            <Link href="/privacy" className="hover:text-gray-300 transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-gray-300 transition-colors">Terms of Service</Link>
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>

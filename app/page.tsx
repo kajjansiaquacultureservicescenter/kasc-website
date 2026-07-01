@@ -27,13 +27,6 @@ type FeaturedProduct = {
   in_stock: boolean;
 };
 
-const FALLBACK_IMG: Record<string, string> = {
-  fingerlings: "https://images.unsplash.com/photo-1560275619-4662e36fa65c?w=400&q=80",
-  feed:        "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&q=80",
-  liners:      "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&q=80",
-  nets:        "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400&q=80",
-  equipment:   "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=400&q=80",
-};
 
 function FadeIn({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null);
@@ -370,13 +363,18 @@ export default function HomePage() {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {featuredProducts.map((product, i) => {
-                const img = product.image_url || FALLBACK_IMG[product.category] || FALLBACK_IMG.equipment;
                 return (
                   <FadeIn key={product.id} delay={i * 0.06}>
                     <Link href={`/shop/${product.slug}`} className="group block h-full">
                       <div className="h-full bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-1 transition-all duration-300">
-                        <div className="relative h-48 bg-gradient-to-br from-[#f0f9ff] to-[#f0fcf4] overflow-hidden">
-                          <Image src={img} alt={product.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <div className="relative h-48 bg-gradient-to-br from-[#f0f9ff] to-[#bae6fd] overflow-hidden">
+                          {product.image_url ? (
+                            <Image src={product.image_url} alt={product.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                          ) : (
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <Fish size={48} className="text-[#7dd3fc] opacity-60" />
+                            </div>
+                          )}
                           {product.badge && (
                             <span className={cn("absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-semibold",
                               product.badge === "Best Seller" ? "bg-[#f4a020] text-white" :

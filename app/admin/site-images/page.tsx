@@ -85,18 +85,48 @@ export default function SiteImagesPage() {
 
   useEffect(() => { fetchAll(); }, [fetchAll]);
 
-  async function deleteGalleryImage(entry: ImageEntry) {
-    if (!confirm(`Delete "${entry.label}"? This cannot be undone.`)) return;
+  async function deleteEntry(entry: ImageEntry) {
+    if (!confirm(`Delete image "${entry.label}"? This cannot be undone.`)) return;
     setDeleting(entry.id);
-    const photoId = entry.id.replace("gal-", "");
-    if (entry.storagePath) {
-      await supabase.storage.from("gallery").remove([entry.storagePath]);
+    let error: { message: string } | null = null;
+
+    if (entry.source === "gallery") {
+      if (entry.storagePath) {
+        await supabase.storage.from("gallery").remove([entry.storagePath]);
+      }
+      const photoId = entry.id.replace("gal-", "");
+      ({ error } = await supabase.from("gallery_photos").delete().eq("id", photoId));
+
+    } else if (entry.source === "products") {
+      const isMain = entry.id.includes("-main");
+      const rawId = entry.id.replace("prod-", "").replace(/-main$/, "").replace(/-extra-\d+$/, "");
+      if (isMain) {
+        ({ error } = await supabase.from("products").update({ image_url: null }).eq("id", rawId));
+      } else {
+        const extraIdx = parseInt(entry.id.split("-extra-").pop() ?? "0", 10);
+        const { data: prod } = await supabase.from("products").select("images").eq("id", rawId).single();
+        const imgs: string[] = Array.isArray(prod?.images) ? prod.images : [];
+        imgs.splice(extraIdx, 1);
+        ({ error } = await supabase.from("products").update({ images: imgs }).eq("id", rawId));
+      }
+
+    } else if (entry.source === "news") {
+      const newsId = entry.id.replace("news-", "");
+      ({ error } = await supabase.from("news").update({ cover_image_url: null }).eq("id", newsId));
+
+    } else if (entry.source === "flash-deals") {
+      const fdId = entry.id.replace("fd-", "");
+      ({ error } = await supabase.from("flash_deals").update({ image_url: null }).eq("id", fdId));
+
+    } else if (entry.source === "offers") {
+      const offId = entry.id.replace("off-", "");
+      ({ error } = await supabase.from("offers").update({ image_url: null }).eq("id", offId));
     }
-    const { error } = await supabase.from("gallery_photos").delete().eq("id", photoId);
+
     if (error) {
       toast.error("Delete failed: " + error.message);
     } else {
-      toast.success("Photo deleted");
+      toast.success("Image removed");
       setImages((prev) => prev.filter((i) => i.id !== entry.id));
     }
     setDeleting(null);
@@ -115,7 +145,7 @@ export default function SiteImagesPage() {
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-[#0c4a6e] font-display">Site Images</h1>
         <p className="text-gray-500 text-sm mt-1">
-          All images used across the website — {images.length} total. To replace a product or gallery image, edit it from its respective section.
+          All images used across the website — {images.length} total. Hover any image and click the trash icon to remove it.
         </p>
       </div>
 
@@ -175,17 +205,15 @@ export default function SiteImagesPage() {
                   className="object-cover"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
                 />
-                {entry.source === "gallery" && (
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
-                    <button
-                      onClick={() => deleteGalleryImage(entry)}
-                      disabled={deleting === entry.id}
-                      className="p-2.5 rounded-xl bg-red-500 text-white hover:bg-red-600 transition-all"
-                    >
-                      {deleting === entry.id ? <Loader2 size={15} className="animate-spin" /> : <Trash2 size={15} />}
-                    </button>
-                  </div>
-                )}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+                  <button
+                    onClick={() => deleteEntry(entry)}
+                    disabled={deleting === entry.id}
+                    className="p-2.5 rounded-xl bg-red-500 text-white hover:bg-red-600 transition-all"
+                  >
+                    {deleting === entry.id ? <Loader2 size={15} className="animate-spin" /> : <Trash2 size={15} />}
+                  </button>
+                </div>
               </div>
               <div className="p-3">
                 <div className="text-xs font-semibold text-[#0c4a6e] truncate">{entry.label}</div>
@@ -197,7 +225,7 @@ export default function SiteImagesPage() {
       )}
 
       <div className="mt-8 p-4 rounded-2xl bg-[#f8fafc] border border-gray-200 text-sm text-gray-500">
-        <strong className="text-gray-700">To replace an image:</strong> go to the relevant section (Products / Gallery / News / etc.) and edit the item there. Gallery images can be deleted directly from this page using the trash icon that appears on hover.
+        <strong className="text-gray-700">Note:</strong> Removing a product image clears it from that product — the product itself stays. Gallery photos are permanently deleted from storage.
       </div>
     </div>
   );
